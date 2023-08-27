@@ -15,6 +15,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import authenticationApi from '../api/authentication';
+import { setUser } from '../redux/userSlice';
+import { useDispatch , useSelector } from 'react-redux';
 
 
 function Copyright(props) {
@@ -39,7 +41,9 @@ export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [userData, setUserData] = useState(null);
+    // const [userData, setUserData] = useState(null);
+    const user = useSelector((state)=>state.user);
+    const dispatch = useDispatch({user});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -59,9 +63,12 @@ export default function SignIn() {
         .then(res => {
           console.log('Response from the backend:', res.data); // Log the entire response data
           if (res.data) {   
-            setUserData(res.data.user);
+            // setUserData(res.data.user);
+            dispatch(setUser(res.data.user));
+            // console.log(dispatch(setUser(res.data.user)));
             // store token in session
             localStorage.setItem('token', res.data.user.authToken);
+            localStorage.setItem('user', res.data.user);
             navigate('/dashboard');  
             console.log('Successfully logged in', res.data.user);
           } else {

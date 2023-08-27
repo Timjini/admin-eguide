@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    
+  }
+
+body {
+    margin-left:250px;
+}
+
+.hero-img {
+    background-image: url(/public/images/home.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hero-img img {
+    width: auto;
+    height: 100vh;
+}
+
+
+.sign-up-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.logo{
+    width: 50px;
+    height: auto;
+}
+.userAvatar{
+    width:50px;
+    height:auto;
+    border-radius: 50%;
+}
+
+.bar-card{
+    width: 200px;
+    background-color: rgb(241, 241, 241);
+    height: 70px;
+    border-radius: 10px;
+    /* center */
+    margin-left:25px;
+    margin-bottom:50px;
+}

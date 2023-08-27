@@ -1,51 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Logout from '../Authentication/Logout';
 import { HEADERS , API_USER_DATA } from '../constant';
+import { useSelector } from'react-redux';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+import AudioCard from '../components/AudioCard';
 
 export default function Dashboard(props) {
-  const [userData, setUserData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const user = useSelector(state => state.user); 
 
-  useEffect(() => {
-    axios
-      .post(
-        API_USER_DATA,
-        {},
-        {
-          headers: {
-            ...HEADERS,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-
-        setUserData(res.data.user);
-        setIsLoading(false); // Set loading to false when data is loaded
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
 
   return (
     <div>
+      <Container sx={{ m: 5 }}>
 
-    {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            <>
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
             <div>
-              <h2>User Details</h2>
-              <p>Name: {userData.avatar}</p>
-              <p>Email: {userData.email}</p>
-              <img src={`http://localhost:4000/uploads/${userData.avatar}`} alt="User Avatar" />
-            <Logout />
+              <AudioCard />
             </div>
-            </>
-          )}
+          </Grid>
+          <Grid item xs={4}>
+            <div>
+            <AudioCard />
+            </div>
+          </Grid>
+        </Grid>
+        </Container>
+
 
     </div>
   );

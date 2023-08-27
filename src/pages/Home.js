@@ -1,10 +1,11 @@
-import UserManagement from "../Authentication/UserManagement";
-
+import { useSelector } from "react-redux";
 
 export default function Home() {
 
 
     return (
-      <UserManagement />
+      <>
+      <h1>Home</h1>
+      </>
       );
   }

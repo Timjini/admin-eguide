@@ -1,6 +1,8 @@
 import React from 'react';
 import SignUpForm from './SignUpForm';
 import axios from 'axios';
+import Box from '@mui/material/Box';
+import Item from '@mui/material/ListItem';
 
 const UserManagement = () => {
   const handleSignUpAndUpload = async (userData) => {
@@ -13,11 +15,14 @@ const UserManagement = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up and Upload Avatar</h2>
-      <SignUpForm onSignUp={handleSignUpAndUpload} />
-      {/* No need for Upload Avatar section here */}
-    </div>
+      <div className='sign-up-container'>
+        <div>
+          <SignUpForm onSignUp={handleSignUpAndUpload} />
+        </div>
+        <div className='hero-img'>
+          <img src='/images/home.jpg' alt='e-guide' />
+        </div>
+      </div>
   );
 };
 

@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react';
 import {DataGrid} from '@mui/x-data-grid';
 import Container from '@mui/material/Container';
 import { useSelector } from'react-redux';
+import {API_ROOT} from '../constant';
 
 
 
@@ -23,7 +24,7 @@ export default function UsersTable(){
             }
         };
     
-        fetch('http://localhost:4000/api/users/users', requestOptions)
+        fetch(`${API_ROOT}/api/users/users`, requestOptions)
           .then(res => res.json())
           .then(data => {
             console.log(data); // Log the fetched data

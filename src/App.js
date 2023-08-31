@@ -5,10 +5,10 @@ import Dashboard from './pages/Dashboard';
 import SignIn from './Authentication/SignIn';
 import { useSelector } from 'react-redux';
 import UserManagement from './Authentication/UserManagement';
-import Navbar from './components/Navbar';
 import LeftSideBar from './components/LeftSidebar';
 import Profile from './pages/Profile';
 import Tours from './pages/Tours';
+import BroadcastsPage from './pages/BroadcastsPage';
 
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/tours" element={<Tours />} />
+            <Route path="/broadcasts-page" element={<BroadcastsPage />} />
           </>
         ) : (
           <>

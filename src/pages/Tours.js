@@ -11,8 +11,7 @@ export default function Tours(props) {
 
   return (
     <div>
-      <Container sx={{ m: 5 }}>
-
+      <Container sx={{marginTop:10}}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <div>

@@ -30,7 +30,7 @@ body {
 }
 
 .logo{
-    width: 50px;
+    width: 100px;
     height: auto;
 }
 .userAvatar{
@@ -44,7 +44,13 @@ body {
     background-color: rgb(241, 241, 241);
     height: 70px;
     border-radius: 10px;
-    /* center */
     margin-left:25px;
     margin-bottom:50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.logo-container{
+    display:grid;
+    justify-content: center;
 }

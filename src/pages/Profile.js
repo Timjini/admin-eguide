@@ -9,7 +9,7 @@ export default function Profile () {
     const user = useSelector(state => state.user); 
 
     return (
-        <Container sx={{ m: 5 }}>
+        <Container sx={{marginTop:10}}>
             <div>
               <h2>User Details</h2>
               <p>Name: {user.user.avatar}</p>

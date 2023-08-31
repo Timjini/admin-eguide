@@ -13,6 +13,7 @@ import ConnectedTvIcon from '@mui/icons-material/ConnectedTv';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Navbar from './Navbar';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const drawerWidth = 250;
 
@@ -28,16 +29,16 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
 export default function RightSidebar({}) {
   const [isOpen, setIsOpen] = useState(true); // Control the open state
 
-  const handleToggleSidebar = () => {
-    setIsOpen(!isOpen); // Toggle the open state
-  };
+  // const handleToggleSidebar = () => {
+  //   setIsOpen(!isOpen); // Toggle the open state
+  // };
   return (
     <>
-   <div style={{ display: 'flex' }}>
+   <div style={{ display: 'flex', flexDirection: 'column'}}>
     <StyledDrawer
       variant="permanent"
       anchor="left"
-      sx={{ boxShadow: 'none' }}
+      sx={{ boxShadow: 'none',border: 'none'}}
     >
       <List>
         <div className="logo-container">
@@ -45,13 +46,20 @@ export default function RightSidebar({}) {
           <img src="/images/logo.png" className='logo' />
           </a>
         </div>
-        <div className="bar-card">
-
-        </div>
         <ListItem className="sidebar-item">
+        <a href="/dashboard">
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+        </a>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
+        <ListItem className="sidebar-item">
+        <a href="/broadcasts-page">
           <ListItemIcon>
             <ConnectedTvIcon />
           </ListItemIcon>
+        </a>
           <ListItemText primary="Broadcast" />
         </ListItem>
         <ListItem className="sidebar-item">
@@ -84,7 +92,7 @@ export default function RightSidebar({}) {
         </ListItem>
       </List>
     </StyledDrawer>
-    <div style={{ flex: 1 }}>
+    <div style={{ display: 'flex', flex: 1 }}>
       <Navbar />
     </div>
     </div></>

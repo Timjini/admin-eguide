@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useSelector } from'react-redux';
-import { API_ROOT } from '../constant';
+import { API_ROOT_PUBLIC } from '../constant';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -188,7 +188,7 @@ export default function PrimarySearchAppBar() {
                 color="inherit"
                 >
                 {user.user.avatar !== null && (
-                    <img src={`${API_ROOT}/uploads/${user.user.avatar}`} alt="User Avatar" className='userAvatar' />
+                    <img src={`${API_ROOT_PUBLIC}/uploads/${user.user.avatar}`} alt="User Avatar" className='userAvatar' />
                 )}
                 {user.user.avatar === null && <AccountCircle />}
                 </IconButton>

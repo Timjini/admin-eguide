@@ -7,6 +7,6 @@ export const HEADERS = {
   // const baseUrl = 'https://stream-ten-eta.vercel.app/';
   const baseUrl = 'https://api.e-guidesolutions.com/'
   
-  
+export const API_ROOT_PUBLIC = `${baseUrl}`
 export const API_ROOT = `${baseUrl}api`; 
 export const API_USER_DATA = `${baseUrl}api/users/user_data`;

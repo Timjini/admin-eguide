@@ -11,37 +11,7 @@ export default function Tours(props) {
 
   return (
     <div>
-      <Container sx={{marginTop:10}}>
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <div>
-              <ReviewCard />
-            </div>
-          </Grid>
-          <Grid item xs={4}>
-            <div>
-              <ReviewCard />
-            </div>
-          </Grid>
-          <Grid item xs={4}>
-            <div>
-              <ReviewCard />
-            </div>
-          </Grid>
-          <Grid item xs={4}>
-            <div>
-              <ReviewCard />
-            </div>
-          </Grid>
-          <Grid item xs={8}>
-            <div>
-              <ReviewCard />
-            </div>
-          </Grid>
-        </Grid>
-        </Container>
-
-
+      <ReviewCard />
     </div>
   );
 }

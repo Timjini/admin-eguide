@@ -9,6 +9,7 @@ import LeftSideBar from './components/LeftSidebar';
 import Profile from './pages/Profile';
 import Tours from './pages/Tours';
 import BroadcastsPage from './pages/BroadcastsPage';
+import Sidebar from './components/Sidebar';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      {user && user.user && <LeftSideBar />}
+      {user && user.user && <Sidebar />}
       <Routes>
         {user && user.user ? (
           <>

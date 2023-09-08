@@ -4,8 +4,8 @@ export default function Home() {
 
 
     return (
-      <>
-      <h1>Home</h1>
-      </>
+      <div class="p-4 sm:ml-64">
+        <h1>Home</h1>
+      </div>
       );
   }

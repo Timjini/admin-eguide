@@ -9,14 +9,13 @@ export default function Dashboard(props) {
 
     if (user.type === 'admin') {
       return(
-        <div>
-
+      <div class="p-4 sm:ml-64">
         <UsersTable />
       </div>
       );
     } else {
       return(
-        <div>
+        <div class="p-4 sm:ml-64">
           <h2>Dashboard</h2>
         </div>
       );

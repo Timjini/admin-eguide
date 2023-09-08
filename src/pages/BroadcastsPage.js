@@ -6,7 +6,7 @@ import AudioCard from '../components/AudioCard';
 
 export default function BroadcastPage(){
     return (
-        <Container sx={{marginTop:10}}>
+        <div class="p-4 sm:ml-64">
             <Grid container spacing={2}>
             <Grid item xs={4}>
                 <div>
@@ -19,6 +19,6 @@ export default function BroadcastPage(){
                 </div>
             </Grid>
             </Grid>
-        </Container>
+        </div>
     )
 }

@@ -1,6 +1,7 @@
 // import tailwindcss from 'tailwindcss';
 import React from 'react';
 import {menuItems} from './NavbarMenu';
+import Navbar from './Navbar';
 
 
 const Sidebar = () => {
@@ -29,6 +30,9 @@ const Sidebar = () => {
                     </ul>
                 </div>
         </aside>
+        <div class="sm:ml-64">
+          <Navbar />
+        </div>
         </>
 
     )

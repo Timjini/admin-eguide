@@ -24,7 +24,7 @@ export default function UsersTable(){
             }
         };
     
-        fetch(`${API_ROOT}/api/users/users`, requestOptions)
+        fetch(`${API_ROOT}/users/users`, requestOptions)
           .then(res => res.json())
           .then(data => {
             console.log(data); // Log the fetched data

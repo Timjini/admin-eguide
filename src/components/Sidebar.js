@@ -17,11 +17,14 @@ const Sidebar = () => {
             </svg>
         </button>
         <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-                <div class="h-full px-3 py-4 overflow-y-auto bg-gray-200 dark:bg-gray-800">
-                    <ul class="space-y-2 font-medium">
+                <div class="h-full px-3 py-4 overflow-y-auto bg-slate-900 dark:bg-gray-800 p-10">
+                    <div class="p-5">
+                        <img src="https://images.unsplash.com/photo-1557053964-937650b63311?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1897&q=80" />
+                    </div>
+                    <ul class="space-y-2 font-medium p-2">
                     {menuItems.map((item, index) => (
                         <li key={index}>
-                            <a href={item.link} class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <a href={item.link} class="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:text-gray-700  hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 {item.icon}
                                 <span class="ml-3">{item.label}</span>
                             </a>

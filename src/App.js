@@ -24,8 +24,8 @@ function App() {
       <Routes>
         {user && user.user ? (
           <>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/tours" element={<Tours />} />
             <Route path="/broadcasts-page" element={<BroadcastsPage />} />

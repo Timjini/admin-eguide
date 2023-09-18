@@ -58,3 +58,7 @@ body {
     display:grid;
     justify-content: center;
 }
+
+.graph {
+    height:150px;
+}

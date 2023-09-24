@@ -8,8 +8,9 @@ import UserManagement from './Authentication/UserManagement';
 import LeftSideBar from './components/LeftSidebar';
 import Profile from './pages/Profile';
 import Tours from './pages/Tours';
-import BroadcastsPage from './pages/BroadcastsPage';
+import Channels from './pages/Channels';
 import Sidebar from './components/Sidebar';
+import Agency from './pages/Agency';
 
 
 function App() {
@@ -24,11 +25,12 @@ function App() {
       <Routes>
         {user && user.user ? (
           <>
-            {/* <Route path="/" element={<Home />} /> */}
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/tours" element={<Tours />} />
-            <Route path="/broadcasts-page" element={<BroadcastsPage />} />
+            <Route path="/channels" element={<Channels />} />
+            <Route path="/agency_profile" element={<Agency />} />
           </>
         ) : (
           <>

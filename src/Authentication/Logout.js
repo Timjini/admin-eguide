@@ -1,9 +1,8 @@
 import React from 'react';
-import authenticationApi from '../api/authentication';
-import { HEADERS } from '../constant';
 import { useDispatch, useSelector } from'react-redux';
 import { clearUser } from '../redux/userSlice';
 import axios from 'axios';
+import {API_ROOT} from '../constant/index';
 
 
 export default function Logout() {
@@ -12,18 +11,20 @@ export default function Logout() {
   console.log(user.user.authToken);
     
     const handleLogOut = async () => {
-        // const response = await axios.post(('http://localhost:4000/api/users/logout'),
-        //   {
-        //     headers:  {            
-        //       Authorization: `Bearer ${user.user.authToken}`,
-        //     }
-        //   }
-        // );
-        // if (response.status === 200) {
-        //     localStorage.removeItem('token');
-        //     window.location.href = '/';
-        //     dispatch(clearUser());
-        // }
+      const response = await axios.post(
+        `${API_ROOT}/users/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${user.user.authToken}`, // Set the Authorization header
+          },
+        }
+      );
+        if (response.status === 200) {
+            localStorage.removeItem('token');
+            window.location.href = '/';
+            dispatch(clearUser());
+        }
         dispatch(clearUser());
         localStorage.removeItem('token');
         window.location.href = '/';
@@ -31,7 +32,7 @@ export default function Logout() {
 
   return (
     <div>
-      <button onClick={handleLogOut}>Log Out</button>
+      <button onClick={handleLogOut} className='px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'>Log Out</button>
     </div>
   );
 }

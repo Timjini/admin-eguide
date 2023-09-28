@@ -10,24 +10,30 @@ export default function Logout() {
   const user = useSelector(state => state.user); 
   console.log(user.user.authToken);
     
-    const handleLogOut = async () => {
-      const response = await axios.post(
-        `${API_ROOT}/users/logout`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${user.user.authToken}`, // Set the Authorization header
-          },
-        }
-      );
-        if (response.status === 200) {
-            localStorage.removeItem('token');
-            window.location.href = '/';
-            dispatch(clearUser());
-        }
-        dispatch(clearUser());
-        localStorage.removeItem('token');
-        window.location.href = '/';
+    // const handleLogOut = async () => {
+    //   const response = await axios.post(
+    //     `${API_ROOT}/users/logout`,
+    //     {},
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${user.user.authToken}`, // Set the Authorization header
+    //       },
+    //     }
+    //   );
+    //     if (response.status === 200) {
+    //         localStorage.removeItem('token');
+    //         window.location.href = '/';
+    //         dispatch(clearUser());
+    //     }
+    //     dispatch(clearUser());
+    //     localStorage.removeItem('token');
+    //     window.location.href = '/';
+    // }
+
+    const handleLogOut = (event) => {
+      localStorage.removeItem('token');
+      window.location.href = '/';
+      dispatch(clearUser());
     }
 
   return (

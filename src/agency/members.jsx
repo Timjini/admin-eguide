@@ -184,7 +184,7 @@ const Members = ({data}) => {
                             </a>
                             </td>
                         </tr>
-                        )};
+                        )}
                     </tbody>
                 </table>
             </div>

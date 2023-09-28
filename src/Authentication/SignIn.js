@@ -69,7 +69,7 @@ export default function SignIn() {
             // store token in session
             localStorage.setItem('token', res.data.user.authToken);
             localStorage.setItem('user', res.data.user);
-            navigate('/dashboard');  
+            navigate('/');  
             console.log('Successfully logged in', res.data.user);
           } else {
             setError(res.data.error);

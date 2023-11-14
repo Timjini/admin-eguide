@@ -27,7 +27,7 @@ const Agency = () => {
 
   return (
     <>
-      <div className="p-4 sm:ml-64">
+      <div className="p-4 sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{height:'100vh'}}>
         <Members data={membersData} />
       </div>
     </>

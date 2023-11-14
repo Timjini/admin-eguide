@@ -6,7 +6,7 @@ const Navbar = () => {
   const user = useSelector(state => state.user); 
 
   return (
-    <nav class="bg-slate-800 dark:bg-gray-700 sm:block">
+    <nav class="bg-purple-50 dark:bg-gray-700 sm:block">
       <div class="mx-auto px-2 sm:px-6 lg:px-4">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">

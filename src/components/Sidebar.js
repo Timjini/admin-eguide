@@ -41,16 +41,17 @@ function Sidebar() {
         aria-label="Sidebar"
         ref={sidebarRef} // Reference to the sidebar element
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-slate-900 dark:bg-gray-800 p-10">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-purple-100 dark:bg-gradient-to-b from-gray-700 via-gray-900 to-black p-10">
           <div className="p-5">
-            <img src="/images/light-logo.png" alt="Logo" />
+            {/* <img src="/images/light-logo.png" alt="Logo" /> */}
+            <span className="text-4xl font-bold text-gray-700 dark:text-white">E-Guide</span>
           </div>
           <ul className="space-y-2 font-medium p-2">
             {menuItems.map((item, index) => (
               <li key={index}>
                 <Link
                   to={item.link}
-                  className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:text-gray-700  hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  className="flex items-center p-2 text-gray-700 rounded-lg dark:text-white hover:text-gray-700  hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 >
                   {item.icon}
                   <span className="ml-3">{item.label}</span>
@@ -63,7 +64,7 @@ function Sidebar() {
       <div className={`sm:ml-${isSidebarOpen ? '64' : '0'}`}>
      
      
-      <nav class="bg-slate-800 dark:bg-gray-700 sm:block ">
+      <nav class="bg-purple-100 dark:bg-gray-700 sm:block  dark:bg-gradient-to-r from-gray-700 via-gray-900 to-black">
       <div class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">

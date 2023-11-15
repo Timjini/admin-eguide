@@ -12,11 +12,11 @@ body {
     /* margin-left:250px; */
 }
 
-h1, h2, span{
+h1, h2, h3{
     font-family: 'Cinzel', sans-serif;
 }
 
-a, h3 {
+a, h4, span,label {
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
@@ -72,3 +72,20 @@ a, h3 {
 .graph {
     height:150px;
 }
+
+
+.dashboard_hero {
+    background-image: linear-gradient(#ddc5c580,#00000080),url('https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    height: 250px;
+    background-position: top;
+    background-size: cover;
+    border-radius: 20px;
+  }
+
+  .content {
+    text-align: left;
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    color: #fff;
+  }

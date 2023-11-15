@@ -44,7 +44,7 @@ function Sidebar() {
         <div className="h-full flex flex-col px-3 py-4 overflow-y-auto bg-purple-100 dark:bg-gradient-to-b from-gray-700 via-gray-900 to-black p-10">
           <div className="p-5">
             {/* <img src="/images/light-logo.png" alt="Logo" /> */}
-            <span className="text-4xl font-bold text-gray-700 dark:text-white">E-Guide</span>
+            <h2 className="text-4xl font-bold text-gray-700 dark:text-white">E-Guide</h2><label className="text-sm text-italic">Solutions</label>
           </div>
           <ul className="space-y-2 font-medium p-2">
             {menuItems.map((item, index) => (

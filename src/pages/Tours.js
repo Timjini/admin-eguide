@@ -12,23 +12,44 @@ export default function Tours(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  
-    useEffect(() => {
-      // Fetch agency members when the component mounts
-      agencyApi.tours({
-        headers: {
-          Authorization: `Bearer ${user.user.authToken}`,
-        },
-      })
-        .then((response) => {
-          setData(response.data);
-          console.log(response);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching agency members:", error);
+  useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        const response = await agencyApi.tours({
+          headers: {
+            Authorization: `Bearer ${user.user.authToken}`,
+          },
         });
-    }, [user.user.authToken]);
+
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching agency members:", error);
+      } finally {
+        setLoading(false); // Set loading to false regardless of success or failure
+      }
+    };
+
+    fetchTours();
+  }, [user.user.authToken]);
+  
+    // useEffect(() => {
+    //   // Fetch agency members when the component mounts
+    //   agencyApi.tours({
+    //     headers: {
+    //       Authorization: `Bearer ${user.user.authToken}`,
+    //     },
+    //   })
+    //     .then((response) => {
+    //       setData(response.data);
+    //       console.log(response);
+    //       setLoading(false);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching agency members:", error);
+    //     } } finally {
+    //       setLoading(false); // Set loading to false regardless of success or failure
+    //     };
+    // }, [user.user.authToken]);
 
 
 

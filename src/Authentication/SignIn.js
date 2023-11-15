@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import authenticationApi from '../api/authentication';
 import { setUser } from '../redux/userSlice';
 import { useDispatch , useSelector } from 'react-redux';
+import Alert from '../components/Alert';
 
 
 function Copyright(props) {
@@ -40,7 +41,7 @@ export default function SignIn() {
     const navigate = useNavigate(); // Get the navigate functiont
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState(null);
     // const [userData, setUserData] = useState(null);
     const user = useSelector((state)=>state.user);
     const dispatch = useDispatch({user});
@@ -74,16 +75,22 @@ export default function SignIn() {
           } else {
             setError(res.data.error);
             console.log("error"  + res.data.error);
+            alert(res.data.error)
           }
         })
         .catch(err => {
           console.log(err);
+          setError(error);
         });
       }
       
 
   return (
+    
     <ThemeProvider theme={defaultTheme}>
+      {error && (
+       <Alert message={error} />
+      )}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

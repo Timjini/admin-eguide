@@ -1,44 +1,21 @@
-import React, { useEffect, useState } from "react";
-import Members from "../agency/members";
-import agencyApi from "../api/agency";
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Loader from "../components/Loader";
+import UsersTable from '../admin/UsersTable'
+import MembersList from '../agency/MembersList';
+import MemberDashboard from '../dashboard/MemberDashboard';
 
-const MembersList = () => {
-  const [membersData, setMembersData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const user = useSelector(state => state.user);
+export default function Dashboard(props) {
+  const user = useSelector(state => state.user.user);
 
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const response = await agencyApi.members({
-          headers: {
-            Authorization: `Bearer ${user.user.authToken}`,
-          },
-        });
+  console.log(user.type)
 
-        setMembersData(response.data.members);
-      } catch (error) {
-        console.error("Error fetching agency members:", error);
-      } finally {
-        setLoading(false); // Set loading to false regardless of success or failure
-      }
-    };
+  switch (user.type) { 
+    case 'admin':
+      return <UsersTable  user={user}/>;
+    case 'owner':
+      return <MembersList user={user} />;
+    default:
+      return <MemberDashboard  user={user}/>;
+  }
 
-    fetchMembers();
-  }, [user.user.authToken]);
-
-  return (
-    <div className="p-4 flex flex-col sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{height:'90vh'}}>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Members data={membersData} />
-      )}
-    </div>
-  );
-};
-
-export default MembersList;
-
+}

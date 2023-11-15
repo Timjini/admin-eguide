@@ -53,7 +53,7 @@ export default function UsersTable(){
     ];
 
     return(
-        <Container sx={{marginTop:10}}>
+        <Container sx={{marginTop:10}} className='bg-white text-gray-800'>
             <DataGrid
             rows={rows}
             columns={columns}

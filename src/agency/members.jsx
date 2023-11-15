@@ -1,6 +1,7 @@
 import React,{useState, useEfect} from 'react';
 // import {agencyApi} from './agencyApi';
 import {API_PUBLIC_FOLDER} from '../constant/index';
+import AddMember from './AddMember';
 
 const Members = ({data}) => {
 
@@ -8,8 +9,9 @@ const Members = ({data}) => {
         <>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                        <div>
+                        <div className='flex flex-row justify-between'>
                             <h3 className='py-5 text-2xl text-gray-700 dark:text-white'>Members</h3>
+                            <AddMember />
                         </div>
                             <label htmlFor="table-search" className="sr-only">
                             Search

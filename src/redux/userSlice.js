@@ -22,6 +22,7 @@ export const userSlice = createSlice(
             register: (state, action) => {},
           },
     },
+
 )
 
 export const { setUser ,clearUser } = userSlice.actions;

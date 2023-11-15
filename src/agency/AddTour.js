@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import agencyApi from '../api/agency';
+import useGetGuides from './getGuides';
+
 
 const AddTour = () => {
+
+  const getGuides = useGetGuides();
+  const [guides, setGuides] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.user);
   const [tourData, setTourData] = useState({
@@ -46,7 +52,6 @@ const AddTour = () => {
       });
 
       setData(response.data);
-      console.log('Tour added successfully:', response.data);
       window.location.reload();
       alert('Tour added successfully');
     } catch (error) {
@@ -54,20 +59,33 @@ const AddTour = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchGuides = async () => {
+      const guidesData = await getGuides();
+      setGuides(guidesData);
+    };
+
+    fetchGuides();
+  }, []);
+
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
 
 
-  console.log(user.user.agency._id)
   return (
     <>
       <button
         onClick={openModal}
-        className="block text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="w-56"
         type="button"
       >
-        Add A tour
+        <div className='flex flex-row gap-2 hover:bg-purple-100 p-3 rounded-lg'>
+          <span class="material-symbols-outlined text-xl">
+          add_circle
+          </span>
+          <span>Add A Tour</span>
+        </div>
       </button>
       {showModal && (
         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black opacity-50 z-40" />
@@ -117,10 +135,28 @@ const AddTour = () => {
                         <label  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Description:</label>
                         <textarea name="description" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={tourData.description} onChange={handleChange} required />
                     </div>
-                    <div className='flex flex-col'>
-                        <label  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Guide:</label>
-                        <input type="text" name="guide" value={tourData.guide} onChange={handleChange} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500' required />
-                    </div>
+                    <div className='flex flex-col p-2'>
+                  <label
+                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                  >
+                    Guide:
+                  </label>
+                  <select
+                    name="guide"
+                    value={tourData.guide}
+                    onChange={handleChange}
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+                    required
+                  >
+                    <option value="">Select a guide</option>
+                    {/* Mapping through guidesData to create options */}
+                    {guides.map((guide) => (
+                      <option key={guide._id} value={guide._id}>
+                        {guide.user.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                     <div>
                         <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Starting Date:</label>
                         <input type="date" name="startingDate" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' value={tourData.startingDate} onChange={handleChange} required />

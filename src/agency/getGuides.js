@@ -15,7 +15,6 @@ const useGetGuides = () => {
           Authorization: `Bearer ${user.user.authToken}`,
         },
       });
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error('Error getting guides:', error);

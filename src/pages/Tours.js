@@ -3,6 +3,7 @@ import { useSelector } from'react-redux';
 import agencyApi from "../api/agency";
 import Tour from "../agency/tours";
 import Loader from '../components/Loader';
+import AddTour from '../agency/AddTour';
 
 
 
@@ -51,15 +52,17 @@ export default function Tours(props) {
     //     };
     // }, [user.user.authToken]);
 
-
+  console.log(data);
 
   return (  
-  <div className="p-4 flex flex-col sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{height:'100vh'}}>
-    {loading ? (
-            <Loader />
-          ) : (
-            <Tour data={data} />
-          )}
-  </div>
+    <>
+  <div className="p-4 flex flex-col sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{ height: '100vh' }}>
+    <AddTour />
+      {loading ? (
+        <Loader />
+      ) : (
+        <Tour data={data} />
+      )}
+    </div></>
   );
 }

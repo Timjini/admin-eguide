@@ -16,7 +16,7 @@ const AddChannel = () => {
   const [channelData, setChannelData] = useState({
     type: 'public',
     guide: '',
-    tour: '', // Modified the initial state for tour
+    tour: '',
     startingDate: '',
     endingDate: '',
   });
@@ -48,9 +48,7 @@ const AddChannel = () => {
           Authorization: `Bearer ${user.user.authToken}`,
         },
       });
-      console.log(response)
       setData(response.data);
-      console.log('Channel added successfully:', response.data);
       window.location.reload();
       alert('Channel added successfully');
     } catch (error) {
@@ -58,10 +56,8 @@ const AddChannel = () => {
     }
   };
 
-  console.log(channelData.guide)
   
 
-    // console.log(user.user.authToken)
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
@@ -70,7 +66,6 @@ const AddChannel = () => {
     const fetchGuides = async () => {
       const guidesData = await getGuides();
       setGuides(guidesData);
-      console.log(guidesData);
     };
 
     fetchGuides();
@@ -80,25 +75,28 @@ const AddChannel = () => {
     const fetchTours = async () => {
       const toursData = await getTours();
       setTours(toursData);
-      console.log(toursData);
     };
 
     fetchTours();
   }, []);
 
   if (!tours.tour || tours.tour.length === 0) {
-    // console.log('No tour data available.');
     return null; // Return null or a message when there is no tour data
   }
 
   return (
     <>
-      <button
+       <button
         onClick={openModal}
-        className="block text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="w-56"
         type="button"
       >
-        Add A tour
+        <div className='flex flex-row gap-2 hover:bg-purple-100 p-3 rounded-lg'>
+        <span class="material-symbols-outlined text-xl">
+        add_circle
+        </span>
+        <span>Add A Channel</span>
+        </div>
       </button>
       {showModal && (
         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black opacity-50 z-40" />
@@ -153,10 +151,11 @@ const AddChannel = () => {
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
                     required
                   >
+                    <option value="">Select a guide</option>
                     {/* Mapping through guidesData to create options */}
                     {guides.map((guide) => (
                       <option key={guide._id} value={guide._id}>
-                        {guide.name}
+                        {guide.user.name}
                       </option>
                     ))}
                   </select>
@@ -175,6 +174,7 @@ const AddChannel = () => {
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
                     required
                   >
+                    <option value="">Select a Tour</option>
                     {/* Mapping through toursData to create options */}
                     {tours.tour.map((tour) => (
                       <option key={tour._id} value={tour._id}>

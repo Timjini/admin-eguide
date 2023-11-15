@@ -9,7 +9,7 @@ import Tours from './pages/Tours';
 import Channels from './pages/Channels';
 import Sidebar from './components/Sidebar';
 import MembersList from './pages/MembersList';
-
+import BroadcastPages from './pages/BroadCastPages';
 
 function App() {
 
@@ -29,6 +29,7 @@ function App() {
             <Route path="/tours" element={<Tours />} />
             <Route path="/channels" element={<Channels />} />
             <Route path="/members" element={<MembersList />} />
+            <Route path="/broadcast" element={<BroadcastPages />} />
           </>
         ) : (
           <>

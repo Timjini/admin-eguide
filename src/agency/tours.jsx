@@ -10,39 +10,45 @@ const Tour = ({data}) => {
         return null; // Return null or a message when there is no tour data
       }
 
-    
-    return (
+    console.log('Tour data: ', data.tour);
+      return (
         <>
-        <div className='flex flex-row justify-center gap-5 flex-wrap'>
-        {data.tour.map((tour) => {
-            const guide = data.guide;
-            return (
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div href="#">
-                <img className="rounded-t-lg h-96 object-cover" src={`${API_PUBLIC_FOLDER}/${tour.photo}`} alt="" />
-            </div>
-            <div className="p-5">
-                <div href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{tour.title}</h5>
-                </div>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{tour.description}</p>
-                <div className='flex flex-row gap-2 content-evenly'>
-                        <img className="w-10 h-10 rounded-full" 
-                                        src={`${API_PUBLIC_FOLDER}/${guide[0].avatar}`}
-                                        alt={guide[0].name}
+            <div className='flex flex-row justify-center gap-5 flex-wrap'>
+                {data.tour && data.tour.length > 0 ? (
+                    data.tour.map((tour) => {
+                        const guide = data.guide;
+                        return (
+                            <div key={tour._id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                <div href="#">
+                                    <img className="rounded-t-lg h-96 object-cover" src={`${API_PUBLIC_FOLDER}/${tour.photo}`} alt="" />
+                                </div>
+                                <div className="p-5">
+                                    <div href="#">
+                                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{tour.title}</h5>
+                                    </div>
+                                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{tour.description}</p>
+                                    <div className='flex flex-row gap-2 content-evenly'>
+                                        <img className="w-10 h-10 rounded-full" 
+                                            src={`${API_PUBLIC_FOLDER}/${guide[0].avatar}`}
+                                            alt={guide[0].name}
                                         />
-                            <span>{guide[0].name}</span>
-                        </div>
+                                        <span>{guide[0].name}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })
+                ) : (
+                    <p>No tours available.</p>
+                )}
             </div>
-        </div>      
-            );
-        })}
-                </div>
-        <div className='flex flex-row mx-auto mt-5'>
-        <AddTour />
-        </div>
+    
+            <div className='flex flex-row mx-auto mt-5'>
+                {(!data.tour || data.tour.length === 0) && <AddTour />}
+            </div>
         </>
-    )
+    );
+    
 
 }
 

@@ -15,6 +15,9 @@ const Tour = ({data}) => {
             const guide = data.guide;
             console.log(guide[0].avatar);
             return (
+    <section className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <h3 className='py-5 text-2xl text-gray-700 dark:text-white'>Tours</h3>
+        <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10">
             <article className="mx-auto group w-full shadow-2xl max-w-md pb-8 rounded-b-2xl transform duration-500 hover:-translate-y-2 cursor-pointer">
                 <section className="content bg-cover bg-center h-64 rounded-2xl" 
                     style={{backgroundImage: `url(${API_PUBLIC_FOLDER}/${tour.photo})`}}
@@ -56,6 +59,8 @@ const Tour = ({data}) => {
                     </p>
                 </div>
             </article>
+            </section>
+    </section>
             );
         })}
         </>

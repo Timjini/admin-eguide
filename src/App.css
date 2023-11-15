@@ -12,6 +12,16 @@ body {
     /* margin-left:250px; */
 }
 
+h1, h2, span{
+    font-family: 'Cinzel', sans-serif;
+}
+
+a, h3 {
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+}
+
 .hero-img {
     background-image: url(/public/images/home.jpg);
     background-size: cover;

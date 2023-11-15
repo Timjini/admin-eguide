@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import Tours from './pages/Tours';
 import Channels from './pages/Channels';
 import Sidebar from './components/Sidebar';
-import Agency from './pages/Agency';
+import MembersList from './pages/MembersList';
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/tours" element={<Tours />} />
             <Route path="/channels" element={<Channels />} />
-            <Route path="/users" element={<Agency />} />
+            <Route path="/members" element={<MembersList />} />
           </>
         ) : (
           <>

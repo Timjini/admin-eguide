@@ -35,7 +35,7 @@ export default function BroadcastPage(){
           {/* Card header */}
             <div className="items-center justify-between lg:flex">
               <div className="mb-4 lg:mb-0">
-                <h3 className="py-5 text-xl text-gray-700 dark:text-white">
+                <h3 className="py-5 text-2xl text-gray-700 dark:text-white">
                   Channels
                 </h3>
                 <span className="text-base font-normal text-gray-500 dark:text-gray-400">

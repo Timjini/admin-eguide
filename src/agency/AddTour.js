@@ -2,15 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import agencyApi from '../api/agency';
 import useGetGuides from './getGuides';
+import Alert from '../components/Alert';
+
 
 
 const AddTour = () => {
 
+
   const getGuides = useGetGuides();
   const [guides, setGuides] = useState([]);
+  const [alertData, setAlertData] = useState(null);
+
 
   const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.user);
+
   const [tourData, setTourData] = useState({
     title: '',
     description: '',
@@ -30,6 +36,7 @@ const AddTour = () => {
       [name]: name === 'image' ? files[0] : value,
     }));
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,10 +59,13 @@ const AddTour = () => {
       });
 
       setData(response.data);
-      window.location.reload();
-      alert('Tour added successfully');
+      setAlertData({ message: response.data, status: 'success' });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error('Error adding tour:', error);
+      setAlertData({ message: 'An error occurred while adding the tour', status: 'error' });
     }
   };
 
@@ -75,6 +85,11 @@ const AddTour = () => {
 
   return (
     <>
+     <Alert
+        message={alertData?.message}
+        status={alertData?.status}
+        onClose={() => setAlertData(null)} // Clear alertData when the alert is closed
+      />
       <button
         onClick={openModal}
         className="w-56"

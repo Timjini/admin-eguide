@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from'react-redux';
 import Logout from '../Authentication/Logout';
-import {API_PUBLIC_FOLDER} from '../constant/index';
+import {API_USER_IMAGE} from '../constant/index';
 import BreadCrumbs from '../components/BreadCrumbs';
 
 
@@ -26,7 +26,7 @@ export default function Profile () {
                 <div className="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
                     <img
                     className="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0 object-cover"
-                    src={`${API_PUBLIC_FOLDER}${user.avatar}`}
+                    src={`${API_USER_IMAGE}/${user.avatar}`}
                     alt={user.email}
                     />
                     <div>

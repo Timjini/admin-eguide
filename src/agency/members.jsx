@@ -1,6 +1,6 @@
 import React,{useState, useEfect} from 'react';
 // import {agencyApi} from './agencyApi';
-import {API_PUBLIC_FOLDER} from '../constant/index';
+import {API_USER_IMAGE} from '../constant/index';
 import AddMember from './AddMember';
 
 const Members = ({data}) => {
@@ -91,7 +91,7 @@ const Members = ({data}) => {
                             >
                             <img
                                 className="w-10 h-10 rounded-full"
-                                src={`${API_PUBLIC_FOLDER}${member.avatar}`}
+                                src={`${API_USER_IMAGE}/${member.avatar}`}
                                 alt={member.name}
                             />
                             <div className="pl-3">

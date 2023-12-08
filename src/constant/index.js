@@ -11,3 +11,4 @@ export const API_ROOT_PUBLIC = `${baseUrl}`
 export const API_ROOT = `${baseUrl}api`; 
 export const API_PUBLIC_FOLDER = `${baseUrl}`;
 export const API_USER_DATA = `${baseUrl}api/users/user_data`;
+export const API_USER_IMAGE = `${baseUrl}uploads`;

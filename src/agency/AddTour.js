@@ -167,7 +167,7 @@ const AddTour = () => {
                     {/* Mapping through guidesData to create options */}
                     {guides.map((guide) => (
                       <option key={guide._id} value={guide._id}>
-                        {guide.user.name}
+                        {guide.user?.name}
                       </option>
                     ))}
                   </select>

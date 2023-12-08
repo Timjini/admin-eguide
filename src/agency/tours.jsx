@@ -20,7 +20,7 @@ const Tour = ({data}) => {
                         return (
                             <div key={tour._id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                 <div href="#">
-                                    <img className="rounded-t-lg h-96 object-cover" src={`${API_PUBLIC_FOLDER}/${tour.photo}`} alt="" />
+                                    <img className="rounded-t-lg h-96 object-cover w-96" src={`${API_PUBLIC_FOLDER}/${tour.image}`} alt="" />
                                 </div>
                                 <div className="p-5">
                                     <div href="#">

@@ -8,6 +8,7 @@ const channels = payload => axios.get(`${API_ROOT}/channels/agency_channels`, pa
 const addTour = payload => axios.post(`${API_ROOT}/tours/new_tour`, payload);
 const addChannel = payload => axios.post(`${API_ROOT}/channels/create`, payload);
 const guides = payload => axios.get(`${API_ROOT}/users/guides`, payload);
+const addMember = payload => axios.post(`${API_ROOT}/agencies/create_agent`, payload);
 
 // Admin Routes
 const users = payload => axios.get(`${API_ROOT}/users/users`, payload);
@@ -21,7 +22,8 @@ const agencyApi = {
     addTour,
     addChannel,
     users,
-    guides
+    guides,
+    addMember
   };
   
 export default agencyApi;

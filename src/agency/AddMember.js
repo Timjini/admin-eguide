@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import agencyApi from '../api/agency';
 import LoadingButton from '../components/LoadingButton';
+import Alert from '../components/Alert';
 
 const AddMember = () => {
   const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.user);
   const [selectedUserType, setSelectedUserType] = useState('');
   const [loading, setLoading] = useState(false);
+  const [alertData, setAlertData] = useState(null);
   
+
   const [memberData, setMemberData] = useState({
-    title: '',
-    description: '',
-    guide: '',
-    agency: '',
-    startingDate: '',
-    endingDate: '',
+    name: '',
+    // username: '',
+    email: '',
+    phone: '',
+    password: '',
     image: null, 
   });
   const [data, setData] = useState(null);
@@ -29,6 +31,9 @@ const AddMember = () => {
     }));
   };
 
+  console.log(user.user.authToken)
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,11 +41,15 @@ const AddMember = () => {
     try {
       const formData = new FormData();
       formData.append('name', memberData.name);
-      formData.append('username', memberData.username);
+      // formData.append('username', memberData.username);
       formData.append('email', memberData.email);
       formData.append('phone', memberData.phone);
       formData.append('password', memberData.password);
       formData.append('image', memberData.image);
+      formData.append('type', selectedUserType);
+
+      console.log(formData);
+
 
       const response = await agencyApi.addMember(formData, {
         headers: {
@@ -51,11 +60,15 @@ const AddMember = () => {
 
       setData(response.data);
       console.log('Member added successfully:', response.data);
+      setAlertData({ message: response.data, status: 'success' });
       setLoading(false);
-      window.location.reload();
-      alert('Member added successfully');
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error('Error adding tour:', error);
+      setAlertData({ message: 'An error occurred while adding the tour', status: 'error' });
+
     }
   };
 
@@ -66,6 +79,11 @@ const AddMember = () => {
 
   return (
     <>
+     <Alert
+        message={alertData?.message}
+        status={alertData?.status}
+        onClose={() => setAlertData(null)} // Clear alertData when the alert is closed
+      />
       <button
         onClick={openModal}
         className="block cursor-pointer"
@@ -123,8 +141,8 @@ const AddMember = () => {
                       <input type="text" name="name" value={memberData.name} onChange={handleChange} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500' required />
                     </div>
                     <div className='flex flex-col'>
-                      <label  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Username:</label>
-                      <input name="username" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={memberData.username} onChange={handleChange} required />
+                      <label  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>password:</label>
+                      <input type='password' name="password" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={memberData.password} onChange={handleChange} required />
                     </div>
                 </div>
                 <div className='flex flex-row gap-1'>
@@ -134,7 +152,7 @@ const AddMember = () => {
                     </div>
                     <div className='flex flex-col'>
                       <label  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Phone:</label>
-                      <input name="phone" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={memberData.phone} onChange={handleChange} required />
+                      <input type="number" name="phone" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={memberData.phone} onChange={handleChange} required />
                     </div>
                 </div>
                 <div className='flex flex-col'>

@@ -19,6 +19,7 @@ const AddMember = () => {
     phone: '',
     password: '',
     image: null, 
+    agencyId: user.user.agency._id,
   });
   const [data, setData] = useState(null);
 
@@ -47,6 +48,7 @@ const AddMember = () => {
       formData.append('password', memberData.password);
       formData.append('image', memberData.image);
       formData.append('type', selectedUserType);
+      formData.append('agencyId', user.user.agency._id);
 
       console.log(formData);
 
@@ -136,39 +138,41 @@ const AddMember = () => {
             </div>
             <form onSubmit={handleSubmit} className='p-4 md:p-5 flex flex-col'>
                 <div className='flex flex-row gap-1 '>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col w-full'>
+                      <div>
                       <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'> Name:</label>
-                      <input type="text" name="name" value={memberData.name} onChange={handleChange} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500' required />
-                    </div>
-                    <div className='flex flex-col'>
-                      <label  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>password:</label>
-                      <input type='password' name="password" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={memberData.password} onChange={handleChange} required />
+                      <input type="name" name="name" value={memberData.name} onChange={handleChange} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500' placeholder='Users Full Name' required />
+                      </div>
+                      <div className='flex flex-col'>
+                        <label  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>password:</label>
+                        <input type='password' name="password" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder='*******' value={memberData.password} onChange={handleChange} required />
+                      </div>
                     </div>
                 </div>
-                <div className='flex flex-row gap-1'>
+                <div className='flex flex-col gap-1 w-full'>
                     <div className='flex flex-col'>
                       <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'> Email:</label>
-                      <input type="text" name="email" value={memberData.email} onChange={handleChange} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500' required />
+                      <input type="text" name="email" value={memberData.email} onChange={handleChange} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500' placeholder='email@company.com' required />
                     </div>
                     <div className='flex flex-col'>
                       <label  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Phone:</label>
-                      <input type="number" name="phone" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={memberData.phone} onChange={handleChange} required />
+                      <input type="phone" name="phone" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="(212) 548-1478"value={memberData.phone} onChange={handleChange} required />
                     </div>
                 </div>
-                <div className='flex flex-col'>
+                <div className='flex flex-col mt-2'>
                 <select
                   // value={selectedUserType} // Set this value based on your component's state
                   onChange={(e) => setSelectedUserType(e.target.value)} // Update this based on your component's state management
                   className="block w-full px-4 py-2 mt-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500"
                 >
                   <option value="">Select an Option</option>
-                  <option value="">Guide</option>
-                  <option value="">Agent</option>
+                  <option value="guide">Guide</option>
+                  <option value="agent">Agent</option>
                 </select>
                 </div>
                 <div className='my-5'>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload An Image</label>    
-                    <input type="file" name="image" onChange={handleChange} accept="image/*" className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' required />
+                    <input type="file" name="image" onChange={handleChange} accept="image/*" className='block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' />
                 </div>
                 {loading && (
                     <div className='flex flex-row justify-end'>

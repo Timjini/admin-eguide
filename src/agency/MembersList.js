@@ -30,7 +30,7 @@ const MembersList = () => {
   }, [user.user.authToken]);
 
   return (
-    <div className="p-4 flex flex-col sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{height:'90vh'}}>
+    <div className="p-4 flex flex-col sm:ml-64 " style={{height:'90vh'}}>
       {loading ? (
         <Loader />
       ) : (

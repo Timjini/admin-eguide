@@ -11,14 +11,14 @@ const AgencyChannels = ({data}) => {
   return (
 
     <>
-    <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+    <div className="p-4 border border-gray-200 rounded-lg shadow-sm content-wrapper">
       {/* Card header */}
       <div className="items-center justify-between lg:flex">
         <div className="mb-4 lg:mb-0">
-          <h3 className="py-5 text-2xl text-gray-700 dark:text-white">
+          <h3 className="py-5 text-2xl  ">
             Channels
           </h3>
-          <span className="text-base font-normal text-gray-500 dark:text-gray-400">
+          <span className="text-base font-normal  ">
             This is a list of latest transactions
           </span>
         </div>
@@ -27,7 +27,7 @@ const AgencyChannels = ({data}) => {
             <button
               id="dropdownDefault"
               data-dropdown-toggle="dropdown"
-              className="mb-4 sm:mb-0 mr-4 inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+              className="mb-4 sm:mb-0 mr-4 inline-flex items-center   border border-gray-300 focus:outline-none hover: focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 dark:  dark:border-gray-600 dark:hover: dark:hover:border-gray-600 dark:focus:ring-gray-700"
               type="button"
             >
               Filter by status
@@ -49,9 +49,9 @@ const AgencyChannels = ({data}) => {
             {/* Dropdown menu */}
             <div
               id="dropdown"
-              className="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700"
+              className="z-10 hidden w-56 p-3  rounded-lg shadow dark:"
             >
-              <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+              <h6 className="mb-3 text-sm font-medium  ">
                 Category
               </h6>
               <ul className="space-y-2 text-sm" aria-labelledby="dropdownDefault">
@@ -60,10 +60,10 @@ const AgencyChannels = ({data}) => {
                     id="apple"
                     type="checkbox"
                     defaultValue=""
-                    className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                    className="w-4 h-4  border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark: dark:border-gray-500" />
                   <label
                     htmlFor="apple"
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                    className="ml-2 text-sm font-medium  "
                   >
                     Completed (56)
                   </label>
@@ -74,10 +74,10 @@ const AgencyChannels = ({data}) => {
                     type="checkbox"
                     defaultValue=""
                     defaultChecked=""
-                    className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                    className="w-4 h-4  border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark: dark:border-gray-500" />
                   <label
                     htmlFor="fitbit"
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                    className="ml-2 text-sm font-medium  "
                   >
                     Cancelled (56)
                   </label>
@@ -87,10 +87,10 @@ const AgencyChannels = ({data}) => {
                     id="dell"
                     type="checkbox"
                     defaultValue=""
-                    className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                    className="w-4 h-4  border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark: dark:border-gray-500" />
                   <label
                     htmlFor="dell"
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                    className="ml-2 text-sm font-medium  "
                   >
                     In progress (56)
                   </label>
@@ -101,10 +101,10 @@ const AgencyChannels = ({data}) => {
                     type="checkbox"
                     defaultValue=""
                     defaultChecked=""
-                    className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                    className="w-4 h-4  border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark: dark:border-gray-500" />
                   <label
                     htmlFor="asus"
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                    className="ml-2 text-sm font-medium  "
                   >
                     In review (97)
                   </label>
@@ -116,7 +116,7 @@ const AgencyChannels = ({data}) => {
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
-                  className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  className="w-5 h-5  "
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -132,13 +132,13 @@ const AgencyChannels = ({data}) => {
               <input
                 name="start"
                 type="text"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                className=" border border-gray-300  text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5  dark: dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="From" />
             </div>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
-                  className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  className="w-5 h-5  "
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@ const AgencyChannels = ({data}) => {
               <input
                 name="end"
                 type="text"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                className=" border border-gray-300  text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5  dark: dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="To" />
             </div>
           </div>
@@ -166,68 +166,68 @@ const AgencyChannels = ({data}) => {
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden shadow sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                <thead className="bg-gray-50 dark:bg-gray-700">
+                <thead className=" dark:">
                   <tr>
                     <th
                       scope="col"
-                      className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white"
+                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                     >
                       Channel Name
                     </th>
                     <th
                       scope="col"
-                      className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white"
+                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                     >
                       Starting Date &amp;
                     </th>
                     <th
                       scope="col"
-                      className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white"
+                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                     >
                       Ending Date
                     </th>
                     <th
                       scope="col"
-                      className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white"
+                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                     >
                       Channel Code
                     </th>
                     <th
                       scope="col"
-                      className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white"
+                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                     >
                       Guide
                     </th>
                     <th
                       scope="col"
-                      className="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white"
+                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                     >
                       Status
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-gray-800">
+                <tbody className=" dark:">
                   {data.channels.map((channel) => (
                     <tr key={channel.id}>
-                      <td className="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                      <td className="p-4 text-sm font-normal  whitespace-nowrap ">
                         {channel.channelName}{" "}
                       </td>
-                      <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      <td className="p-4 text-sm font-normal  whitespace-nowrap ">
                         {formattedDate(channel.tour.starting_date)}
                       </td>
-                      <td className="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                      <td className="p-4 text-sm font-semibold  whitespace-nowrap ">
                         {formattedDate(channel.tour.ending_date)}
                       </td>
-                      <td className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      <td className="p-4 text-sm font-normal  whitespace-nowrap ">
                         {channel.code}
                       </td>
-                      <td className="inline-flex items-center p-4 space-x-2 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      <td className="inline-flex items-center p-4 space-x-2 text-sm font-normal  whitespace-nowrap ">
                         <span>
                           {channel.guide.user.name}
                         </span>
                       </td>
                       <td className="p-4 whitespace-nowrap">
-                        <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">
+                        <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark: dark:text-green-400 border border-green-100 dark:border-green-500">
                           {channel.status}
                         </span>
                       </td>
@@ -243,7 +243,7 @@ const AgencyChannels = ({data}) => {
       <div className="flex items-center justify-between pt-3 sm:pt-6">
         <div>
           <button
-            className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            className="inline-flex items-center p-2 text-sm font-medium text-center  rounded-lg hover:  dark:hover:"
             type="button"
             data-dropdown-toggle="transactions-dropdown"
           >
@@ -264,12 +264,12 @@ const AgencyChannels = ({data}) => {
           </button>
           {/* Dropdown menu */}
           <div
-            className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+            className="z-50 hidden my-4 text-base list-none  divide-y divide-gray-100 rounded shadow dark: dark:divide-gray-600"
             id="transactions-dropdown"
           >
             <div className="px-4 py-3" role="none">
               <p
-                className="text-sm font-medium text-gray-900 truncate dark:text-white"
+                className="text-sm font-medium  truncate "
                 role="none"
               >
                 Sep 16, 2021 - Sep 22, 2021
@@ -279,7 +279,7 @@ const AgencyChannels = ({data}) => {
               <li>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm  hover:  dark:hover: dark:hover:"
                   role="menuitem"
                 >
                   Yesterday
@@ -288,7 +288,7 @@ const AgencyChannels = ({data}) => {
               <li>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm  hover:  dark:hover: dark:hover:"
                   role="menuitem"
                 >
                   Today
@@ -297,7 +297,7 @@ const AgencyChannels = ({data}) => {
               <li>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm  hover:  dark:hover: dark:hover:"
                   role="menuitem"
                 >
                   Last 7 days
@@ -306,7 +306,7 @@ const AgencyChannels = ({data}) => {
               <li>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm  hover:  dark:hover: dark:hover:"
                   role="menuitem"
                 >
                   Last 30 days
@@ -315,7 +315,7 @@ const AgencyChannels = ({data}) => {
               <li>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm  hover:  dark:hover: dark:hover:"
                   role="menuitem"
                 >
                   Last 90 days
@@ -325,7 +325,7 @@ const AgencyChannels = ({data}) => {
             <div className="py-1" role="none">
               <a
                 href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                className="block px-4 py-2 text-sm  hover:  dark:hover: dark:hover:"
                 role="menuitem"
               >
                 Custom...
@@ -336,7 +336,7 @@ const AgencyChannels = ({data}) => {
         <div className="flex-shrink-0">
           <a
             href="#"
-            className="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700"
+            className="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover: dark:text-primary-500 dark:hover:"
           >
             Channels Report
             <svg

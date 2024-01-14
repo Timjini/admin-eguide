@@ -38,7 +38,7 @@ export default function BroadcastPages(){
   
   
     return (
-      <div className="p-4 sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{ height: '100vh' }}>
+      <div className="p-4 sm:ml-64 " style={{ height: '100vh' }}>
         <h1>Something</h1>
       </div>
     )

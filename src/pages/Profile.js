@@ -3,6 +3,7 @@ import { useSelector } from'react-redux';
 import Logout from '../Authentication/Logout';
 import {API_USER_IMAGE} from '../constant/index';
 import BreadCrumbs from '../components/BreadCrumbs';
+import BackButton from '../components/BackButton';
 
 
 
@@ -13,16 +14,19 @@ export default function Profile () {
     const firstName = user && user.name ? user.name.split(" ")[0] : "";
     const lastName = user && user.name ? user.name.split(" ").slice(1).join(" ") : "";
     return (
-        <div className="p-4 sm:ml-64 bg-gray-50 dark:bg-gray-900">
-            <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+        <div className="p-4 sm:ml-64 ">
+             <div className="">
+                    <BackButton />
+                </div>
+            <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 content-wrapper">
             <div className="mb-4 col-span-full xl:mb-2">
-                <h3 className="py-5 text-2xl text-gray-700 dark:text-white">
+                <h3 className="py-5 text-2xl  ">
                 User settings
                 </h3>
             </div>
             {/* Right Content */}
             <div className="col-span-full xl:col-auto">
-                <div className="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <div className="p-4 mb-4  border rounded-lg shadow-sm 2xl:col-span-2  sm:p-6">
                 <div className="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
                     <img
                     className="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0 object-cover"
@@ -30,16 +34,16 @@ export default function Profile () {
                     alt={user.email}
                     />
                     <div>
-                    <h3 className="mb-1 text-xl font-bold text-gray-900 dark:text-white">
+                    <h3 className="mb-1 text-xl font-bold ">
                         {user.name ? user.name : user.email}
                     </h3>
-                    <div className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="mb-4 text-sm ">
                         JPG, GIF or PNG. Max size of 800K
                     </div>
                     <div className="flex items-center space-x-4">
                         <button
                         type="button"
-                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center  rounded-lg  focus:ring-4 "
                         >
                         <svg
                             className="w-4 h-4 mr-2 -ml-1"
@@ -54,7 +58,7 @@ export default function Profile () {
                         </button>
                         <button
                         type="button"
-                        className="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                        className="py-2 px-3 text-sm font-medium  focus:outline-none rounded-lg border focus:z-10 focus:ring-4"
                         >
                         Delete
                         </button>
@@ -62,21 +66,21 @@ export default function Profile () {
                     </div>
                 </div>
                 </div>
-                <div className="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <h3 className="mb-4 text-xl font-semibold dark:text-white">
+                <div className="p-4 mb-4  rounded-lg shadow-sm 2xl:col-span-2  sm:p-6 ">
+                <h3 className="mb-4 text-xl font-semibold ">
                     Language &amp; Time
                 </h3>
                 <div className="mb-4">
                     <label
                     htmlFor="settings-language"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium "
                     >
                     Select language
                     </label>
                     <select
                     id="settings-language"
                     name="countries"
-                    className="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="sm:text-sm rounded-lg  block w-full p-2.5 "
                     >
                     <option>English (US)</option>
                     <option>Italiano</option>
@@ -90,14 +94,14 @@ export default function Profile () {
                 <div className="mb-6">
                     <label
                     htmlFor="settings-timezone"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium "
                     >
                     Time Zone
                     </label>
                     <select
                     id="settings-timezone"
                     name="countries"
-                    className="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className=" border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                     >
                     <option>GMT+0 Greenwich Mean Time (GMT)</option>
                     <option>GMT+1 Central European Time (CET)</option>
@@ -109,7 +113,7 @@ export default function Profile () {
                     </select>
                 </div>
                 <div>
-                    <button className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    <button className=" font-medium rounded-lg text-sm px-5 py-2.5 text-center  ">
                     Save all
                     </button>
                 </div>
@@ -117,8 +121,8 @@ export default function Profile () {
             
             </div>
             <div className="col-span-2">
-                <div className="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <h3 className="mb-4 text-xl font-semibold dark:text-white">
+                <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2  sm:p-6 ">
+                <h3 className="mb-4 text-xl font-semibold ">
                     General information
                 </h3>
                 <form action="#">
@@ -126,7 +130,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="first-name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         First Name
                         </label>
@@ -134,7 +138,7 @@ export default function Profile () {
                         type="text"
                         name="first-name"
                         id="first-name"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder={firstName}
                         required=""
                         />
@@ -142,7 +146,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="last-name"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Last Name
                         </label>
@@ -150,7 +154,7 @@ export default function Profile () {
                         type="text"
                         name="last-name"
                         id="last-name"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder={lastName}
                         required=""
                         />
@@ -158,7 +162,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="country"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Country
                         </label>
@@ -166,7 +170,7 @@ export default function Profile () {
                         type="text"
                         name="country"
                         id="country"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder="United States"
                         required=""
                         />
@@ -174,7 +178,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="city"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         City
                         </label>
@@ -182,7 +186,7 @@ export default function Profile () {
                         type="text"
                         name="city"
                         id="city"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder="e.g. San Francisco"
                         required=""
                         />
@@ -190,7 +194,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="address"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Address
                         </label>
@@ -198,7 +202,7 @@ export default function Profile () {
                         type="text"
                         name="address"
                         id="address"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder="e.g. California"
                         required=""
                         />
@@ -206,7 +210,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="email"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Email
                         </label>
@@ -214,7 +218,7 @@ export default function Profile () {
                         type="email"
                         name="email"
                         id="email"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder={user.email}
                         required=""
                         />
@@ -222,7 +226,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="phone-number"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Phone Number
                         </label>
@@ -230,7 +234,7 @@ export default function Profile () {
                         type="number"
                         name="phone-number"
                         id="phone-number"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder={user.phone}
                         required=""
                         />
@@ -238,7 +242,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="birthday"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Birthday
                         </label>
@@ -246,7 +250,7 @@ export default function Profile () {
                         type="number"
                         name="birthday"
                         id="birthday"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder="15/08/1990"
                         required=""
                         />
@@ -254,7 +258,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="organization"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Organization
                         </label>
@@ -262,7 +266,7 @@ export default function Profile () {
                         type="text"
                         name="organization"
                         id="organization"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder={user.agency}
                         required=""
                         />
@@ -270,7 +274,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="role"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Role
                         </label>
@@ -278,7 +282,7 @@ export default function Profile () {
                         type="text"
                         name="role"
                         id="role"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder={user.isAgencyOwner === true ? 'Admin' : user.type}
                         required=""
                         />
@@ -286,7 +290,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="department"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Department
                         </label>
@@ -294,7 +298,7 @@ export default function Profile () {
                         type="text"
                         name="department"
                         id="department"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder="Development"
                         required=""
                         />
@@ -302,7 +306,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="zip-code"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Zip/postal code
                         </label>
@@ -310,14 +314,14 @@ export default function Profile () {
                         type="number"
                         name="zip-code"
                         id="zip-code"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder={123456}
                         required=""
                         />
                     </div>
                     <div className="col-span-6 sm:col-full">
                         <button
-                        className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        className=" font-medium rounded-lg text-sm px-5 py-2.5 text-center  "
                         type="submit"
                         >
                         Save all
@@ -326,8 +330,8 @@ export default function Profile () {
                     </div>
                 </form>
                 </div>
-                <div className="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <h3 className="mb-4 text-xl font-semibold dark:text-white">
+                <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2  sm:p-6 ">
+                <h3 className="mb-4 text-xl font-semibold ">
                     Password information
                 </h3>
                 <form action="#">
@@ -335,7 +339,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="current-password"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Current password
                         </label>
@@ -343,7 +347,7 @@ export default function Profile () {
                         type="text"
                         name="current-password"
                         id="current-password"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border border-gray-300  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder="••••••••"
                         required=""
                         />
@@ -351,7 +355,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="password"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         New password
                         </label>
@@ -360,7 +364,7 @@ export default function Profile () {
                         data-popover-placement="bottom"
                         type="password"
                         id="password"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className=" border text-sm rounded-lg block w-full p-2.5 "
                         placeholder="••••••••"
                         required=""
                         />
@@ -368,23 +372,23 @@ export default function Profile () {
                         data-popover=""
                         id="popover-password"
                         role="tooltip"
-                        className="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+                        className="absolute z-10 invisible inline-block text-sm font-light  transition-opacity duration-300 border rounded-lg shadow-sm opacity-0 w-72  "
                         >
                         <div className="p-3 space-y-2">
-                            <h3 className="font-semibold text-gray-900 dark:text-white">
+                            <h3 className="font-semibold ">
                             Must have at least 6 characters
                             </h3>
                             <div className="grid grid-cols-4 gap-2">
-                            <div className="h-1 bg-orange-300 dark:bg-orange-400" />
-                            <div className="h-1 bg-orange-300 dark:bg-orange-400" />
-                            <div className="h-1 bg-gray-200 dark:bg-gray-600" />
-                            <div className="h-1 bg-gray-200 dark:bg-gray-600" />
+                            <div className="h-1 " />
+                            <div className="h-1 " />
+                            <div className="h-1  " />
+                            <div className="h-1  " />
                             </div>
                             <p>It’s better to have:</p>
                             <ul>
                             <li className="flex items-center mb-1">
                                 <svg
-                                className="w-4 h-4 mr-2 text-green-400 dark:text-green-500"
+                                className="w-4 h-4 mr-2 "
                                 aria-hidden="true"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
@@ -400,7 +404,7 @@ export default function Profile () {
                             </li>
                             <li className="flex items-center mb-1">
                                 <svg
-                                className="w-4 h-4 mr-2 text-gray-300 dark:text-gray-400"
+                                className="w-4 h-4 mr-2 "
                                 aria-hidden="true"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
@@ -416,7 +420,7 @@ export default function Profile () {
                             </li>
                             <li className="flex items-center">
                                 <svg
-                                className="w-4 h-4 mr-2 text-gray-300 dark:text-gray-400"
+                                className="w-4 h-4 mr-2 "
                                 aria-hidden="true"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
@@ -438,7 +442,7 @@ export default function Profile () {
                     <div className="col-span-6 sm:col-span-3">
                         <label
                         htmlFor="confirm-password"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium "
                         >
                         Confirm password
                         </label>
@@ -446,14 +450,14 @@ export default function Profile () {
                         type="text"
                         name="confirm-password"
                         id="confirm-password"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        className="shadow-sm  border  sm:text-sm rounded-lg  block w-full p-2.5  "
                         placeholder="••••••••"
                         required=""
                         />
                     </div>
                     <div className="col-span-6 sm:col-full">
                         <button
-                        className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        className=" font-medium rounded-lg text-sm px-5 py-2.5 text-center  "
                         type="submit"
                         >
                         Save all
@@ -462,9 +466,9 @@ export default function Profile () {
                     </div>
                 </form>
                 </div>
-                <div className="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2  sm:p-6 ">
                 <div className="flow-root">
-                    <h3 className="text-xl font-semibold dark:text-white">Sessions</h3>
+                    <h3 className="text-xl font-semibold ">Sessions</h3>
                     <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                     <li className="py-4">
                         <div className="flex items-center space-x-4">

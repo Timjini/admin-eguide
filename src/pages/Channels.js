@@ -5,6 +5,7 @@ import AddChannel from '../agency/AddChannel';
 import AgencyChannels from '../agency/AgencyChannels';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
+import BackButton from '../components/BackButton';
 
 export default function BroadcastPage() {
   const user = useSelector(state => state.user);
@@ -37,9 +38,18 @@ export default function BroadcastPage() {
 
   if (!data.channels || data.channels.length === 0) {
     return (
-      <div className="p-4 sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{ height: '100vh' }}>
-        <div className='m-2'>
+      <div className="p-4 sm:ml-64 " style={{ height: '100vh' }}>
+        <div className="">
+                    <BackButton />
+                </div>
+        <div className='m-2 flex flex-row justify-between'>
+          <div>
+            <BackButton />
+          </div>
+          <div>
           <AddChannel />
+
+          </div>
         </div>
         <div className='flex flex-row gap-1'>
         <span className="ml-4">No channels available</span>, <Link to="/tours">Please create a Tour first </Link>
@@ -49,9 +59,17 @@ export default function BroadcastPage() {
   }
 
   return (
-    <div className="p-4 sm:ml-64 flex flex-col bg-gray-50 dark:bg-gray-900" style={{ height: '100vh' }}>
+    <div className="p-4 sm:ml-64 flex flex-col " style={{ height: '100vh' }}>
       <div>
-      <AddChannel />
+      <div className='flex flex-row justify-between '>
+          <div>
+            <BackButton />
+          </div>
+          <div>
+          <AddChannel />
+
+          </div>
+        </div>
       </div>
        {loading ? (
         <Loader />

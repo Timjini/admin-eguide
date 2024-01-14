@@ -1,6 +1,6 @@
 const AdminDashboard = ({user}) => {
     return (
-      <div className="p-4 sm:ml-64 text-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-white">
+      <div className="p-4 sm:ml-64 ">
         <div class="dashboard_hero">
                 <div class="content">
                     <h2 className="font-blod text-xl"> Dashboard </h2>

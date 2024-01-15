@@ -58,32 +58,30 @@ h1, h2, h3{
 
 h4, span,label {
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
     font-size: 1.2rem;
 }
 a{
     text-decoration: none;
-    font-size:1rem;
-    font-family: 'Roboto', sans-serif;
+    font-size:0.9rem;
+    /* font-family: 'Roboto', sans-serif; */
 }
 
 aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
 
-.content-wrapper{background-image: var(--white-gradient);padding:1rem;background-color: #242424;min-height: 100vh;border-radius: 20px;}
-
 /* Grid Layout */
 
-/* .playground{
+.playground{
     display: grid;
     grid-template-areas: 
-    "nav nav nav"
-    "side content content"
+    "nav nav nav nav"
+    "side content content content"
     ;
 }
 
-nav {grid-area: nav;}
-aside {grid-area:side;}
-.content {grid-area:content;color:var(--text);background-color: var(--bg);} */
+.navigation {grid-area: nav;}
+.sidebar-container {grid-area:side;}
+.content-wrapper {grid-area:content;background-image: var(--white-gradient);padding:1rem;background-color: #242424;min-height: 100vh;border-radius: 20px;}
 
 /* HERO SECTION ============================================================  */
 

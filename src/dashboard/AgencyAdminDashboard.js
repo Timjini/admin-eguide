@@ -1,11 +1,21 @@
-const AgencyAdminDashboard = ({user}) => {
+import DrawerForm from "../components/DrawerForm";
+import React, { useState } from 'react';
+
+const AgencyAdminDashboard = ({ user }) => {
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerVisible(!isDrawerVisible);
+  };
+
   return (
-    <div className="p-4 sm:ml-64 ">
-        <div className="content-wrapper">
+    <div className="content-wrapper">
+      <div className="">
         <span> Welcome Back {user.name}</span>
-        </div>
+        {/* The rest of your content */}
+      </div>
     </div>
   );
-}
+};
 
-export default AgencyAdminDashboard;  
+export default AgencyAdminDashboard;

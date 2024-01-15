@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import agencyApi from "../api/agency";
 import { useSelector } from 'react-redux';
-import AddChannel from '../agency/AddChannel';
-import AgencyChannels from '../agency/AgencyChannels';
+import AddChannel from '../agency/management/AddChannel';
+import AgencyChannels from '../agency/view/AgencyChannels';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import BackButton from '../components/BackButton';

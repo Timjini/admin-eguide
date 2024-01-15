@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import agencyApi from '../api/agency';
-import useGetGuides from './getGuides';
-import Alert from '../components/Alert';
+import agencyApi from '../../api/agency';
+import useGetGuides from '../components/getGuides';
+import Alert from '../../components/Alert';
 
 
 

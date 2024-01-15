@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import UsersTable from '../admin/UsersTable'
+import UsersTable from '../admin/views/UsersTable'
 import MembersList from '../agency/MembersList';
 import MemberDashboard from '../dashboard/MemberDashboard';
-import AddMember from '../agency/AddMember';
 
 export default function Dashboard(props) {
   const user = useSelector(state => state.user.user);

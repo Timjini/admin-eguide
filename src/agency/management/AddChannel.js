@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import agencyApi from '../api/agency';
-import useGetGuides from './getGuides';
-import useGetTours from './getTours';
+import agencyApi from '../../api/agency';
+import useGetGuides from '../components/getGuides';
+import useGetTours from '../components/getTours';
 
 const AddChannel = () => {
   const getGuides = useGetGuides();

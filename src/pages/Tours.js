@@ -56,7 +56,7 @@ export default function Tours(props) {
 
   return (  
     <>
-  <div className="p-4 flex flex-col sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{ height: '100vh' }}>
+  <div className="p-4 flex flex-col content-wrapper" style={{ height: '100vh' }}>
     <AddTour />
       {loading ? (
         <Loader />

@@ -1,6 +1,6 @@
 // useAgencyData.js
 import { useEffect } from 'react';
-import agencyApi from '../api/agency';
+import agencyApi from '../../api/agency';
 
 const useAgencyData = ({ onMembers, onTours, onChannels }) => {
   useEffect(() => {

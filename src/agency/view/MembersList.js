@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Members from "./members";
-import agencyApi from "../api/agency";
+import Members from "./components/members";
+import agencyApi from "../../api/agency";
 import { useSelector } from 'react-redux';
-import Loader from "../components/Loader";
+import Loader from "../../components/Loader";
 
 const MembersList = () => {
   const [membersData, setMembersData] = useState([]);

@@ -1,36 +1,51 @@
 import './App.css';
+import './styles/mobile.css';
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import SignIn from './Authentication/SignIn';
 import { useSelector } from 'react-redux';
+import SignIn from './Authentication/SignIn';
 import UserManagement from './Authentication/UserManagement';
+import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Tours from './pages/Tours';
 import Channels from './pages/Channels';
-import Sidebar from './components/Sidebar';
 import MembersList from './pages/MembersList';
-import BroadcastPages from './pages/BroadCastPages';
+// import BroadcastPages from './pages/BroadCastPages';
+import Sidebar from './components/Sidebar';
+
 
 function App() {
 
-  const user = useSelector(state => state.user);
-  console.log(user);
+  const auth = useSelector(state => state.user);
+  console.log(auth);
   
 
   return (
-    <>
-      <BrowserRouter>
-      {user && user.user && <Sidebar />}
+    <BrowserRouter>
+      {auth && auth.user && <Sidebar />}
       <Routes>
-        {user && user.user ? (
-          <>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/tours" element={<Tours />} />
-            <Route path="/channels" element={<Channels />} />
-            <Route path="/members" element={<MembersList />} />
-            <Route path="/broadcast" element={<BroadcastPages />} />
-          </>
+        {auth && auth.user ? (
+          auth.user.type === 'admin' ? (
+            <>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/tours" element={<Tours />} />
+              <Route path="/channels" element={<Channels />} />
+              <Route path="/members" element={<MembersList />} />
+
+              {/* Admin user routes */}
+              {/* <Route path="/admin/" element={<AdminDashboard />} /> */}
+              {/* <Route path="/admin/users" element={<AdminUsers />} /> */}
+              {/* Add more admin routes as needed */}
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/tours" element={<Tours />} />
+              <Route path="/channels" element={<Channels />} />
+              <Route path="/members" element={<MembersList />} />
+            </>
+          )
         ) : (
           <>
             <Route path="/sign_up" element={<UserManagement />} />
@@ -40,9 +55,8 @@ function App() {
         <Route path="/*" element={<SignIn />} />
       </Routes>
     </BrowserRouter>
-
-    </>
   );
-}
+};
+
 
 export default App;

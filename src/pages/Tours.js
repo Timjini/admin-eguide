@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from'react-redux';
 import agencyApi from "../api/agency";
-import Tour from "../agency/tours";
+import Tour from "../agency/views/tours";
 import Loader from '../components/Loader';
-import AddTour from '../agency/AddTour';
+import AddTour from '../agency/management/AddTour';
 
 
 
@@ -56,13 +56,16 @@ export default function Tours(props) {
 
   return (  
     <>
-  <div className="p-4 flex flex-col content-wrapper" style={{ height: '100vh' }}>
-    <AddTour />
-      {loading ? (
-        <Loader />
-      ) : (
-        <Tour data={data} />
-      )}
-    </div></>
+    <div className='playground'>
+      <div className="p-4 flex flex-col content-wrapper" style={{ height: '100vh' }}>
+        <AddTour />
+          {loading ? (
+            <Loader />
+          ) : (
+            <Tour data={data} />
+          )}
+        </div>
+    </div>
+        </>
   );
 }

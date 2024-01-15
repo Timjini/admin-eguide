@@ -41,9 +41,9 @@ function App() {
             <>
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/tours" element={<Tours />} />
-              <Route path="/channels" element={<Channels />} />
-              <Route path="/members" element={<MembersList />} />
+              <Route path="/agency/tours" element={<Tours />} />
+              <Route path="/agency/channels/:agencyId" element={<Channels />} />
+              <Route path="/agency/members/:agencyId" element={<MembersList />} />
             </>
           )
         ) : (

@@ -38,7 +38,14 @@ export default function Logout() {
 
   return (
     <div>
-      <button onClick={handleLogOut} className='px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'>Log Out</button>
+      <button onClick={handleLogOut} className=' thirdBtn flex flex-row justify-center content-center px-3 py-2 mb-3 mr-3 text-sm font-medium text-center '>
+      <span class="material-symbols-outlined">
+        logout
+        </span>
+      <span className="block xs:block lg:hidden xl:block">
+        Log Out
+      </span>        
+      </button>
     </div>
   );
 }

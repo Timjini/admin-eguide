@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { API_USER_IMAGE } from '../constant/index';
-import AddMember from './AddMember';
-import BackButton from '../components/BackButton';
+import { API_USER_IMAGE } from '../../constant/index';
+import AddMember from '../management/AddMember';
+import BackButton from '../../components/BackButton';
 
 const Members = ({ data }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState(data);
 
-//   console.log(data)
-
-useEffect(() => {
-    // Update filteredData whenever the data or searchQuery changes
-    const filtered = data.filter((member) =>
+ console.log("received data" ,data.members)
+ useEffect(() => {
+  if (data.members) {
+    const filtered = data.members.filter((member) =>
       (member.email && member.email.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (member.username && member.username.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (member.name && member.name.toLowerCase().includes(searchQuery.toLowerCase()))
     );
+
     console.log("filtered here", filtered);
     setFilteredData(filtered);
-  }, [data, searchQuery]);
+  } else {
+    setFilteredData([]); // Ensure filteredData is an array even if there is no 'members' property in data
+  }
+}, [data, searchQuery]);
 
   
 
@@ -97,7 +100,7 @@ useEffect(() => {
                     </tr>
                     </thead>
                     <tbody>
-                    {data && filteredData.map((member,index) =>
+                    {Array.isArray(filteredData) && filteredData.map((member, index) =>
                         <tr key={index} className="border-b  ">
                             <td className="w-4 p-4">
                             <div className="flex items-center">
@@ -136,13 +139,25 @@ useEffect(() => {
                                 {member.status}
                             </div>
                             </td>
-                            <td className="px-6 py-4">
-                            <a
-                                href="#"
-                                className=""
-                            >
-                                Edit user
-                            </a>
+                            <td className="px-6 py-4 flex gap-2">
+                            <button
+                            className=""
+                            id={member._id}
+                            // onClick={() => handleViewUser(member._id)}
+                          >
+                            <span class="material-symbols-outlined">
+                            visibility
+                            </span>
+                          </button> 
+                            <button
+                            className=""
+                            id={member._id}
+                            // onClick={() => handleEditUser(member._id)}
+                          >
+                            <span class="material-symbols-outlined">
+                            edit
+                            </span>
+                          </button>
                             </td>
                         </tr>
                         )}

@@ -1,8 +1,11 @@
 // useAgencyData.js
 import { useEffect } from 'react';
 import agencyApi from '../../api/agency';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 const useAgencyData = ({ onMembers, onTours, onChannels }) => {
+  const { agencyId } = useParams();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,7 +21,8 @@ const useAgencyData = ({ onMembers, onTours, onChannels }) => {
         onTours && onTours(toursData);
 
         // Fetch channels
-        const channelsResponse = await agencyApi.channels();
+        const channelsResponse = await agencyApi.channels({agencyId});
+        console.log(channelsResponse);
         const channelsData = channelsResponse.data.channels;
         onChannels && onChannels(channelsData);
       } catch (error) {

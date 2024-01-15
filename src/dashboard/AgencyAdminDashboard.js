@@ -10,10 +10,7 @@ const AgencyAdminDashboard = ({ user }) => {
 
   return (
     <div className="content-wrapper">
-      <div className="">
         <span> Welcome Back {user.name}</span>
-        {/* The rest of your content */}
-      </div>
     </div>
   );
 };

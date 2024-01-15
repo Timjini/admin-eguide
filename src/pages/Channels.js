@@ -2,82 +2,72 @@ import React, { useState, useEffect } from 'react';
 import agencyApi from "../api/agency";
 import { useSelector } from 'react-redux';
 import AddChannel from '../agency/management/AddChannel';
-import AgencyChannels from '../agency/view/AgencyChannels';
+import AgencyChannels from '../agency/views/AgencyChannels';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import BackButton from '../components/BackButton';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 
 export default function BroadcastPage() {
   const user = useSelector(state => state.user);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const { agencyId: routeAgencyId } = useParams();
 
+  console.log("here route",routeAgencyId)
+ 
   useEffect(() => {
-    // Set loading to true when the request starts
-    setLoading(true);
-  
-    // Fetch agency members when the component mounts
-    agencyApi.channels({
-      headers: {
-        Authorization: `Bearer ${user.user.authToken}`,
-      },
-    })
-      .then((response) => {
+    const fetchChannels = async () => {
+      try {
+        const response = await agencyApi.channels({
+          headers: {
+            Authorization: `Bearer ${user.user.authToken}`,
+          },
+          params: {
+            agencyId: routeAgencyId
+          }
+        });
+
         setData(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching agency members:", error);
-      })
-      .finally(() => {
-        // Set loading to false regardless of success or failure
+      } catch (error) {
+        console.error("Error fetching agency channels:", error);
+      } finally {
         setLoading(false);
-      });
-  }, [user.user.authToken]);
+      }
+    };
+
+    fetchChannels();
+  }, [user.user.authToken, routeAgencyId]);
+
+  
 
   if (!data.channels || data.channels.length === 0) {
     return (
-      <div className="p-4 sm:ml-64 " style={{ height: '100vh' }}>
-        <div className="">
-                    <BackButton />
-                </div>
-        <div className='m-2 flex flex-row justify-between'>
-          <div>
-            <BackButton />
-          </div>
-          <div>
-          <AddChannel />
-
-          </div>
-        </div>
-        <div className='flex flex-row gap-1'>
-        <span className="ml-4">No channels available</span>, <Link to="/tours">Please create a Tour first </Link>
+      <div className="content-wrapper" >
+        <div className='flex flex-col mt-24 mx-auto justify-center items-center'>
+          <Loader/>
+          <span>Please contact the administrator</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="p-4 sm:ml-64 flex flex-col " style={{ height: '100vh' }}>
-      <div>
-      <div className='flex flex-row justify-between '>
-          <div>
-            <BackButton />
-          </div>
-          <div>
+      <div className='content-wrapper'>
+        <div className="p-4 flex flex-col" >
           <AddChannel />
-
+            {loading ? (
+              <Loader />
+            ) : (
+              <div className=''>
+              <AgencyChannels data={data} />
+              </div>
+            )}
           </div>
-        </div>
       </div>
-       {loading ? (
-        <Loader />
-      ) : (
-        <><div className='m-2'>
-          </div><AgencyChannels data={data} /></>
-      )}
+    );
       
-    </div>
-  );
 }

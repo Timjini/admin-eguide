@@ -7,5 +7,8 @@
         "content "
         ;
     }
+    .content-wrapper{
+        margin-left:0px;
+    }
 
 }

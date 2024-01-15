@@ -1,8 +1,7 @@
 import React,{useState, useEfect} from 'react';
 // import {agencyApi} from './agencyApi';
-import {API_PUBLIC_FOLDER, API_USER_IMAGE} from '../constant/index';
-import AddTour from './AddTour';
-import AddChannel from './AddChannel';
+import {API_PUBLIC_FOLDER, API_USER_IMAGE} from '../../constant/index';
+import AddTour from '../management/AddTour';
 
 const Tour = ({data}) => {
     if (!data.tour || data.tour.length === 0) {

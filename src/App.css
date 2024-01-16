@@ -153,5 +153,17 @@ aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
     color: #fff;
   }
 
+  .dashboard_card_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dahboard_card_content span{
+    font-size: 5rem;
+    color:var(--primary);
+  }
+
   /* NAVIGATIONS======================================================================= */
   .sidebarItems li:hover {background-color: var(--primary);border-radius: 10px;color:var(--bg);}

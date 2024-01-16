@@ -97,8 +97,8 @@ function Sidebar() {
     <div className="">
       <aside
         id="default-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 md:w-24 lg:w-24 xl:w-64 h-screen transition-transform  ${
-          isSidebarOpen ? 'sm:translate-x-0' : '-translate-x-full sm:translate-x-0 hidden lg:block'
+        className={`fixed top-0 left-0 z-40 w-64 md:w-24 lg:w-24 xl:w-48 h-screen transition-transform  ${
+          isSidebarOpen ? 'sm:translate-x-0' : '-translate-x-full sm:translate-x-0 hidden lg:block sidebar-container'
         }`}
         aria-label="Sidebar"
         ref={sidebarRef} // Reference to the sidebar element

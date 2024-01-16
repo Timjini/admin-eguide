@@ -1,13 +1,14 @@
 import React from 'react';
 import SignUpForm from './SignUpForm';
 import axios from 'axios';
-import Box from '@mui/material/Box';
-import Item from '@mui/material/ListItem';
+// import Box from '@mui/material/Box';
+// import Item from '@mui/material/ListItem';
+import { API_ROOT } from '../constant';
 
 const UserManagement = () => {
   const handleSignUpAndUpload = async (userData) => {
     try {
-      const signUpResponse = await axios.post('http://localhost:4000/api/users/sign_up', userData);
+      const signUpResponse = await axios.post(`${API_ROOT}/api/users/sign_up`, userData);
       console.log('Sign Up Response:', signUpResponse.data);
     } catch (error) {
       console.error('Error signing up:', error);

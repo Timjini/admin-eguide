@@ -1,3 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* 
+    Stylesheet Navigation 
+
+    - Common styling
+    - Hero Section
+    - Logo
+    - Buttons
+    - Authentication forms
+    - DASHBOARDS
+    - NAvigations
+
+    IMPORTANT please update this with every new snippet
+*/
+
+
+
+/* COMMON STYLING  ===========================================================*/
+
+   /* THEME PREFERENCES */
+   /* To Activate Dark/Light mode add the following tags 
+    in css add :root[data-theme="light"] and :root[data-theme="dark"]
+    in html tag add data-theme="light" to set the main theme
+   */
+   /* :root[data-theme="light"]  */
+
+   :root {
+    --bg: #f5f5f5;
+    --text: #242424;
+    --primary:#e666a0;
+    --secondary: #f8e8d2;
+    --white-gradient: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    --accent: #007aff;
+    --static-color: rgba(253, 253, 253, 0.03);
+    --shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+    --hover: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --special-color: conic-gradient(from 90deg at 40% -25%, #ffd700, #f79d03, #ee6907, #e6390a, #de0d0d, #d61039, #cf1261, #c71585, #cf1261, #d61039, #de0d0d, #ee6907, #f79d03, #ffd700, #ffd700, #ffd700);
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -5,8 +49,42 @@
   }
 
 body {
-    margin-left:250px;
+    /* margin-left:250px; */
+    background-color: var(--bg);
 }
+
+h1, h2, h3{
+    font-family: 'Cinzel', sans-serif;
+}
+
+h4{
+    text-decoration: none;
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 1.2rem;
+}
+a,span,label {
+    text-decoration: none;
+    font-size:1rem;
+    /* font-family: 'Roboto', sans-serif; */
+}
+
+aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
+
+/* Grid Layout */
+
+.playground{
+    display: grid;
+    grid-template-areas: 
+    "nav nav nav nav"
+    "side content content content"
+    ;
+}
+
+.navigation {grid-area: nav;}
+.sidebar-container {grid-area:side;}
+.content-wrapper {grid-area:content;background-image: var(--white-gradient);padding:1rem;background-color: #242424;min-height: 100vh;border-radius: 20px; margin-left:3rem;}
+
+/* HERO SECTION ============================================================  */
 
 .hero-img {
     background-image: url(/public/images/home.jpg);
@@ -20,6 +98,27 @@ body {
     height: 100vh;
 }
 
+/* LOGO ==================================================================== */
+
+.logo{width: 100px;height: auto;}
+.logo-container{display:grid;justify-content: center;}
+
+
+/* BUTTONS ================================================================= */
+
+.primaryBtn{background-color: var(--primary) ; color: var(--bg)}
+.secondaryBtn{background-color: var(--secondary); color: var(--text)}
+.thirdBtn{}
+.thirdBtn:hover{background-color: var(--secondary); color:var(--text); border-radius: 10px;padding:10px 5px 10px 5px;}
+.backBtn{
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+    background-blend-mode: multiply,multiply;
+    border-radius: 50%;padding-left:0px;margin-left:5px;font-size: 2rem;color:var(--bg);}
+.backBtn:hover {background-color:var(--primary);}
+
+
+/* Authentication forms ================================================== */
+
 
 .sign-up-container {
     display:flex;
@@ -29,28 +128,50 @@ body {
     height: 100vh;
 }
 
-.logo{
-    width: 100px;
-    height: auto;
-}
 .userAvatar{
     width:50px;
     height:auto;
     border-radius: 50%;
 }
 
-.bar-card{
-    width: 200px;
-    background-color: rgb(241, 241, 241);
-    height: 70px;
-    border-radius: 10px;
-    margin-left:25px;
-    margin-bottom:50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
 
-.logo-container{
-    display:grid;
-    justify-content: center;
-}
+/* DASHBOARDS ========================================================== */
+
+.dashboard_hero {
+    background-image: linear-gradient(#ddc5c580,#00000080),url('https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    height: 250px;
+    background-position: top;
+    background-size: cover;
+    border-radius: 20px;
+  }
+
+  .content {
+    text-align: left;
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    color: #fff;
+  }
+
+  .dashboard_card_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dahboard_card_content span{
+    font-size: 3rem;
+    color:var(--secondary);
+    background-color: var(--text);
+    border-radius: 50%;
+    padding: 10px;
+  }
+
+  .dahboard_card_content span:hover{
+    background-color: var(--primary);
+  }
+
+  .shadow{background-color: var(--bg);}
+  /* NAVIGATIONS======================================================================= */
+  .sidebarItems li:hover {background-color: var(--primary);border-radius: 10px;color:var(--bg);}

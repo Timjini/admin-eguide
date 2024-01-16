@@ -12,6 +12,7 @@
     - Buttons
     - Authentication forms
     - DASHBOARDS
+    - NAvigations
 
     IMPORTANT please update this with every new snippet
 */
@@ -151,3 +152,6 @@ aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
     left: 20%;
     color: #fff;
   }
+
+  /* NAVIGATIONS======================================================================= */
+  .sidebarItems li:hover {background-color: var(--primary);border-radius: 10px;color:var(--bg);}

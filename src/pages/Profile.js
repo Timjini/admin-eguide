@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from'react-redux';
 import Logout from '../Authentication/Logout';
 import {API_USER_IMAGE} from '../constant/index';
-import BreadCrumbs from '../components/BreadCrumbs';
 import BackButton from '../components/BackButton';
 
 

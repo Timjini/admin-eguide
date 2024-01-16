@@ -113,13 +113,12 @@ function Sidebar() {
             {/* <h2 className="text-2xl font-bold ">EG</h2> */}
           </div>
 
-          <ul className="space-y-2 font-medium p-4">
+          <ul className="space-y-2 font-medium p-4 sidebarItems">
             <li>
               <Link to="/" className="flex items-center p-2 rounded-lg  group">
-                <svg className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                  <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                  <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-                </svg>
+              <span className="material-symbols-outlined">
+                space_dashboard
+              </span>
                 <span className="ml-3 block xs:block lg:hidden xl:block ">Dashboard</span>
               </Link>
             </li>
@@ -137,9 +136,9 @@ function Sidebar() {
 
             <li>
               <Link to="/profile" className="flex items-center p-2 rounded-lg  group">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strockWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
+              <span className="material-symbols-outlined">
+                manage_accounts
+              </span>
                 <span className="ml-3 block xs:block lg:hidden xl:block ">Profile</span>
               </Link>
             </li>

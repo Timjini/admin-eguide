@@ -44,6 +44,7 @@ function App() {
               <Route path="/agency/tours" element={<Tours />} />
               <Route path="/agency/channels/:agencyId" element={<Channels />} />
               <Route path="/agency/members/:agencyId" element={<MembersList />} />
+              <Route path="/members/:userId" element={<Profile/>} />
             </>
           )
         ) : (

@@ -57,7 +57,9 @@ export default function BroadcastPage() {
   return (
       <div className='content-wrapper'>
         <div className="p-4 flex flex-col" >
-          <AddChannel />
+          <div>
+            <AddChannel />
+          </div>
             {loading ? (
               <Loader />
             ) : (

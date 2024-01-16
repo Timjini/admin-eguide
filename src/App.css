@@ -161,8 +161,15 @@ aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
   }
 
   .dahboard_card_content span{
-    font-size: 5rem;
-    color:var(--primary);
+    font-size: 3rem;
+    color:var(--secondary);
+    background-color: var(--text);
+    border-radius: 50%;
+    padding: 10px;
+  }
+
+  .dahboard_card_content span:hover{
+    background-color: var(--primary);
   }
 
   .shadow{background-color: var(--bg);}

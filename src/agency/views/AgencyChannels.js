@@ -19,7 +19,7 @@ const AgencyChannels = ({data}) => {
               Channels
             </h3>
             <span className="text-base font-normal  ">
-              This is a list of latest transactions
+              This is a list of latest channels
             </span>
           </div>
           <div className="items-center sm:flex">

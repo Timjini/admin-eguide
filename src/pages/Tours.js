@@ -6,6 +6,7 @@ import Loader from '../components/Loader';
 import AddTour from '../agency/management/AddTour';
 import { useParams } from 'react-router-dom';
 import AllTours from '../admin/views/AllTours';
+import BackButton from '../components/BackButton';
 
 
 
@@ -41,20 +42,24 @@ export default function Tours(props) {
     fetchTours();
   }, [user.user.authToken, routeAgencyId]);
 
-console.log("DATA " , data)
+console.log("user " , data)
 
   return (  
     <>
-    <div className='playground'>
-      <div className="p-4 flex flex-col content-wrapper" style={{ height: '100vh' }}>
-        {user.type === 'admin' ? (
+    <div className=''>
+      <div className="p-4 flex flex-col content-wrapper">
+        {user.user.type === 'admin' ? (
           <AllTours data={data} />
         ) : (
           <>
-            <AddTour />
+          <div className='flex flex-row justify-between'>
+          <BackButton />
+          <AddTour />
+          </div>
             {loading ? (
               <Loader />
             ) : (
+
               <Tour data={data} />
             )}
           </>

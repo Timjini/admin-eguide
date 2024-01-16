@@ -16,8 +16,8 @@ import {
     height: 240,
     series: [
       {
-        name: "Sales",
-        data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+        name: "Travlers",
+        data: [50, 40, 30, 32, 50, 35, 20, 23, 50],
       },
     ],
     options: {
@@ -114,15 +114,14 @@ import {
           </div>
           <div>
             <Typography variant="h6" color="blue-gray">
-              Line Chart
+              Travelers Chart
             </Typography>
             <Typography
               variant="small"
               color="gray"
               className="max-w-sm font-normal"
             >
-              Visualize your data in a simple way using the
-              @material-tailwind/react chart plugin.
+              Number of travelers in the past 9 months
             </Typography>
           </div>
         </CardHeader>

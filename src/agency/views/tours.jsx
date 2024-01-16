@@ -41,10 +41,6 @@ const Tour = ({data}) => {
                     <p>No tours available.</p>
                 )}
             </div>
-    
-            <div className='flex flex-row mx-auto mt-5'>
-                {(!data.tour || data.tour.length === 0) && <AddTour />}
-            </div>
         </>
     );
     

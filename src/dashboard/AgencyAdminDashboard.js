@@ -1,20 +1,17 @@
 import DrawerForm from '../components/DrawerForm';
 import React, { useState } from 'react';
 import Example from '../components/Example';
+import { useSelector } from 'react-redux';
 
 const AgencyAdminDashboard = ({ user }) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
-  const toggleDrawer = () => {
-    setIsDrawerVisible(!isDrawerVisible);
-  };
-
   return (
     <div className='content-wrapper'>
-      <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-8" >
+      <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-20" >
         <a
           href="#"
-          className="block max-w-sm p-6  border  rounded-lg shadow "
+          className="block w-1/4 h-36 p-6  border  rounded-lg shadow "
         >
           <div className="flex flex-row justify-between items-center	 dahboard_card_content">
             <div>
@@ -23,18 +20,17 @@ const AgencyAdminDashboard = ({ user }) => {
             </h5>
             </div>
             <span className="material-symbols-outlined dahboard_icon">
-                space_dashboard
+                airport_shuttle
               </span>
           </div>
-          <p className="font-normal ">
-            Here are the biggest enterprise technology acquisitions of 2021 so far, in
-            reverse chronological order.
-          </p>
+          <span className="font-medium ">
+            Active Guides
+          </span>
         </a>
 
         <a
           href="#"
-          className="block max-w-sm p-6  border  rounded-lg shadow "
+          className="block w-1/4 h-36 p-6  border  rounded-lg shadow "
         >
           <div className="flex flex-row justify-between items-center	 dahboard_card_content">
             <div>
@@ -42,18 +38,17 @@ const AgencyAdminDashboard = ({ user }) => {
               37
             </h5>
             </div>
-            <span className="material-symbols-outlined dahboard_icon">
-                space_dashboard
-              </span>
+            <span class="material-symbols-outlined dahboard_icon">
+            your_trips  
+            </span>
           </div>
-          <p className="font-normal ">
-            Here are the biggest enterprise technology acquisitions of 2021 so far, in
-            reverse chronological order.
-          </p>
+          <span className="font-medium  ">
+            Current Trips
+          </span>
         </a>
         <a
           href="#"
-          className="block max-w-sm p-6  border  rounded-lg shadow "
+          className="block w-1/4 h-36 p-6  border  rounded-lg shadow "
         >
           <div className="flex flex-row justify-between items-center	 dahboard_card_content">
             <div>
@@ -62,20 +57,21 @@ const AgencyAdminDashboard = ({ user }) => {
             </h5>
             </div>
             <span className="material-symbols-outlined dahboard_icon">
-                space_dashboard
+                map
               </span>
           </div>
-          <p className="font-normal ">
-            Here are the biggest enterprise technology acquisitions of 2021 so far, in
-            reverse chronological order.
-          </p>
+          <span className="font-medium ">
+            Current Travelers
+          </span>
         </a>
       </div>
+
+
       <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-10 ">
          <Example />
          <a
             href="#"
-            className="block w-1/3 p-6  border  rounded-lg shadow "
+            className="block w-1/3 p-6  border  rounded-lg shadow hidden"
           >
             <h5 className="mb-2 text-2xl font-bold tracking-tight ">
               Noteworthy technology acquisitions 2021

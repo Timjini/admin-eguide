@@ -28,9 +28,9 @@ function App() {
             <>
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/tours" element={<Tours />} />
-              <Route path="/channels" element={<Channels />} />
-              <Route path="/members" element={<MembersList />} />
+              <Route path="/admin/tours" element={<Tours />} />
+              <Route path="/admin/channels" element={<Channels />} />
+              <Route path="/admin/members" element={<MembersList />} />
 
               {/* Admin user routes */}
               {/* <Route path="/admin/" element={<AdminDashboard />} /> */}
@@ -41,7 +41,7 @@ function App() {
             <>
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/agency/tours" element={<Tours />} />
+              <Route path="/agency/tours/:agencyId" element={<Tours />} />
               <Route path="/agency/channels/:agencyId" element={<Channels />} />
               <Route path="/agency/members/:agencyId" element={<MembersList />} />
               <Route path="/members/:userId" element={<Profile/>} />

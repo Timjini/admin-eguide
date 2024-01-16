@@ -4,17 +4,17 @@ import {API_PUBLIC_FOLDER, API_USER_IMAGE} from '../../constant/index';
 import AddTour from '../management/AddTour';
 
 const Tour = ({data}) => {
-    if (!data.tour || data.tour.length === 0) {
+    if (!data.tours || data.tours.length === 0) {
         console.log('No tour data available.');
         return null; // Return null or a message when there is no tour data
       }
 
-    console.log('Tour data: ', data.tour);
+    console.log('Tour data: ', data.tours);
       return (
         <>
             <div className='flex flex-row justify-center gap-5 flex-wrap'>
-                {data.tour && data.tour.length > 0 ? (
-                    data.tour.map((tour) => {
+                {data.tours && data.tours.length > 0 ? (
+                    data.tours.map((tour) => {
                         const guide = data.guide;
                         return (
                             <div key={tour._id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

@@ -165,5 +165,6 @@ aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
     color:var(--primary);
   }
 
+  .shadow{background-color: var(--bg);}
   /* NAVIGATIONS======================================================================= */
   .sidebarItems li:hover {background-color: var(--primary);border-radius: 10px;color:var(--bg);}

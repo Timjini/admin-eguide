@@ -4,10 +4,13 @@ import {Link} from 'react-router-dom';
 import {API_ROOT_PUBLIC} from '../constant';
 import { useSelector } from'react-redux';
 import Logout from '../Authentication/Logout';
+import UserMenu from './UserMenu';
+import AdminMenu from './AdminMenu';
 
 function Sidebar() {
   const user = useSelector(state => state.user); 
-  const reduxAgencyId = useSelector(state => state.user.user.agency._id);
+  const reduxAgencyId = useSelector(state => state.user.user.agency ? state.user.user.agency._id : '');
+
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
@@ -22,6 +25,9 @@ function Sidebar() {
     }
   };
 
+  if (user.type === 'admin') {
+
+  }
 
 
   useEffect(() => {
@@ -122,18 +128,7 @@ function Sidebar() {
                 <span className="ml-3 block xs:block lg:hidden xl:block ">Dashboard</span>
               </Link>
             </li>
-            {menuItems.map((item, index) => (
-              <li key={index} className={item.className}>
-                <Link
-                  to={`${item.link}/${reduxAgencyId}`}
-                  className="flex items-center p-2 rounded-lg  group"
-                >
-                  {item.icon}
-                  <span className="ml-3 block xs:block lg:hidden xl:block ">{item.label}</span>
-                </Link>
-              </li>
-            ))}
-
+            {user.user.type === 'admin' ? <AdminMenu /> : <UserMenu reduxAgencyId={reduxAgencyId} />}
             <li>
               <Link to="/profile" className="flex items-center p-2 rounded-lg  group">
               <span className="material-symbols-outlined">

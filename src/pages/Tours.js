@@ -4,6 +4,9 @@ import agencyApi from "../api/agency";
 import Tour from "../agency/views/tours";
 import Loader from '../components/Loader';
 import AddTour from '../agency/management/AddTour';
+import { useParams } from 'react-router-dom';
+import AllTours from '../admin/views/AllTours';
+
 
 
 
@@ -13,6 +16,8 @@ export default function Tours(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const { agencyId: routeAgencyId } = useParams();
+
   useEffect(() => {
     const fetchTours = async () => {
       try {
@@ -20,52 +25,43 @@ export default function Tours(props) {
           headers: {
             Authorization: `Bearer ${user.user.authToken}`,
           },
+          params: {
+            agencyId: routeAgencyId
+          }
         });
-
+        console.log(response.data)
         setData(response.data);
       } catch (error) {
-        console.error("Error fetching agency members:", error);
+        console.error("Error fetching Tours channels:", error);
       } finally {
-        setLoading(false); // Set loading to false regardless of success or failure
+        setLoading(false);
       }
     };
 
     fetchTours();
-  }, [user.user.authToken]);
-  
-    // useEffect(() => {
-    //   // Fetch agency members when the component mounts
-    //   agencyApi.tours({
-    //     headers: {
-    //       Authorization: `Bearer ${user.user.authToken}`,
-    //     },
-    //   })
-    //     .then((response) => {
-    //       setData(response.data);
-    //       console.log(response);
-    //       setLoading(false);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching agency members:", error);
-    //     } } finally {
-    //       setLoading(false); // Set loading to false regardless of success or failure
-    //     };
-    // }, [user.user.authToken]);
+  }, [user.user.authToken, routeAgencyId]);
 
-  console.log(data);
+console.log("DATA " , data)
 
   return (  
     <>
     <div className='playground'>
       <div className="p-4 flex flex-col content-wrapper" style={{ height: '100vh' }}>
-        <AddTour />
-          {loading ? (
-            <Loader />
-          ) : (
-            <Tour data={data} />
-          )}
-        </div>
+        {user.type === 'admin' ? (
+          <AllTours data={data} />
+        ) : (
+          <>
+            <AddTour />
+            {loading ? (
+              <Loader />
+            ) : (
+              <Tour data={data} />
+            )}
+          </>
+        )}
+      </div>
     </div>
+
         </>
   );
 }

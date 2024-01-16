@@ -17,7 +17,6 @@ export default function BroadcastPage() {
 
   const { agencyId: routeAgencyId } = useParams();
 
-  console.log("here route",routeAgencyId)
  
   useEffect(() => {
     const fetchChannels = async () => {

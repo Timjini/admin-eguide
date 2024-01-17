@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from'react-redux';
 import agencyApi from "../api/agency";
-import Tour from "../agency/tours";
+import Tour from "../agency/views/tours";
 import Loader from '../components/Loader';
-import AddTour from '../agency/AddTour';
+import AddTour from '../agency/management/AddTour';
+import { useParams } from 'react-router-dom';
+import AllTours from '../admin/views/AllTours';
+import BackButton from '../components/BackButton';
+
 
 
 
@@ -13,6 +17,8 @@ export default function Tours(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const { agencyId: routeAgencyId } = useParams();
+
   useEffect(() => {
     const fetchTours = async () => {
       try {
@@ -20,49 +26,47 @@ export default function Tours(props) {
           headers: {
             Authorization: `Bearer ${user.user.authToken}`,
           },
+          params: {
+            agencyId: routeAgencyId
+          }
         });
-
+        console.log(response.data)
         setData(response.data);
       } catch (error) {
-        console.error("Error fetching agency members:", error);
+        console.error("Error fetching Tours channels:", error);
       } finally {
-        setLoading(false); // Set loading to false regardless of success or failure
+        setLoading(false);
       }
     };
 
     fetchTours();
-  }, [user.user.authToken]);
-  
-    // useEffect(() => {
-    //   // Fetch agency members when the component mounts
-    //   agencyApi.tours({
-    //     headers: {
-    //       Authorization: `Bearer ${user.user.authToken}`,
-    //     },
-    //   })
-    //     .then((response) => {
-    //       setData(response.data);
-    //       console.log(response);
-    //       setLoading(false);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching agency members:", error);
-    //     } } finally {
-    //       setLoading(false); // Set loading to false regardless of success or failure
-    //     };
-    // }, [user.user.authToken]);
+  }, [user.user.authToken, routeAgencyId]);
 
-  console.log(data);
+console.log("user " , data)
 
   return (  
     <>
-  <div className="p-4 flex flex-col sm:ml-64 bg-gray-50 dark:bg-gray-900" style={{ height: '100vh' }}>
-    <AddTour />
-      {loading ? (
-        <Loader />
-      ) : (
-        <Tour data={data} />
-      )}
-    </div></>
+    <div className=''>
+      <div className="p-4 flex flex-col content-wrapper">
+        {user.user.type === 'admin' ? (
+          <AllTours data={data} />
+        ) : (
+          <>
+          <div className='flex flex-row justify-between'>
+          <BackButton />
+          <AddTour />
+          </div>
+            {loading ? (
+              <Loader />
+            ) : (
+
+              <Tour data={data} />
+            )}
+          </>
+        )}
+      </div>
+    </div>
+
+        </>
   );
 }

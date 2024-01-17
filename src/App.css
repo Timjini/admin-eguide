@@ -12,6 +12,7 @@
     - Buttons
     - Authentication forms
     - DASHBOARDS
+    - NAvigations
 
     IMPORTANT please update this with every new snippet
 */
@@ -56,34 +57,32 @@ h1, h2, h3{
     font-family: 'Cinzel', sans-serif;
 }
 
-h4, span,label {
+h4{
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
     font-size: 1.2rem;
 }
-a{
+a,span,label {
     text-decoration: none;
     font-size:1rem;
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
 }
 
 aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
 
-.content-wrapper{background-image: var(--white-gradient);padding:1rem;background-color: #242424;min-height: 100vh;border-radius: 20px;}
-
 /* Grid Layout */
 
-/* .playground{
+.playground{
     display: grid;
     grid-template-areas: 
-    "nav nav nav"
-    "side content content"
+    "nav nav nav nav"
+    "side content content content"
     ;
 }
 
-nav {grid-area: nav;}
-aside {grid-area:side;}
-.content {grid-area:content;color:var(--text);background-color: var(--bg);} */
+.navigation {grid-area: nav;}
+.sidebar-container {grid-area:side;}
+.content-wrapper {grid-area:content;background-image: var(--white-gradient);padding:1rem;background-color: #242424;min-height: 100vh;border-radius: 20px; margin-left:3rem;}
 
 /* HERO SECTION ============================================================  */
 
@@ -109,10 +108,12 @@ aside {grid-area:side;}
 
 .primaryBtn{background-color: var(--primary) ; color: var(--bg)}
 .secondaryBtn{background-color: var(--secondary); color: var(--text)}
+.thirdBtn{}
+.thirdBtn:hover{background-color: var(--secondary); color:var(--text); border-radius: 10px;padding:10px 5px 10px 5px;}
 .backBtn{
     background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
     background-blend-mode: multiply,multiply;
-    border-radius: 50%;padding-left:0px;margin-left:5px;font-size: 2rem;color:var(--bg)}
+    border-radius: 50%;padding-left:0px;margin-left:5px;font-size: 2rem;color:var(--bg);}
 .backBtn:hover {background-color:var(--primary);}
 
 
@@ -151,3 +152,26 @@ aside {grid-area:side;}
     left: 20%;
     color: #fff;
   }
+
+  .dashboard_card_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dahboard_card_content span{
+    font-size: 3rem;
+    color:var(--secondary);
+    background-color: var(--text);
+    border-radius: 50%;
+    padding: 10px;
+  }
+
+  .dahboard_card_content span:hover{
+    background-color: var(--primary);
+  }
+
+  .shadow{background-color: var(--bg);}
+  /* NAVIGATIONS======================================================================= */
+  .sidebarItems li:hover {background-color: var(--primary);border-radius: 10px;color:var(--bg);}

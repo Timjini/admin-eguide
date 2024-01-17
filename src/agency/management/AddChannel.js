@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import agencyApi from '../api/agency';
-import useGetGuides from './getGuides';
-import useGetTours from './getTours';
+import agencyApi from '../../api/agency';
+import useGetGuides from '../components/getGuides';
+import useGetTours from '../components/getTours';
+import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import {
+Button,
+} from "@material-tailwind/react";
+import BackButton from '../../components/BackButton';
 
 const AddChannel = () => {
   const getGuides = useGetGuides();
@@ -88,18 +93,12 @@ const AddChannel = () => {
 
   return (
     <>
-       <button
-        onClick={openModal}
-        className="w-56"
-        type="button"
-      >
-        <div className='flex flex-row gap-2 hover:bg-purple-100 p-3 rounded-lg'>
-        <span class="material-symbols-outlined text-xl">
-        add_circle
-        </span>
-        <span>Add A Channel</span>
-        </div>
-      </button>
+    <div className='flex flex-row justify-between'>
+    <BackButton />
+      <Button className="flex items-center gap-3 mb-2 primaryBtn" size="sm" onClick={openModal}>
+              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
+      </Button>
+    </div>
       {showModal && (
         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black opacity-50 z-40" />
       )}
@@ -107,17 +106,17 @@ const AddChannel = () => {
         id="crud-modal"
         className={`${
           showModal ? 'fixed' : 'hidden'
-        } top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden z-50 bg-white rounded-lg shadow dark:bg-gray-700 w-full md:max-w-md md:w-full`}
+        } top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden z-50  rounded-lg shadow  w-full md:max-w-md md:w-full`}
       >
         <div className="relative p-4 w-full max-w-md max-h-full">
           <div className="relative ">
-            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+              <h3 className="text-lg font-semibold ">
                 Create A New Channel
               </h3>
               <button
                 type="button"
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="text-gray-400 bg-transparent hover:bg-gray-200  rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                 onClick={openModal}
               >
                 <svg
@@ -142,7 +141,7 @@ const AddChannel = () => {
               <div className='py-2'>
                 <div className='flex flex-col p-2'>
                   <label
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                    className='block mb-2 text-sm font-medium  '
                   >
                     Guide:
                   </label>
@@ -150,7 +149,7 @@ const AddChannel = () => {
                     name="guide"
                     value={channelData.guide}
                     onChange={handleChange}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+                    className=' border border-gray-300  text-sm rounded-lg w-full p-2.5'
                     required
                   >
                     <option value="">Select a guide</option>
@@ -165,7 +164,7 @@ const AddChannel = () => {
 
                 <div className='flex flex-col p-2'>
                   <label
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                    className='block mb-2 text-sm font-medium'
                   >
                     Tour:
                   </label>
@@ -173,7 +172,7 @@ const AddChannel = () => {
                     name="tour"
                     value={channelData.tour}
                     onChange={handleChange}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+                    className='border border-gray-300  text-sm rounded-lg  block w-full p-2.5 '
                     required
                   >
                     <option value="">Select a Tour</option>
@@ -188,14 +187,14 @@ const AddChannel = () => {
 
                 <div className='flex flex-col p-2'>
                   <label
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                    className='block mb-2 text-sm font-medium  '
                   >
                     Starting Date:
                   </label>
                   <input
                     type="date"
                     name="startingDate"
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='border border-gray-300  text-sm rounded-lg w-full p-2.5'
                     value={channelData.startingDate}
                     onChange={handleChange}
                     required
@@ -204,7 +203,7 @@ const AddChannel = () => {
 
                 <div className='flex flex-col p-2 mb-5'>
                   <label
-                    className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                    className='block mb-2 text-sm font-medium  '
                   >
                     Ending Date:
                   </label>
@@ -213,13 +212,13 @@ const AddChannel = () => {
                     name="endingDate"
                     value={channelData.endingDate}
                     onChange={handleChange}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='border border-gray-300  text-sm rounded-lg  block w-full ps-2 p-1 '
                     required
                   />
                 </div>
                 <button
                   type="submit"
-                  className='block text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                  className='block focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center primaryBtn'
                 >
                   Add A Channel
                 </button>

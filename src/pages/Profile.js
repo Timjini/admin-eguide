@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from'react-redux';
 import Logout from '../Authentication/Logout';
 import {API_USER_IMAGE} from '../constant/index';
-import BreadCrumbs from '../components/BreadCrumbs';
 import BackButton from '../components/BackButton';
 
 
@@ -17,7 +16,7 @@ export default function Profile () {
         <div className="p-4 sm:ml-64 ">
              <div className="">
                     <BackButton />
-                </div>
+            </div>
             <div className="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 content-wrapper">
             <div className="mb-4 col-span-full xl:mb-2">
                 <h3 className="py-5 text-2xl  ">

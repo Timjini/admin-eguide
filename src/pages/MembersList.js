@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import UsersTable from '../admin/UsersTable'
-import MembersList from '../agency/MembersList';
+import UsersTable from '../admin/views/UsersTable'
+import MembersList from '../agency/views/MembersList';
 import MemberDashboard from '../dashboard/MemberDashboard';
-import AddMember from '../agency/AddMember';
+import { useParams } from 'react-router-dom';
+
 
 export default function Dashboard(props) {
   const user = useSelector(state => state.user.user);

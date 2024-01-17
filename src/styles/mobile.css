@@ -1,0 +1,14 @@
+
+@media (max-width: 1022px) {
+    .playground{
+        display: grid;
+        grid-template-areas: 
+        "nav"
+        "content "
+        ;
+    }
+    .content-wrapper{
+        margin-left:0px;
+    }
+
+}

@@ -7,7 +7,7 @@ import ChannelCreate from '../agency/management/ChannelCreate';
 import { useParams } from 'react-router-dom';
 import AllTours from '../admin/views/AllTours';
 import BackButton from '../components/Buttons/BackButton';
-import useGetChannels from '../hooks/useGetTours';
+import useGetChannels from '../hooks/useGetChannels';
 import ChannelsTable from '../agency/ui/ChannelsTable';
 import { Link } from 'react-router-dom';
 
@@ -48,15 +48,14 @@ export default function Channels(props) {
           <>
           <div className='flex flex-row justify-between'>
           <BackButton />
-          <Link to="/agency/channels/create"> 
+          <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
           Create Channel
           </Link>
           </div>
             {loading ? (
               <Loader />
             ) : (
-              <></>
-              // <ChannelsTable data={channels} />
+              <ChannelsTable channelsData={channels} />
             )}
           </>
         )}

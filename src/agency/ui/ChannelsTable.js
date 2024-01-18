@@ -3,16 +3,34 @@ import TableRow from '../TablesContent/TableRow';
 import TableHeader from '../TablesContent/TableHeader';
 import {API_PUBLIC_FOLDER} from '../../constant/index';
 
-const ChannelsTable = ({data}) => {
+const ChannelsTable = ({channelsData}) => {
 
     const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
 
+    console.log("here is the Channels Table", channelsData.data.channels)
 
-  const formattedDate = (dateString) => {
-    const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
-    const formatted = new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
-    return formatted;
-  };
+    const formattedDate = (dateString) => {
+      const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
+      const formatted = new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
+      return formatted;
+    };
+
+    const channelRows = channelsData.data.channels ? (
+      channelsData.data.channels.map((channel, index) => (
+        <tr key={index}>
+          {/* Render your table cells here */}
+          <td className="p-4 text-sm">{channel.channelName}</td>
+          <td className="p-4 text-sm">{channel.code}</td>
+          <td className="p-4 text-sm"> {channel.ending_date ? formattedDate(channel.ending_date) : '-'}</td>
+          <td className="p-4 text-sm">{channel.tour.title}</td>
+        </tr>
+      ))
+    ) : (
+      <tr>
+        <td colSpan={headerItems.size}>No channels available</td>
+      </tr>
+    );
+
 
     return (
 
@@ -33,13 +51,7 @@ const ChannelsTable = ({data}) => {
                      scope="col"
                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                      >
-                     Description
-                  </th>
-                  <th
-                     scope="col"
-                     className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                     >
-                     Starting Date
+                     Code
                   </th>
                   <th
                      scope="col"
@@ -51,50 +63,12 @@ const ChannelsTable = ({data}) => {
                      scope="col"
                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                      >
-                     
+                     Related Tour
                   </th>
                </tr>
             </thead>
             <tbody className="">
-               {data.channels.map((channel ,index) => (
-               <tr key={index}>
-                  <td className="p-4 text-sm font-normal  whitespace-nowrap ">
-                     <div className='flex flex-row gap-2 content-center'>
-                        {/* <img className="w-8 h-8 rounded-full" src={`${API_PUBLIC_FOLDER}${channel.image}`}  /> */}
-                        <span>{channel.name}{" "}</span>
-                     </div>
-                  </td>
-                  <td className="p-4 text-sm font-normal  whitespace-nowrap ">
-                     {channel.description}
-                  </td>
-                  <td className="p-4 text-sm font-semibold  whitespace-nowrap ">
-                     {channel.starting_date ? formattedDate(channel.starting_date) : '-'}
-                  </td>
-                  <td className="p-4 text-sm font-normal  whitespace-nowrap ">
-                     {channel.ending_date ? formattedDate(channel.ending_date) : '-'}
-                  </td>
-                  <td className="px-6 py-4 flex gap-2">
-                            <button
-                            className=""
-                            id={channel._id}
-                            // onClick={() => handleViewUser(member._id)}
-                          >
-                            <span class="material-symbols-outlined">
-                            visibility
-                            </span>
-                          </button> 
-                            <button
-                            className=""
-                            id={channel._id}
-                            // onClick={() => handleEditUser(member._id)}
-                          >
-                            <span class="material-symbols-outlined">
-                            edit
-                            </span>
-                          </button>
-                          </td>
-               </tr>
-               ))}
+               {channelRows}
             </tbody>
          </table>
       </div>

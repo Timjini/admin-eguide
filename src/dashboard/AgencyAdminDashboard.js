@@ -10,9 +10,9 @@ const AgencyAdminDashboard = ({ user }) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   const {guides ,loading:guidesLoading, error, refetch } = useGetGuides();
-  const {tours , loading: toursLoading, error: toursError, refetch: refetchTours} = useGetTours();
+  // const {tours , loading: toursLoading, error: toursError, refetch: refetchTours} = useGetTours();
 
-  console.log("useTours guides ", tours)
+  console.log("useTours guides ", guides)
   if (guidesLoading) {
     return <Loader/>;
   }

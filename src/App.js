@@ -45,8 +45,8 @@ function App() {
               <Route path="/agency/members/:agencyId" element={<MembersList />} />
               <Route path="/members/:userId" element={<Profile/>} />
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
-              <Route path="/agency/tour/create" element={<ChannelCreate/>} />
-              <Route path="/agency/member/create" element={<ChannelCreate/>} />
+              {/* <Route path="/agency/tour/create" element={<ChannelCreate/>} /> */}
+              {/* <Route path="/agency/member/create" element={<ChannelCreate/>} /> */}
             </>
           )
         ) : (

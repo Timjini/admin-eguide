@@ -80,6 +80,7 @@ const tourOptions = tours.data && tours.data.tours ? (
     return(
         <>  
         <div className='content-wrapper'>
+          <BackButton />
           <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-20" >
           <form  onSubmit={handleSubmit} className='p-4 md:p-5 flex flex-col w-72 mx-auto'>
               <div className='py-2'>

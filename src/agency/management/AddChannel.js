@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import agencyApi from '../../api/agency';
 import useGetGuides from '../components/getGuides';
 import useGetTours from '../components/getTours';
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 import {
 Button,
 } from "@material-tailwind/react";
-import BackButton from '../../components/BackButton';
+import BackButton from '../../components/Buttons/BackButton';
 
-const AddChannel = () => {
+const AddChannel = ({closeModal}) => {
   const getGuides = useGetGuides();
   const [guides, setGuides] = useState([]);
 
@@ -89,7 +89,6 @@ const AddChannel = () => {
     return null; // Return null or a message when there is no tour data
   }
 
-  console.log(tours);
 
   return (
     <>

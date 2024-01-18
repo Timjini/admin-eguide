@@ -1,74 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from'react-redux';
 import agencyApi from "../api/agency";
-import { useSelector } from 'react-redux';
-import AddChannel from '../agency/management/AddChannel';
-import AgencyChannels from '../agency/views/AgencyChannels';
-import Loader from '../components/Loader';
-import { Link } from 'react-router-dom';
-import BackButton from '../components/BackButton';
+import AgencyTours from "../agency/views/AgencyTours";
+import Loader from '../components/Loaders/Loader';
+import ChannelCreate from '../agency/management/ChannelCreate';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import AllTours from '../admin/views/AllTours';
+import BackButton from '../components/Buttons/BackButton';
+import useGetChannels from '../hooks/useGetTours';
+import ChannelsTable from '../agency/ui/ChannelsTable';
+import { Link } from 'react-router-dom';
 
 
-export default function BroadcastPage() {
+
+
+
+export default function Channels(props) {
   const user = useSelector(state => state.user);
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  const { agencyId: routeAgencyId } = useParams();
+  const { agencyId } = useParams();
+  const { channels, loading, error, refetch } = useGetChannels(agencyId);
 
- 
-  useEffect(() => {
-    const fetchChannels = async () => {
-      try {
-        const response = await agencyApi.channels({
-          headers: {
-            Authorization: `Bearer ${user.user.authToken}`,
-          },
-          params: {
-            agencyId: routeAgencyId
-          }
-        });
-
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching agency channels:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchChannels();
-  }, [user.user.authToken, routeAgencyId]);
-
-  
-
-  if (!data.channels || data.channels.length === 0) {
-    return (
-      <div className="content-wrapper" >
-        <div className='flex flex-col mt-24 mx-auto justify-center items-center'>
-          <Loader/>
-          <span>Please contact the administrator</span>
-        </div>
-      </div>
-    );
+  console.log("useTours Channels ", channels)
+  if (loading) {
+    return <Loader/>;
   }
 
-  return (
-      <div className='content-wrapper'>
-        <div className="p-4 flex flex-col" >
-          <div>
-            <AddChannel />
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  if (channels === null || undefined){
+    return <p>No channels found</p>
+  }
+
+
+
+  return (  
+    <>
+      <div className="p-4 flex flex-col content-wrapper">
+        {user.user.type === 'admin' ? (
+          <>
+          </>
+          // <AllTours data={data} />
+        ) : (
+          <>
+          <div className='flex flex-row justify-between'>
+          <BackButton />
+          <Link to="/agency/channels/create"> 
+          Create Channel
+          </Link>
           </div>
             {loading ? (
               <Loader />
             ) : (
-              <div className=''>
-              <AgencyChannels data={data} />
-              </div>
+              <></>
+              // <ChannelsTable data={channels} />
             )}
-          </div>
+          </>
+        )}
       </div>
-    );
-      
+
+        </>
+  );
 }

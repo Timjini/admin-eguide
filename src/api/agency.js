@@ -10,6 +10,20 @@ const guides = payload => axios.get(`${API_ROOT}/users/guides`, payload);
 const addMember = payload => axios.post(`${API_ROOT}/agencies/create_agent`, payload);
 const profile = payload => axios.get(`${API_ROOT}/users/profile`, payload);
 
+const guidesApi = async (user) => {
+  try {
+    const response = await axios.get(`${API_ROOT}/users/guides`, {
+      headers: {
+        Authorization: `Bearer ${user.authToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error getting guides:', error);
+    throw error;
+  }
+};
+
 const channels = payload => axios.get(`${API_ROOT}/agencies/agency_channels`, payload);
 // Admin Routes
 const users = payload => axios.get(`${API_ROOT}/users/users`, payload);
@@ -24,7 +38,8 @@ const agencyApi = {
     addChannel,
     users,
     guides,
-    addMember
+    addMember,
+    guidesApi
   };
   
 export default agencyApi;

@@ -1,12 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {menuItems} from './NavbarMenu';
 import {Link} from 'react-router-dom';
-import {API_ROOT_PUBLIC} from '../constant';
+import {API_ROOT_PUBLIC} from '../../constant';
 import { useSelector } from'react-redux';
 
 const AdminMenu = () => {
 
     const adminMenuItems = [
+      {
+        label: 'Agencies',
+        link: '/admin/agencies',
+        icon: (
+          <span class="material-symbols-outlined">
+          domain_add
+          </span>
+        ),
+        className:''
+      },
         {
             label: 'Channels',
             link: '/admin/channels',
@@ -23,6 +33,16 @@ const AdminMenu = () => {
             icon: (
               <span className="material-symbols-outlined">
               travel_explore
+              </span>
+            ),
+            className:''
+          },
+          {
+            label: 'All Users',
+            link: '/admin/users',
+            icon: (
+              <span className="material-symbols-outlined">
+              group
               </span>
             ),
             className:''

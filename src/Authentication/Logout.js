@@ -8,7 +8,6 @@ import {API_ROOT} from '../constant/index';
 export default function Logout() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user); 
-  console.log(user.user.authToken);
     
     // const handleLogOut = async () => {
     //   const response = await axios.post(

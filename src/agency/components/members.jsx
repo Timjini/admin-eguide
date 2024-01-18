@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { API_USER_IMAGE } from '../../constant/index';
 import AddMember from '../management/AddMember';
-import BackButton from '../../components/BackButton';
+import BackButton from '../../components/Buttons/BackButton';
 
 const Members = ({ data }) => {
   const [searchQuery, setSearchQuery] = useState('');

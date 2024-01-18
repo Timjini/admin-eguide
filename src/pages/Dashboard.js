@@ -7,7 +7,6 @@ import MemberDashboard from '../dashboard/MemberDashboard';
 export default function Dashboard(props) {
   const user = useSelector(state => state.user.user);
 
-  console.log( "this is the user " , user)
   switch (user.type) { 
     case 'admin':
       return <AdminDashboard  user={user}/>;

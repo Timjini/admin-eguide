@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from'react-redux';
 import agencyApi from "../api/agency";
-import Tour from "../agency/views/tours";
-import Loader from '../components/Loader';
+import AgencyTours from "../agency/views/AgencyTours";
+import Loader from '../components/Loaders/Loader';
 import AddTour from '../agency/management/AddTour';
 import { useParams } from 'react-router-dom';
 import AllTours from '../admin/views/AllTours';
-import BackButton from '../components/BackButton';
+import BackButton from '../components/Buttons/BackButton';
+import useGetTours from '../hooks/useGetTours';
+import ToursTable from '../agency/ui/ToursTable';
 
 
 
@@ -15,38 +17,23 @@ import BackButton from '../components/BackButton';
 export default function Tours(props) {
   const user = useSelector(state => state.user);
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  const { agencyId: routeAgencyId } = useParams();
+  const { agencyId } = useParams();
+  const { tours, loading, error, refetch } = useGetTours(agencyId);
 
-  useEffect(() => {
-    const fetchTours = async () => {
-      try {
-        const response = await agencyApi.tours({
-          headers: {
-            Authorization: `Bearer ${user.user.authToken}`,
-          },
-          params: {
-            agencyId: routeAgencyId
-          }
-        });
-        console.log(response.data)
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching Tours channels:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  console.log("useTours guides ", tours)
+  if (loading) {
+    return <Loader/>;
+  }
 
-    fetchTours();
-  }, [user.user.authToken, routeAgencyId]);
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
 
-console.log("user " , data)
+
 
   return (  
     <>
-    <div className=''>
       <div className="p-4 flex flex-col content-wrapper">
         {user.user.type === 'admin' ? (
           <AllTours data={data} />
@@ -60,12 +47,11 @@ console.log("user " , data)
               <Loader />
             ) : (
 
-              <Tour data={data} />
+              <ToursTable data={tours.data} />
             )}
           </>
         )}
       </div>
-    </div>
 
         </>
   );

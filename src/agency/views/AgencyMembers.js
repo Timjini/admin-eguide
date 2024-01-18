@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Members from "../components/members";
 import agencyApi from "../../api/agency";
 import { useSelector } from 'react-redux';
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loaders/Loader";
 import { useParams } from "react-router-dom";
 
-const MembersList = () => {
+const AgencyMembers = () => {
   const [membersData, setMembersData] = useState([]);
   const [loading, setLoading] = useState(true);
   const user = useSelector(state => state.user);
@@ -47,5 +47,5 @@ const MembersList = () => {
   );
 };
 
-export default MembersList;
+export default AgencyMembers;
 

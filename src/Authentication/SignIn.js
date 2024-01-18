@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import authenticationApi from '../api/authentication';
 import { setUser } from '../redux/userSlice';
 import { useDispatch , useSelector } from 'react-redux';
-import Alert from '../components/Alert';
+import Alert from '../components/Alerts/Alert';
 
 
 function Copyright(props) {

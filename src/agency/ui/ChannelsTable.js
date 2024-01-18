@@ -1,12 +1,13 @@
+import TableHeaderNavigation from '../../components/Navigations/TableHeaderNavigation';
+import TableRow from '../TablesContent/TableRow';
+import TableHeader from '../TablesContent/TableHeader';
+import {API_PUBLIC_FOLDER} from '../../constant/index';
 
-import BackButton from "../../components/Buttons/BackButton";
-import AddTour from "../../agency/management/AddTour";
+const ChannelsTable = ({channelsData}) => {
 
-
-const AdminAgencies = ({agencies})=> {
     const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
 
-    console.log("here is the Channels Table", )
+    console.log("here is the Channels Table", channelsData.data.channels)
 
     const formattedDate = (dateString) => {
       const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
@@ -14,8 +15,8 @@ const AdminAgencies = ({agencies})=> {
       return formatted;
     };
 
-    const channelRows = agencies ? (
-        agencies.map((channel, index) => (
+    const channelRows = channelsData.data.channels ? (
+      channelsData.data.channels.map((channel, index) => (
         <tr key={index}>
           {/* Render your table cells here */}
           <td className="p-4 text-sm">{channel.channelName}</td>
@@ -26,18 +27,13 @@ const AdminAgencies = ({agencies})=> {
       ))
     ) : (
       <tr>
-        <td colSpan={headerItems.size}>No Agency available</td>
+        <td colSpan={headerItems.size}>No channels available</td>
       </tr>
     );
 
 
     return (
 
-        <div className="p-4 flex flex-col content-wrapper">
-        <div className='flex flex-row justify-between'>
-          <BackButton />
-          <AddTour />
-          </div>
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="p-4 border border-gray-200 rounded-lg shadow-sm sm:p-6 ">
          <div className="flex flex-row justify-between">
@@ -49,19 +45,19 @@ const AdminAgencies = ({agencies})=> {
                      scope="col"
                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                      >
-                     Agency Name
+                     Channel Name
                   </th>
                   <th
                      scope="col"
                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                      >
-                     Agency Owner
+                     Code
                   </th>
                   <th
                      scope="col"
                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                      >
-                     Description
+                     Ending Date
                   </th>
                   <th
                      scope="col"
@@ -77,12 +73,10 @@ const AdminAgencies = ({agencies})=> {
          </table>
       </div>
     </div>
-    </div>
 
       
 
     )
 }
 
-
-export default AdminAgencies;
+export default ChannelsTable;

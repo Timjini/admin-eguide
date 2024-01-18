@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import agencyApi from '../../api/agency';
-import LoadingButton from '../../components/LoadingButton';
-import Alert from '../../components/Alert';
+import LoadingButton from '../../components/Buttons/LoadingButton';
+import Alert from '../../components/Alerts/Alert';
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
 Button,

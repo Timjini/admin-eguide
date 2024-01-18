@@ -1,10 +1,31 @@
-import DrawerForm from '../components/DrawerForm';
 import React, { useState } from 'react';
-import Example from '../components/Example';
+import Example from '../components/dashboard/Charts/Example';
 import { useSelector } from 'react-redux';
+import useGetGuides from '../hooks/useGetGuides';
+import Loader from '../components/Loaders/Loader';
+import GuidesList from '../agency/ui/GuidesList';
+import useGetTours from '../hooks/useGetTours';
 
 const AgencyAdminDashboard = ({ user }) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+
+  const {guides ,loading:guidesLoading, error, refetch } = useGetGuides();
+  // const {tours , loading: toursLoading, error: toursError, refetch: refetchTours} = useGetTours();
+
+  console.log("useTours guides ", guides)
+  if (guidesLoading) {
+    return <Loader/>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  // Ensure guides is an array before mapping over it
+  if (!Array.isArray(guides)) {
+    console.error('Invalid guides data format:', guides);
+    return <p>Error: Invalid guides data format</p>;
+  }
 
   return (
     <div className='content-wrapper'>
@@ -67,20 +88,17 @@ const AgencyAdminDashboard = ({ user }) => {
       </div>
 
 
-      <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-10 ">
+      <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-12 ">
          <Example />
-         <a
-            href="#"
-            className="block w-1/3 p-6  border  rounded-lg shadow hidden"
-          >
-            <h5 className="mb-2 text-2xl font-bold tracking-tight ">
-              Noteworthy technology acquisitions 2021
-            </h5>
-            <p className="font-normal ">
-              Here are the biggest enterprise technology acquisitions of 2021 so far, in
-              reverse chronological order.
-            </p>
-          </a>
+          <GuidesList data={guides}/>
+      </div>
+
+      <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-20" >
+      <button onClick={refetch}>
+      <span class="material-symbols-outlined">
+      refresh
+      </span>
+      </button>
       </div>
     </div>
   

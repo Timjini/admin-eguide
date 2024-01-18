@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {menuItems} from './NavbarMenu';
 import {Link} from 'react-router-dom';
-import {API_ROOT_PUBLIC} from '../constant';
+import {API_ROOT_PUBLIC} from '../../constant';
 import { useSelector } from'react-redux';
 
 

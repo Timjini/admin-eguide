@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {menuItems} from './NavbarMenu';
+// import {menuItems} from './Menus/NavbarMenu';
 import {Link} from 'react-router-dom';
-import {API_ROOT_PUBLIC} from '../constant';
+import {API_ROOT_PUBLIC} from '../../constant';
 import { useSelector } from'react-redux';
-import Logout from '../Authentication/Logout';
-import UserMenu from './UserMenu';
-import AdminMenu from './AdminMenu';
+import Logout from '../../Authentication/Logout';
+import UserMenu from '../Menus/UserMenu';
+import AdminMenu from '../Menus/AdminMenu';
 
 function Sidebar() {
   const user = useSelector(state => state.user); 

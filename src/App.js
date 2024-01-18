@@ -10,14 +10,14 @@ import Tours from './pages/Tours';
 import Channels from './pages/Channels';
 import MembersList from './pages/MembersList';
 // import BroadcastPages from './pages/BroadCastPages';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/Navigations/Sidebar';
+import ChannelCreate from './agency/management/ChannelCreate';
+import AdminAgencies from './admin/views/AdminAgencies';
 
 
 function App() {
 
-  const auth = useSelector(state => state.user);
-  console.log(auth);
-  
+  const auth = useSelector(state => state.user);  
 
   return (
     <BrowserRouter>
@@ -31,6 +31,8 @@ function App() {
               <Route path="/admin/tours" element={<Tours />} />
               <Route path="/admin/channels" element={<Channels />} />
               <Route path="/admin/members" element={<MembersList />} />
+              <Route path="/agency/channel/create" element={<ChannelCreate/>} />
+              <Route path="/admin/agencies" element={<AdminAgencies/>} />
 
               {/* Admin user routes */}
               {/* <Route path="/admin/" element={<AdminDashboard />} /> */}
@@ -45,6 +47,9 @@ function App() {
               <Route path="/agency/channels/:agencyId" element={<Channels />} />
               <Route path="/agency/members/:agencyId" element={<MembersList />} />
               <Route path="/members/:userId" element={<Profile/>} />
+              <Route path="/agency/channel/create" element={<ChannelCreate/>} />
+              {/* <Route path="/agency/tour/create" element={<ChannelCreate/>} /> */}
+              {/* <Route path="/agency/member/create" element={<ChannelCreate/>} /> */}
             </>
           )
         ) : (

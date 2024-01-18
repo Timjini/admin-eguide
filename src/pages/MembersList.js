@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import UsersTable from '../admin/views/UsersTable'
-import MembersList from '../agency/views/MembersList';
+import AgencyMembers from '../agency/views/AgencyMembers';
 import MemberDashboard from '../dashboard/MemberDashboard';
 import { useParams } from 'react-router-dom';
 
@@ -15,11 +15,7 @@ export default function Dashboard(props) {
     case 'admin':
       return <UsersTable  user={user}/>;
     case 'owner':
-      return (
-        <><MembersList user={user} /></>
-
-      )
-      ;
+      return <AgencyMembers user={user} />;
     default:
       return <MemberDashboard  user={user}/>;
   }

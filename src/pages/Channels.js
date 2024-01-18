@@ -42,15 +42,22 @@ export default function Channels(props) {
       <div className="p-4 flex flex-col content-wrapper">
         {user.user.type === 'admin' ? (
           <>
-          </>
-          // <AllTours data={data} />
-        ) : (
-          <>
-          <div className='flex flex-row justify-between'>
+           <div className='flex flex-row justify-between'>
           <BackButton />
           <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
           Create Channel
           </Link>
+        </div>
+          <ChannelsTable channelsData={channels} />
+          </>
+         
+        ) : (
+          <>
+          <div className='flex flex-row justify-between'>
+            <BackButton />
+            <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
+            Create Channel
+            </Link>
           </div>
             {loading ? (
               <Loader />

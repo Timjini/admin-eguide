@@ -35,8 +35,6 @@ export default function UsersTable(){
           });
     }, []);
     
-    
-
 
     const rows = users.map(user => ({
         id: user.id, // Make sure user.id is a unique identifier for each user
@@ -53,7 +51,9 @@ export default function UsersTable(){
     ];
 
     return(
-        <Container sx={{marginTop:10}} className='bg-white text-gray-800'>
+        <div className='p-4 flex flex-col content-wrapper' >
+       
+        <Container sx={{marginTop:10}} className=''>
             <DataGrid
             rows={rows}
             columns={columns}
@@ -66,5 +66,6 @@ export default function UsersTable(){
             checkboxSelection
             />
         </Container>
+        </div>
     )
 }

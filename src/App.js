@@ -12,7 +12,9 @@ import MembersList from './pages/MembersList';
 // import BroadcastPages from './pages/BroadCastPages';
 import Sidebar from './components/Navigations/Sidebar';
 import ChannelCreate from './agency/management/ChannelCreate';
-import AdminAgencies from './admin/views/AdminAgencies';
+import AdminAgencies from './pages/AdminAgencies';
+import AdminTours from './pages/AdminTour';
+import NewTable from './admin/views/NewTable';
 
 
 function App() {
@@ -28,11 +30,13 @@ function App() {
             <>
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/admin/tours" element={<Tours />} />
+              <Route path="/admin/tours" element={<AdminTours />} />
               <Route path="/admin/channels" element={<Channels />} />
               <Route path="/admin/members" element={<MembersList />} />
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
               <Route path="/admin/agencies" element={<AdminAgencies/>} />
+              <Route path="/admin/new" element={<NewTable />} />
+
 
               {/* Admin user routes */}
               {/* <Route path="/admin/" element={<AdminDashboard />} /> */}

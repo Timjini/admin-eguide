@@ -1,7 +1,6 @@
 import {API_USER_IMAGE} from '../../constant/index';
 
 const GuidesList = ({data}) => {
-    console.log( "guides List component" ,data)
     return (
         <ul
             role="list"

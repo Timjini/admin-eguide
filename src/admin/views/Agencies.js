@@ -3,10 +3,9 @@ import BackButton from "../../components/Buttons/BackButton";
 import AddTour from "../../agency/management/AddTour";
 
 
-const AdminAgencies = ({agencies})=> {
+const Agencies = ({agencies})=> {
     const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
 
-    console.log("here is the Channels Table", )
 
     const formattedDate = (dateString) => {
       const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
@@ -14,14 +13,14 @@ const AdminAgencies = ({agencies})=> {
       return formatted;
     };
 
-    const channelRows = agencies ? (
-        agencies.map((channel, index) => (
+    const channelRows = agencies.data.agencies ? (
+        agencies.data.agencies.map((agency, index) => (
         <tr key={index}>
           {/* Render your table cells here */}
-          <td className="p-4 text-sm">{channel.channelName}</td>
-          <td className="p-4 text-sm">{channel.code}</td>
-          <td className="p-4 text-sm"> {channel.ending_date ? formattedDate(channel.ending_date) : '-'}</td>
-          <td className="p-4 text-sm">{channel.tour.title}</td>
+          <td className="p-4 text-sm">{agency.name}</td>
+          <td className="p-4 text-sm">{agency.description}</td>
+          <td className="p-4 text-sm"> {agency.members.lenght}</td>
+          <td className="p-4 text-sm">{agency.owner}</td>
         </tr>
       ))
     ) : (
@@ -34,10 +33,7 @@ const AdminAgencies = ({agencies})=> {
     return (
 
         <div className="p-4 flex flex-col content-wrapper">
-        <div className='flex flex-row justify-between'>
-          <BackButton />
-          <AddTour />
-          </div>
+
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="p-4 border border-gray-200 rounded-lg shadow-sm sm:p-6 ">
          <div className="flex flex-row justify-between">
@@ -55,13 +51,13 @@ const AdminAgencies = ({agencies})=> {
                      scope="col"
                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                      >
-                     Agency Owner
+                     Description
                   </th>
                   <th
                      scope="col"
                      className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
                      >
-                     Description
+                     Agency Owner
                   </th>
                   <th
                      scope="col"
@@ -85,4 +81,4 @@ const AdminAgencies = ({agencies})=> {
 }
 
 
-export default AdminAgencies;
+export default Agencies;

@@ -10,6 +10,8 @@ import BackButton from '../components/Buttons/BackButton';
 import useGetChannels from '../hooks/useGetChannels';
 import ChannelsTable from '../agency/ui/ChannelsTable';
 import { Link } from 'react-router-dom';
+import MainDrawer from '../components/OffCanvas/MainDrawer';
+// import ChannelCreate from '../agency/management/ChannelCreate';
 
 
 
@@ -55,9 +57,10 @@ export default function Channels(props) {
           <>
           <div className='flex flex-row justify-between'>
             <BackButton />
-            <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
+            <MainDrawer activeDrawer="right" additionalComponent={ChannelCreate} title="Add A Channel"/>
+            {/* <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
             Create Channel
-            </Link>
+            </Link> */}
           </div>
             {loading ? (
               <Loader />

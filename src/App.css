@@ -69,7 +69,14 @@ a,span,label {
     /* font-family: 'Roboto', sans-serif; */
 }
 
+/* .noDisplay {display:none!important;} */
+
+#disactivate{display:none;}
+
 aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
+
+/* Wrong password */
+.wrong-pass{border:1px red solid !important; }
 
 /* Grid Layout */
 

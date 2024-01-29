@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import agencyApi from '../../api/agency';
-import LoadingButton from '../../components/Buttons/LoadingButton';
+import adminApi from '../../api/admin';
+import axios from 'axios';
+import {API_ROOT} from '../../constant'
 import Alert from '../../components/Alerts/Alert';
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
-import {
-Button,
-} from "@material-tailwind/react";
 
-const AddMember = () => {
+
+const CreateAgencyOwner = () => {
   // const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.user);
-  const [selectedUserType, setSelectedUserType] = useState('');
   const [loading, setLoading] = useState(false);
   const [alertData, setAlertData] = useState(null);
   
@@ -21,9 +18,7 @@ const AddMember = () => {
     // username: '',
     email: '',
     phone: '',
-    password: '',
-    image: null, 
-    agencyId: user.user.agency._id,
+    avatar: null, 
   });
   const [data, setData] = useState(null);
 
@@ -47,17 +42,14 @@ const AddMember = () => {
       // formData.append('username', memberData.username);
       formData.append('email', memberData.email);
       formData.append('phone', memberData.phone);
-      formData.append('password', memberData.password);
-      formData.append('image', memberData.image);
-      formData.append('type', selectedUserType);
-      formData.append('agencyId', user.user.agency._id);
+      formData.append('avatar', memberData.avatar);
 
       console.log(formData);
 
-
-      const response = await agencyApi.addMember(formData, {
+     console.log(user.user.authToken)
+     const response = await axios.post(`${API_ROOT}/admin/create_agency_owner`, formData, {
         headers: {
-          Authorization: `Bearer ${user.user.authToken}`,
+          'Authorization': `Bearer ${user.user.authToken}`,
           'Content-Type': 'multipart/form-data',
         },
       });
@@ -65,10 +57,10 @@ const AddMember = () => {
       setData(response.data);
       console.log('Member added successfully:', response.data);
       setAlertData({ message: response.data, status: 'success' });
-      // setLoading(false);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 2000);
+      setLoading(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error('Error adding tour:', error);
       setAlertData({ message: 'An error occurred while adding the tour', status: 'error' });
@@ -90,10 +82,6 @@ const AddMember = () => {
                       <label className='block mb-2 text-sm font-medium '> Name:</label>
                       <input type="name" name="name" value={memberData.name} onChange={handleChange} className=' border border-gray-300  text-sm rounded-lg  block w-full p-2.5 ' placeholder='Users Full Name' required />
                       </div>
-                      <div className='flex flex-col'>
-                        <label  className='block mb-2 text-sm font-medium '>password:</label>
-                        <input type='password' name="password" rows="4" className="block p-2.5 w-full text-sm   rounded-lg border " placeholder='*******' value={memberData.password} onChange={handleChange} required />
-                      </div>
                     </div>
                 </div>
                 <div className='flex flex-col gap-1 w-full'>
@@ -106,20 +94,9 @@ const AddMember = () => {
                       <input type="phone" name="phone" rows="4" className="block p-2.5 w-full text-sm   rounded-lg border " placeholder="(212) 548-1478"value={memberData.phone} onChange={handleChange} required />
                     </div>
                 </div>
-                <div className='flex flex-col mt-2'>
-                <select
-                  // value={selectedUserType} // Set this value based on your component's state
-                  onChange={(e) => setSelectedUserType(e.target.value)} // Update this based on your component's state management
-                  className="block w-full px-4 py-2 mt-2 text-sm border border-gray-300 rounded-md "
-                >
-                  <option value="">Select an Option</option>
-                  <option value="guide">Guide</option>
-                  <option value="agent">Agent</option>
-                </select>
-                </div>
                 <div className='my-5'>
                     <label class="block mb-2 text-sm font-medium " for="file_input">Upload An Image</label>    
-                    <input type="file" name="image" onChange={handleChange} accept="image/*" className='block w-full text-sm  border rounded-lg cursor-pointer  ' />
+                    <input type="file" name="avatar" onChange={handleChange} accept="image/*" className='block w-full text-sm  border rounded-lg cursor-pointer  ' required/>
                 </div>
                 {loading && (
                     <div className='flex flex-row justify-end'>
@@ -144,5 +121,5 @@ const AddMember = () => {
   );
 };
 
-export default AddMember;
+export default CreateAgencyOwner;
 

@@ -9,6 +9,7 @@ import AllTours from '../admin/views/AllTours';
 import BackButton from '../components/Buttons/BackButton';
 import useGetTours from '../hooks/useGetTours';
 import ToursTable from '../agency/ui/ToursTable';
+import MainDrawer from '../components/OffCanvas/MainDrawer';
 
 
 
@@ -41,7 +42,7 @@ export default function Tours(props) {
           <>
           <div className='flex flex-row justify-between'>
           <BackButton />
-          <AddTour />
+          <MainDrawer activeDrawer="right" additionalComponent={AddTour} title= "Add A Tour" />
           </div>
             {loading ? (
               <Loader />

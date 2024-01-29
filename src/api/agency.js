@@ -11,6 +11,7 @@ const addMember = payload => axios.post(`${API_ROOT}/agencies/create_agent`, pay
 const profile = payload => axios.get(`${API_ROOT}/users/profile`, payload);
 const agencies = payload => axios.get(`${API_ROOT}/agencies/all_agencies`, payload);
 const agencyDataUrl = payload => axios.post(`${API_ROOT}/agencies/agency_data`, payload);
+const createAgency = payload => axios.post(`${API_ROOT}/agencies/create_agency`, payload);
 
 const guidesApi = async (user) => {
   try {
@@ -43,7 +44,8 @@ const agencyApi = {
     addMember,
     guidesApi,
     agencies,
-    agencyDataUrl
+    agencyDataUrl,
+    createAgency
   };
   
 export default agencyApi;

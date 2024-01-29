@@ -1,6 +1,14 @@
 import Example from '../components/dashboard/Charts/Example';
+import useGetAdminDashboardData from '../hooks/useGetAdminDashboardData';
+import Loader from '../components/Loaders/Loader';
 
 const AdminDashboard = ({user}) => {
+  const {dashboardData, loading, error} = useGetAdminDashboardData();
+
+  if(loading){
+    return <Loader/>
+  }
+
     return (
       <div className='content-wrapper'>
       <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-20" >
@@ -11,7 +19,7 @@ const AdminDashboard = ({user}) => {
           <div className="flex flex-row justify-between items-center	 dahboard_card_content">
             <div>
             <h5 className="mb-2 text-4xl font-bold tracking-tight ">
-              37
+              {dashboardData.data.guideCount}
             </h5>
             </div>
             <span className="material-symbols-outlined dahboard_icon">
@@ -30,7 +38,7 @@ const AdminDashboard = ({user}) => {
           <div className="flex flex-row justify-between items-center	 dahboard_card_content">
             <div>
             <h5 className="mb-2 text-4xl font-bold tracking-tight ">
-              37
+            {dashboardData.data.tourCount}
             </h5>
             </div>
             <span class="material-symbols-outlined dahboard_icon">
@@ -48,7 +56,7 @@ const AdminDashboard = ({user}) => {
           <div className="flex flex-row justify-between items-center	 dahboard_card_content">
             <div>
             <h5 className="mb-2 text-4xl font-bold tracking-tight ">
-              37
+            {dashboardData.data.touristCount}
             </h5>
             </div>
             <span className="material-symbols-outlined dahboard_icon">

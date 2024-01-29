@@ -15,15 +15,17 @@ import ChannelCreate from './agency/management/ChannelCreate';
 import AdminAgencies from './pages/AdminAgencies';
 import AdminTours from './pages/AdminTour';
 import NewTable from './admin/views/NewTable';
+import ActivateAccount from './Authentication/ActivateAccount';
+import CreateAgency from './agency/management/CreateAgency';
 
 
 function App() {
 
   const auth = useSelector(state => state.user);  
-
+  console.log(auth)
   return (
     <BrowserRouter>
-      {auth && auth.user && <Sidebar />}
+      {auth && auth.user && auth.user.agency  && <Sidebar />}
       <Routes>
         {auth && auth.user ? (
           auth.user.type === 'admin' ? (
@@ -32,7 +34,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/admin/tours" element={<AdminTours />} />
               <Route path="/admin/channels" element={<Channels />} />
-              <Route path="/admin/members" element={<MembersList />} />
+              <Route path="/admin/users" element={<MembersList />} />
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
               <Route path="/admin/agencies" element={<AdminAgencies/>} />
               <Route path="/admin/new" element={<NewTable />} />
@@ -45,6 +47,7 @@ function App() {
             </>
           ) : (
             <>
+              <Route path="/activate-account/create_agency" element={<CreateAgency />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/agency/tours/:agencyId" element={<Tours />} />
@@ -60,6 +63,7 @@ function App() {
           <>
             <Route path="/sign_up" element={<UserManagement />} />
             <Route path="/login" element={<SignIn />} />
+            <Route path="/activate-account" element={<ActivateAccount />} />
           </>
         )}
         <Route path="/*" element={<SignIn />} />

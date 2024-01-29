@@ -3,7 +3,9 @@ import {DataGrid} from '@mui/x-data-grid';
 import Container from '@mui/material/Container';
 import { useSelector } from'react-redux';
 import {API_ROOT} from '../../constant';
-
+import MainDrawer from '../../components/OffCanvas/MainDrawer';
+import CreateAgencyOwner from '../postRequests/createAgencyOwner';
+import BackButton from '../../components/Buttons/BackButton';
 
 
 export default function UsersTable(){
@@ -37,7 +39,7 @@ export default function UsersTable(){
     
 
     const rows = users.map(user => ({
-        id: user.id, // Make sure user.id is a unique identifier for each user
+        id: user.id, 
         name: user.username,
         email: user.email,
         phone: user.phone
@@ -52,17 +54,23 @@ export default function UsersTable(){
 
     return(
         <div className='p-4 flex flex-col content-wrapper' >
-       
+        <div  className='flex justify-between'>
+        <BackButton />
+       <MainDrawer activeDrawer="right" title="Add A User" additionalComponent={CreateAgencyOwner} />
+       </div>
         <Container sx={{marginTop:10}} className=''>
+        <div>
+        <h2 className='mb-4 text-xl'>Users List</h2>
+       </div>
             <DataGrid
             rows={rows}
             columns={columns}
             initialState={{
                 pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                paginationModel: { page: 0, pageSize: 10 },
                 },
             }}
-            pageSizeOptions={[5, 10]}
+            pageSizeOptions={[10, 20]}
             checkboxSelection
             />
         </Container>

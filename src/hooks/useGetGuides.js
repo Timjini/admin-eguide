@@ -19,12 +19,9 @@ const useGetGuides = () => {
       const guidesData = await agencyApi.guidesApi(user);
   
       // Ensure that guidesData is an array before dispatching
-      if (Array.isArray(guidesData) && guidesData.length > 0) {
+     
         setGuides(guidesData);
         // dispatch(setGuides(guidesData));
-      } else {
-        throw new Error('Invalid guides data format');
-      }
     } catch (error) {
       console.error('Error getting guides:', error);
       setError(error);

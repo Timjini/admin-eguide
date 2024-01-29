@@ -4,6 +4,9 @@ import agencyApi from "../../api/agency";
 import { useSelector } from 'react-redux';
 import Loader from "../../components/Loaders/Loader";
 import { useParams } from "react-router-dom";
+import BackButton from "../../components/Buttons/BackButton";
+import MainDrawer from "../../components/OffCanvas/MainDrawer";
+import AddMember from "../../agency/management/AddMember";
 
 const AgencyMembers = () => {
   const [membersData, setMembersData] = useState([]);
@@ -41,7 +44,17 @@ const AgencyMembers = () => {
       {loading ? (
         <Loader />
       ) : (
-        <Members data={membersData} />
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <div className="flex flex-row justify-between ">
+            <div>
+              <BackButton />
+            </div>
+            <div>
+            <MainDrawer activeDrawer="right" additionalComponent={AddMember} title= "Add A Member" />
+            </div>
+          </div>
+          <Members data={membersData} />
+        </div>
       )}
     </div>
   );

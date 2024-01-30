@@ -59,6 +59,7 @@ const CreateAgency = () => {
       // dispatch(updateUserAction(response.data.user));
       // logout user
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       navigate('/login');
     } catch (error) {
       console.error('Error adding tour:', error);

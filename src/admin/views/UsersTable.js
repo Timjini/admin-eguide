@@ -42,7 +42,8 @@ export default function UsersTable(){
         id: user.id, 
         name: user.username,
         email: user.email,
-        phone: user.phone
+        phone: user.phone,
+        type:user.type
     }));
     
     const columns = [
@@ -50,6 +51,7 @@ export default function UsersTable(){
         {field: 'name', headerName: 'Name', width: 200},
         {field: 'email', headerName: 'Email', width: 200},
         {field: 'phone', headerName: 'Phone', width: 200},
+        {field: 'type', headerName: 'Type', width: 200}
     ];
 
     return(

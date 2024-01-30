@@ -11,6 +11,8 @@ import useGetAgencies from '../hooks/useGetAgencies';
 import Agencies from '../admin/views/Agencies';
 import { Link } from 'react-router-dom';
 import  KpiCreationForm  from '../admin/views/DrawerWithForm';
+import MainDrawer from '../components/OffCanvas/MainDrawer';
+import AddChannel from '../agency/management/AddChannel';
 
 
 
@@ -43,10 +45,6 @@ export default function AdminAgencies(props) {
           <>
            <div className='flex flex-row justify-between'>
           <BackButton />
-          {/* <Link to="/agency/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
-          Create Agency
-          </Link> */}
-          <KpiCreationForm />
         </div>
           <Agencies agencies={agencies} />
           </>
@@ -55,9 +53,7 @@ export default function AdminAgencies(props) {
           <>
           <div className='flex flex-row justify-between'>
             <BackButton />
-            <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
-            Create Channel
-            </Link>
+            <MainDrawer activeDrawer="right" additionalComponent={AddChannel} title="Add Channel"/>
           </div>
             {loading ? (
               <Loader />

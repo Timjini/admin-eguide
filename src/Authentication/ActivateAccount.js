@@ -67,7 +67,12 @@ const ActivateAccount = () => {
           // store token in session
           localStorage.setItem('token', res.data.user.authToken);
           localStorage.setItem('user', res.data.user);
+          if (res.data.user.type === 'owner'){
           navigate('/create_agency');  
+          } else {
+          localStorage.removeItem('token');
+            navigate('/');
+          }
           setAlertData({ message: res.data, status: 'success' });
         } else if (res.status === '400'){
             setAlertData({ message: res.data, status: 'error' });

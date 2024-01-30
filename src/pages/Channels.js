@@ -24,7 +24,6 @@ export default function Channels(props) {
   const { agencyId } = useParams();
   const { channels, loading, error, refetch } = useGetChannels(agencyId);
 
-  console.log("useTours Channels ", channels)
   if (loading) {
     return <Loader/>;
   }
@@ -50,7 +49,7 @@ export default function Channels(props) {
           Create Channel
           </Link>
         </div>
-          <ChannelsTable channelsData={channels} />
+          
           </>
          
         ) : (
@@ -58,9 +57,6 @@ export default function Channels(props) {
           <div className='flex flex-row justify-between'>
             <BackButton />
             <MainDrawer activeDrawer="right" additionalComponent={ChannelCreate} title="Add A Channel"/>
-            {/* <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
-            Create Channel
-            </Link> */}
           </div>
             {loading ? (
               <Loader />

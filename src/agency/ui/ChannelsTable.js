@@ -7,7 +7,7 @@ const ChannelsTable = ({channelsData}) => {
 
     const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
 
-    console.log("here is the Channels Table", channelsData.data.channels)
+    console.log("here is the Channels Table", channelsData.data.channels.length)
 
     const formattedDate = (dateString) => {
       const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
@@ -15,20 +15,20 @@ const ChannelsTable = ({channelsData}) => {
       return formatted;
     };
 
-    const channelRows = channelsData.data.channels ? (
-      channelsData.data.channels.map((channel, index) => (
-        <tr key={index}>
-          {/* Render your table cells here */}
-          <td className="p-4 text-sm">{channel.channelName}</td>
-          <td className="p-4 text-sm">{channel.code}</td>
-          <td className="p-4 text-sm"> {channel.ending_date ? formattedDate(channel.ending_date) : '-'}</td>
-          <td className="p-4 text-sm">{channel.tour.title}</td>
-        </tr>
-      ))
-    ) : (
-      <tr>
-        <td colSpan={headerItems.size}>No channels available</td>
+    const channelRows = channelsData.data.channels.length === 0 ? (
+      <tr >
+      <td colSpan={headerItems.size} className='p-4'>No channels available</td>
       </tr>
+    ) : (
+       channelsData.data.channels.map((channel, index) => (
+         <tr key={index}>
+           {/* Render your table cells here */}
+           <td className="p-4 text-sm">{channel.channelName}</td>
+           <td className="p-4 text-sm">{channel.code}</td>
+           <td className="p-4 text-sm"> {channel.ending_date ? formattedDate(channel.ending_date) : '-'}</td>
+           <td className="p-4 text-sm">{channel.tour.title}</td>
+         </tr>
+       ))
     );
 
 

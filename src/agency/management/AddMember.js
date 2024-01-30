@@ -90,10 +90,6 @@ const AddMember = () => {
                       <label className='block mb-2 text-sm font-medium '> Name:</label>
                       <input type="name" name="name" value={memberData.name} onChange={handleChange} className=' border border-gray-300  text-sm rounded-lg  block w-full p-2.5 ' placeholder='Users Full Name' required />
                       </div>
-                      <div className='flex flex-col'>
-                        <label  className='block mb-2 text-sm font-medium '>password:</label>
-                        <input type='password' name="password" rows="4" className="block p-2.5 w-full text-sm   rounded-lg border " placeholder='*******' value={memberData.password} onChange={handleChange} required />
-                      </div>
                     </div>
                 </div>
                 <div className='flex flex-col gap-1 w-full'>

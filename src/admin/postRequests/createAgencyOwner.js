@@ -42,7 +42,7 @@ const CreateAgencyOwner = () => {
       // formData.append('username', memberData.username);
       formData.append('email', memberData.email);
       formData.append('phone', memberData.phone);
-      formData.append('avatar', memberData.avatar);
+      formData.append('image', memberData.image);
 
       console.log(formData);
 
@@ -62,7 +62,7 @@ const CreateAgencyOwner = () => {
         window.location.reload();
       }, 2000);
     } catch (error) {
-      console.error('Error adding tour:', error);
+      console.error('Error adding agency Admin:', error);
       setAlertData({ message: 'An error occurred while adding the tour', status: 'error' });
 
     }
@@ -96,7 +96,7 @@ const CreateAgencyOwner = () => {
                 </div>
                 <div className='my-5'>
                     <label class="block mb-2 text-sm font-medium " for="file_input">Upload An Image</label>    
-                    <input type="file" name="avatar" onChange={handleChange} accept="image/*" className='block w-full text-sm  border rounded-lg cursor-pointer  ' required/>
+                    <input type="file" name="image" onChange={handleChange} accept="image/*" className='block w-full text-sm  border rounded-lg cursor-pointer  ' required/>
                 </div>
                 {loading && (
                     <div className='flex flex-row justify-end'>

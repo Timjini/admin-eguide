@@ -11,10 +11,11 @@ const CreateAgency = () => {
   const navigate = useNavigate(); // Get the navigate functiont
   const [alertData, setAlertData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const auth = useSelector(state => state.user); 
+  // get token from localstorage
+  const token = localStorage.getItem('token');
   const dispatch = useDispatch();
 
-  console.log(auth.user.authToken)
+  console.log(token)
   const [agencyData, setAgencyData] = useState({
     name: '',
     description: '',
@@ -44,7 +45,7 @@ const CreateAgency = () => {
 
       const response = await axios.post(`${API_ROOT}/agencies/create_agency`,formData, {
         headers: {
-          'Authorization': `Bearer ${auth.user.authToken}`,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
@@ -59,7 +60,7 @@ const CreateAgency = () => {
       // dispatch(updateUserAction(response.data.user));
       // logout user
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      // localStorage.removeItem('user');
       navigate('/login');
     } catch (error) {
       console.error('Error adding tour:', error);

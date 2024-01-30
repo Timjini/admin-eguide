@@ -42,7 +42,6 @@ function App() {
             </>
           ) : (
             <>
-              <Route path="/activate-account/create_agency" element={<CreateAgency />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/agency/tours/:agencyId" element={<Tours />} />
@@ -55,6 +54,7 @@ function App() {
           )
         ) : (
           <>
+            <Route path="/activate-account/create_agency" element={<CreateAgency />} />
             <Route path="/activate-account" element={<ActivateAccount />} />
             <Route path="/sign_up" element={<UserManagement />} />
             <Route path="/login" element={<SignIn />} />

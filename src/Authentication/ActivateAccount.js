@@ -62,13 +62,14 @@ const ActivateAccount = () => {
         console.log('Response from the backend:', res.data); // Log the entire response data
         if (res.data) {   
           // setUserData(res.data.user);
-          dispatch(setUser(res.data.user));
+          // dispatch(setUser(res.data.user));
           // console.log(dispatch(setUser(res.data.user)));
           // store token in session
-          localStorage.setItem('token', res.data.user.authToken);
-          localStorage.setItem('user', res.data.user);
+          localStorage.setItem('token', res.data.authToken);
+          console.log(res.data.authToken);
+          // localStorage.setItem('user', res.data.user);
           if (res.data.user.type === 'owner'){
-          navigate('/create_agency');  
+          navigate('/activate-account/create_agency');  
           } else {
           localStorage.removeItem('token');
             navigate('/');

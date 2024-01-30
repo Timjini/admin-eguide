@@ -9,8 +9,15 @@ import AdminMenu from '../Menus/AdminMenu';
 
 function Sidebar() {
   const user = useSelector(state => state.user); 
-  const reduxAgencyId = useSelector(state => state.user.user.agency ? state.user.user.agency._id : '');
+  // const reduxAgencyId = user.agency
+  let reduxAgencyId;
 
+  if (user.user.type === 'admin') {
+    reduxAgencyId = user.agency;
+  } else {
+    reduxAgencyId = user.user.agency._id;
+  }
+  console.log("redux agency id",reduxAgencyId);
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
@@ -80,7 +87,7 @@ function Sidebar() {
                   <button type="button" className="relative flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                     <span className="absolute -inset-1.5"></span>
                     <span className="sr-only">Open user menu</span>
-                    <img className="h-10 w-10 rounded-full object-cover" src={`${API_ROOT_PUBLIC}/uploads/${user.user.avatar}`} alt=""/>
+                    <img className="h-10 w-10 rounded-full object-cover" src={`${API_ROOT_PUBLIC}uploads/${user.user.avatar}`} alt=""/>
                   </button>
                 </div>
                 <div className="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md  py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
@@ -111,11 +118,33 @@ function Sidebar() {
       >
         <div className="h-full flex flex-col px-3 py-4 overflow-y-auto p-10">
           <div className="p-5 hidden md:hidden lg:hidden xl:block">
-            <img className='rounded-full h-auto w-24' src="/images/eguide-logo.png" alt="Logo" />
-            {/* <h2 className="text-4xl font-bold ">E-Guide</h2><label className="text-sm text-italic">Solutions</label> */}
+          {user.user.agency !== null ? (
+            <div>
+              {user.user.agency.image ? (
+                <img className='rounded-full h-auto w-36' src={`${API_ROOT_PUBLIC}uploads/${user.user.agency.image}`} alt="Logo" />
+              ) : (
+                <p>No image available for agency</p>
+              )}
+            </div>
+          ) : (
+            <img className='rounded-full h-auto w-36' src="/images/eguide-logo.png" alt="Logo" />
+          )}
+
           </div>
           <div className="p-5 block md:block lg:block xl:hidden">
-          <img className='rounded-full h-auto w-12' src="/images/eguide-logo.png" alt="Logo" />
+          {/* if user.agency !=null */}
+          {user.user.agency !== null ? (
+            <div>
+              {user.user.agency.image ? (
+                <img className='rounded-full h-auto w-12' src={`${API_ROOT_PUBLIC}uploads/${user.user.agency.image}`} alt="Logo" />
+              ) : (
+                <p>No image available for agency</p>
+              )}
+            </div>
+          ) : (
+            <img className='rounded-full h-auto w-12' src="/images/eguide-logo.png" alt="Logo" />
+          )}
+
             {/* <h2 className="text-2xl font-bold ">EG</h2> */}
           </div>
 

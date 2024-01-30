@@ -16,6 +16,10 @@ export const userSlice = createSlice(
             clearUser: state => {
               state.user = null;
             },
+             // Add the updateUser reducer
+            updateUser: (state, action) => {
+              state.user = action.payload;
+            },
             // Mark the rehydrate action as non-serializable
             rehydrate: (state, action) => {},
             // Mark the register action as non-serializable
@@ -25,5 +29,5 @@ export const userSlice = createSlice(
 
 )
 
-export const { setUser ,clearUser } = userSlice.actions;
+export const { setUser ,clearUser,updateUser } = userSlice.actions;
 export default userSlice.reducer;

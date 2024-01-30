@@ -5,15 +5,18 @@ import useGetGuides from '../hooks/useGetGuides';
 import Loader from '../components/Loaders/Loader';
 import GuidesList from '../agency/ui/GuidesList';
 import useGetTours from '../hooks/useGetTours';
+import DashboardGuidesStats from '../agency/ui/DashboardGuidesStats';
+import useGetGuidesCount from '../hooks/useGetGuidesCount';
 
 const AgencyAdminDashboard = ({ user }) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   const {guides ,loading:guidesLoading, error, refetch } = useGetGuides();
+  const {agencyData, loading:agencyDataLoading } = useGetGuidesCount();
+  console.log("agency data", agencyData)
   // const {tours , loading: toursLoading, error: toursError, refetch: refetchTours} = useGetTours();
 
-  console.log("useTours guides ", guides)
-  if (guidesLoading) {
+  if (guidesLoading, agencyDataLoading) {
     return <Loader/>;
   }
 
@@ -28,70 +31,20 @@ const AgencyAdminDashboard = ({ user }) => {
   }
 
   return (
-    <div className='content-wrapper'>
-      <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-20" >
-        <a
-          href="#"
-          className="block w-1/4 h-36 p-6  border  rounded-lg shadow "
-        >
-          <div className="flex flex-row justify-between items-center	 dahboard_card_content">
-            <div>
-            <h5 className="mb-2 text-4xl font-bold tracking-tight ">
-              37
-            </h5>
-            </div>
-            <span className="material-symbols-outlined dahboard_icon">
-                airport_shuttle
-              </span>
+    <div className='content-wrapper'>      
+        <DashboardGuidesStats count={agencyData} />
+        {guides.length > 0 ? ( // Render content only if guides array is not empty
+        <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-12 ">
+          <Example />
+          <GuidesList data={guides} />
+        </div>
+      ) : (
+        <div className="overflow-visible  relative max-w-sm mx-auto  shadow-lg ring-1 ring-black/5 rounded-xl flex items-center gap-6 shadow highlight-white/5">
+          <div className="flex flex-col py-5 pl-24">
+           <p>No guides available.</p>
           </div>
-          <span className="font-medium ">
-            Active Guides
-          </span>
-        </a>
-
-        <a
-          href="#"
-          className="block w-1/4 h-36 p-6  border  rounded-lg shadow "
-        >
-          <div className="flex flex-row justify-between items-center	 dahboard_card_content">
-            <div>
-            <h5 className="mb-2 text-4xl font-bold tracking-tight ">
-              37
-            </h5>
-            </div>
-            <span class="material-symbols-outlined dahboard_icon">
-            your_trips  
-            </span>
-          </div>
-          <span className="font-medium  ">
-            Current Trips
-          </span>
-        </a>
-        <a
-          href="#"
-          className="block w-1/4 h-36 p-6  border  rounded-lg shadow "
-        >
-          <div className="flex flex-row justify-between items-center	 dahboard_card_content">
-            <div>
-            <h5 className="mb-2 text-4xl font-bold tracking-tight ">
-              37
-            </h5>
-            </div>
-            <span className="material-symbols-outlined dahboard_icon">
-                map
-              </span>
-          </div>
-          <span className="font-medium ">
-            Current Travelers
-          </span>
-        </a>
-      </div>
-
-
-      <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-12 ">
-         <Example />
-          <GuidesList data={guides}/>
-      </div>
+        </div>
+      )}
 
       <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-20" >
       <button onClick={refetch}>

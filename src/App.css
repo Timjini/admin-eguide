@@ -13,6 +13,7 @@
     - Authentication forms
     - DASHBOARDS
     - NAvigations
+    - Form Sidebar
 
     IMPORTANT please update this with every new snippet
 */
@@ -68,7 +69,14 @@ a,span,label {
     /* font-family: 'Roboto', sans-serif; */
 }
 
+/* .noDisplay {display:none!important;} */
+
+#disactivate{display:none;}
+
 aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
+
+/* Wrong password */
+.wrong-pass{border:1px red solid !important; }
 
 /* Grid Layout */
 
@@ -175,3 +183,9 @@ aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
   .shadow{background-color: var(--bg);}
   /* NAVIGATIONS======================================================================= */
   .sidebarItems li:hover {background-color: var(--primary);border-radius: 10px;color:var(--bg);}
+
+
+
+  /* SIDEBAR=========================================================================== */
+  .formSideBar{background-color: var(--text);;min-width:100vw;opacity: 0.8;}
+  .sidebarContent{color: var(--text);max-width:900px; margin-left: auto; margin-right: 0;}

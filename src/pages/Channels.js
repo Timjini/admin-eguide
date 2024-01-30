@@ -10,6 +10,8 @@ import BackButton from '../components/Buttons/BackButton';
 import useGetChannels from '../hooks/useGetChannels';
 import ChannelsTable from '../agency/ui/ChannelsTable';
 import { Link } from 'react-router-dom';
+import MainDrawer from '../components/OffCanvas/MainDrawer';
+// import ChannelCreate from '../agency/management/ChannelCreate';
 
 
 
@@ -22,7 +24,6 @@ export default function Channels(props) {
   const { agencyId } = useParams();
   const { channels, loading, error, refetch } = useGetChannels(agencyId);
 
-  console.log("useTours Channels ", channels)
   if (loading) {
     return <Loader/>;
   }
@@ -48,16 +49,14 @@ export default function Channels(props) {
           Create Channel
           </Link>
         </div>
-          <ChannelsTable channelsData={channels} />
+          
           </>
          
         ) : (
           <>
           <div className='flex flex-row justify-between'>
             <BackButton />
-            <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
-            Create Channel
-            </Link>
+            <MainDrawer activeDrawer="right" additionalComponent={ChannelCreate} title="Add A Channel"/>
           </div>
             {loading ? (
               <Loader />

@@ -3,26 +3,27 @@ import { useSelector } from'react-redux';
 import agencyApi from "../api/agency";
 import AgencyTours from "../agency/views/AgencyTours";
 import Loader from '../components/Loaders/Loader';
-import AddTour from '../agency/management/AddTour';
+import ChannelCreate from '../agency/management/ChannelCreate';
 import { useParams } from 'react-router-dom';
 import AllTours from '../admin/views/AllTours';
 import BackButton from '../components/Buttons/BackButton';
-import useGetTours from '../hooks/useGetTours';
-import ToursTable from '../agency/ui/ToursTable';
+import useGetAgencies from '../hooks/useGetAgencies';
+import Agencies from '../admin/views/Agencies';
+import { Link } from 'react-router-dom';
+import  KpiCreationForm  from '../admin/views/DrawerWithForm';
 import MainDrawer from '../components/OffCanvas/MainDrawer';
+import AddChannel from '../agency/management/AddChannel';
 
 
 
 
-
-export default function Tours(props) {
+export default function AdminAgencies(props) {
   const user = useSelector(state => state.user);
   const [data, setData] = useState([]);
 
-  const { agencyId } = useParams();
-  const { tours, loading, error, refetch } = useGetTours(agencyId);
+  // const { agencyId } = useParams();
+  const { agencies, loading, error, refetch } = useGetAgencies();
 
-  console.log("useTours guides ", tours)
   if (loading) {
     return <Loader/>;
   }
@@ -31,24 +32,33 @@ export default function Tours(props) {
     return <p>Error: {error.message}</p>;
   }
 
+  if (agencies === null || undefined){
+    return <p>No agencies found</p>
+  }
+
 
 
   return (  
     <>
       <div className="p-4 flex flex-col content-wrapper">
         {user.user.type === 'admin' ? (
-          <AllTours data={data} />
+          <>
+           <div className='flex flex-row justify-between'>
+          <BackButton />
+        </div>
+          <Agencies agencies={agencies} />
+          </>
+         
         ) : (
           <>
           <div className='flex flex-row justify-between'>
-          <BackButton />
-          <MainDrawer activeDrawer="right" additionalComponent={AddTour} title= "Add A Tour" />
+            <BackButton />
+            <MainDrawer activeDrawer="right" additionalComponent={AddChannel} title="Add Channel"/>
           </div>
             {loading ? (
               <Loader />
             ) : (
-
-              <ToursTable data={tours.data} />
+              <Agencies agencies={agencies} />
             )}
           </>
         )}

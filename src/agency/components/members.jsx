@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { API_USER_IMAGE } from '../../constant/index';
 import AddMember from '../management/AddMember';
 import BackButton from '../../components/Buttons/BackButton';
+import MainDrawer from '../../components/OffCanvas/MainDrawer';
 
 const Members = ({ data }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState(data);
 
- console.log("received data" ,data.members)
  useEffect(() => {
   if (data.members) {
     const filtered = data.members.filter((member) =>
@@ -27,15 +27,6 @@ const Members = ({ data }) => {
 
   return (
     <>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div className="flex flex-row justify-between ">
-          <div>
-            <BackButton />
-          </div>
-          <div>
-            <AddMember />
-          </div>
-        </div>
         <div className="p-4 border border-gray-200 rounded-lg shadow-sm sm:p-6 ">
           <div className="flex flex-row justify-between">
             <h3 className="py-5 text-2xl  ">Members</h3>
@@ -164,7 +155,6 @@ const Members = ({ data }) => {
                     </tbody>
                 </table>
         </div>
-      </div>
     </>
   );
 };

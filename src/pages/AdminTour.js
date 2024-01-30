@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from'react-redux';
-import agencyApi from "../api/agency";
-import AgencyTours from "../agency/views/AgencyTours";
 import Loader from '../components/Loaders/Loader';
-import AddTour from '../agency/management/AddTour';
-import { useParams } from 'react-router-dom';
 import AllTours from '../admin/views/AllTours';
 import BackButton from '../components/Buttons/BackButton';
 import useGetTours from '../hooks/useGetTours';
-import ToursTable from '../agency/ui/ToursTable';
-import MainDrawer from '../components/OffCanvas/MainDrawer';
+import { Link } from 'react-router-dom';
 
 
 
 
 
-export default function Tours(props) {
+export default function AdminTours(props) {
   const user = useSelector(state => state.user);
   const [data, setData] = useState([]);
 
-  const { agencyId } = useParams();
-  const { tours, loading, error, refetch } = useGetTours(agencyId);
+  // const { agencyId } = useParams();
+  const { tours, loading, error, refetch } = useGetTours();
 
-  console.log("useTours guides ", tours)
+  console.log("adminTours tours ", tours)
   if (loading) {
     return <Loader/>;
   }
@@ -31,24 +26,38 @@ export default function Tours(props) {
     return <p>Error: {error.message}</p>;
   }
 
+  if (tours === null || undefined){
+    return <p>No tours found</p>
+  }
+
 
 
   return (  
     <>
       <div className="p-4 flex flex-col content-wrapper">
         {user.user.type === 'admin' ? (
-          <AllTours data={data} />
+          <>
+           <div className='flex flex-row justify-between'>
+          <BackButton />
+          <Link to="/agency/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
+          Create Agency
+          </Link>
+        </div>
+          <AllTours tours={tours} />
+          </>
+         
         ) : (
           <>
           <div className='flex flex-row justify-between'>
-          <BackButton />
-          <MainDrawer activeDrawer="right" additionalComponent={AddTour} title= "Add A Tour" />
+            <BackButton />
+            <Link to="/agency/channel/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
+            Create Channel
+            </Link>
           </div>
             {loading ? (
               <Loader />
             ) : (
-
-              <ToursTable data={tours.data} />
+              <AllTours tours={tours} />
             )}
           </>
         )}

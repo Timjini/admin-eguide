@@ -5,20 +5,20 @@ const TableRow = ({ data , formattedDate}) => {
   return (
       <tr key={data.id}>
                         <td className="p-4 text-sm font-normal  whitespace-nowrap ">
-                          {data.channelName}{" "}
+                          {data.title}{" "}
                         </td>
                         <td className="p-4 text-sm font-normal  whitespace-nowrap ">
-                          {formattedDate(data.tour.starting_date)}
+                          {formattedDate(data.starting_date)}
                         </td>
                         <td className="p-4 text-sm font-semibold  whitespace-nowrap ">
-                          {formattedDate(data.tour.ending_date)}
+                          {formattedDate(data.ending_date)}
                         </td>
                         <td className="p-4 text-sm font-normal  whitespace-nowrap ">
                           {data.code}
                         </td>
                         <td className="inline-flex items-center p-4 space-x-2 text-sm font-normal  whitespace-nowrap ">
                           <span>
-                            {data.guide.user.name}
+                            {/* {data.guide.user.name} */}
                           </span>
                         </td>
                         <td className="p-4 whitespace-nowrap">

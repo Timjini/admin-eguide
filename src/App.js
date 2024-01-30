@@ -12,35 +12,37 @@ import MembersList from './pages/MembersList';
 // import BroadcastPages from './pages/BroadCastPages';
 import Sidebar from './components/Navigations/Sidebar';
 import ChannelCreate from './agency/management/ChannelCreate';
-import AdminAgencies from './admin/views/AdminAgencies';
+import AdminAgencies from './pages/AdminAgencies';
+import AdminTours from './pages/AdminTour';
+import NewTable from './admin/views/NewTable';
+import ActivateAccount from './Authentication/ActivateAccount';
+import CreateAgency from './agency/management/CreateAgency';
+import AllChannels from './admin/views/AllChannel';
 
 
 function App() {
 
   const auth = useSelector(state => state.user);  
-
+  console.log(auth)
   return (
     <BrowserRouter>
-      {auth && auth.user && <Sidebar />}
+      {auth && auth.user &&  <Sidebar />}
       <Routes>
         {auth && auth.user ? (
           auth.user.type === 'admin' ? (
             <>
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/admin/tours" element={<Tours />} />
-              <Route path="/admin/channels" element={<Channels />} />
-              <Route path="/admin/members" element={<MembersList />} />
+              <Route path="/admin/tours" element={<AdminTours />} />
+              <Route path="/admin/channels" element={<AllChannels />} />
+              <Route path="/admin/users" element={<MembersList />} />
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
               <Route path="/admin/agencies" element={<AdminAgencies/>} />
-
-              {/* Admin user routes */}
-              {/* <Route path="/admin/" element={<AdminDashboard />} /> */}
-              {/* <Route path="/admin/users" element={<AdminUsers />} /> */}
-              {/* Add more admin routes as needed */}
+              <Route path="/admin/new" element={<NewTable />} />
             </>
           ) : (
             <>
+              <Route path="/activate-account/create_agency" element={<CreateAgency />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/agency/tours/:agencyId" element={<Tours />} />
@@ -48,12 +50,12 @@ function App() {
               <Route path="/agency/members/:agencyId" element={<MembersList />} />
               <Route path="/members/:userId" element={<Profile/>} />
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
-              {/* <Route path="/agency/tour/create" element={<ChannelCreate/>} /> */}
-              {/* <Route path="/agency/member/create" element={<ChannelCreate/>} /> */}
+              
             </>
           )
         ) : (
           <>
+            <Route path="/activate-account" element={<ActivateAccount />} />
             <Route path="/sign_up" element={<UserManagement />} />
             <Route path="/login" element={<SignIn />} />
           </>

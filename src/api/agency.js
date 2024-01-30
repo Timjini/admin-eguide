@@ -9,6 +9,9 @@ const addChannel = payload => axios.post(`${API_ROOT}/channels/create`, payload)
 const guides = payload => axios.get(`${API_ROOT}/users/guides`, payload);
 const addMember = payload => axios.post(`${API_ROOT}/agencies/create_agent`, payload);
 const profile = payload => axios.get(`${API_ROOT}/users/profile`, payload);
+const agencies = payload => axios.get(`${API_ROOT}/agencies/all_agencies`, payload);
+const agencyDataUrl = payload => axios.post(`${API_ROOT}/agencies/agency_data`, payload);
+const createAgency = payload => axios.post(`${API_ROOT}/agencies/create_agency`, payload);
 
 const guidesApi = async (user) => {
   try {
@@ -39,7 +42,10 @@ const agencyApi = {
     users,
     guides,
     addMember,
-    guidesApi
+    guidesApi,
+    agencies,
+    agencyDataUrl,
+    createAgency
   };
   
 export default agencyApi;

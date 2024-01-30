@@ -56,7 +56,8 @@ const ToursTable = ({data}) => {
                </tr>
             </thead>
             <tbody className="">
-               {data.tours.map((tour ,index) => (
+            {data.tours.length === 0 ? (
+                  <p className='p-4'>No data available</p> ) : (data.tours.map((tour ,index) => (
                <tr key={index}>
                   <td className="p-4 text-sm font-normal  whitespace-nowrap ">
                      <div className='flex flex-row gap-2 content-center'>
@@ -94,7 +95,8 @@ const ToursTable = ({data}) => {
                           </button>
                           </td>
                </tr>
-               ))}
+                ))
+                )}
             </tbody>
          </table>
       </div>

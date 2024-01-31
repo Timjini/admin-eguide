@@ -53,6 +53,7 @@ const AddChannel = ({closeModal}) => {
           Authorization: `Bearer ${user.user.authToken}`,
         },
       });
+      console.log(response);
       setData(response.data);
       window.location.reload();
       alert('Channel added successfully');

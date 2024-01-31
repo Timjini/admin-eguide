@@ -7,7 +7,7 @@ import ChannelCreate from '../../agency/management/ChannelCreate';
 
 const AllChannels = () => {
     const { channels, loading, error, refetch } = useGetChannels();
-
+    console.log("adminChannels channels ", channels);
     if (loading) {
         return <Loader/>;
       }
@@ -31,7 +31,7 @@ const AllChannels = () => {
     <div className="p-4 flex flex-col content-wrapper">    
         <div className='flex flex-row justify-between'>
             <BackButton />
-            <MainDrawer activeDrawer="right" additionalComponent={ChannelCreate} title="Add A Channel"/>
+            {/* <MainDrawer activeDrawer="right" additionalComponent={ChannelCreate} title="Add A Channel" /> */}
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="p-4 border border-gray-200 rounded-lg shadow-sm sm:p-6 ">
@@ -69,10 +69,10 @@ const AllChannels = () => {
                 <tbody className="">
                 {channels.data.channels.length === 0 ? (
                   <p className='p-4'>No data available</p> ) : (channels.data.channels.map((channel ,index) => (
-                  <tr key={index}>
+                  <tr key={index} id={channel.channelId}>
                      <td className="p-4 text-sm font-normal  whitespace-nowrap ">
                         <div className='flex flex-row gap-2 content-center'>
-                           <span>{channel.title}{" "}</span>
+                           <span>{channel.channelName}{" "}</span>
                         </div>
                      </td>
                      <td className="p-4 text-sm font-normal  whitespace-nowrap ">

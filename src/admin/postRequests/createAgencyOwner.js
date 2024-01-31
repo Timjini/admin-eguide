@@ -63,7 +63,7 @@ const CreateAgencyOwner = () => {
       }, 2000);
     } catch (error) {
       console.error('Error adding agency Admin:', error);
-      setAlertData({ message: 'An error occurred while adding the tour', status: 'error' });
+      setAlertData({ message: 'An error occurred while adding an account', status: 'error' });
 
     }
   };

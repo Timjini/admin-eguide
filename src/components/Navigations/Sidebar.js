@@ -12,10 +12,12 @@ function Sidebar() {
   // const reduxAgencyId = user.agency
   let reduxAgencyId;
 
-  if (user.user.type === 'admin') {
+  if (user && user.user && user.user.type === 'admin') {
     reduxAgencyId = user.agency;
-  } else {
+  } else if (user && user.user && user.user.agency && user.user.agency._id) {
     reduxAgencyId = user.user.agency._id;
+  } else {
+    reduxAgencyId = null; // or set a default value or perform other error handling
   }
   console.log("redux agency id",reduxAgencyId);
 

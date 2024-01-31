@@ -39,9 +39,9 @@ export default function AdminTours(props) {
           <>
            <div className='flex flex-row justify-between'>
           <BackButton />
-          <Link to="/agency/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
+          {/* <Link to="/agency/create" className='flex items-center gap-3 mb-2 primaryBtn rounded-lg px-4'> 
           Create Agency
-          </Link>
+          </Link> */}
         </div>
           <AllTours tours={tours} />
           </>

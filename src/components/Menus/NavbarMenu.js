@@ -2,13 +2,12 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 
 export const menuItems = [
-
   {
-    label: 'Channels',
-    link: '/agency/channels',
+    label: 'Members',
+    link: '/agency/members',
     icon: (
       <span className="material-symbols-outlined">
-      podcasts
+      group
       </span>
     ),
     className:''
@@ -24,11 +23,11 @@ export const menuItems = [
     className:''
   },
   {
-    label: 'Members',
-    link: '/agency/members',
+    label: 'Channels',
+    link: '/agency/channels',
     icon: (
       <span className="material-symbols-outlined">
-      group
+      podcasts
       </span>
     ),
     className:''

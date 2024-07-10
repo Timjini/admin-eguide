@@ -16,21 +16,11 @@ const ToursTable = ({ data }) => {
          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                <tr>
-                  <th scope="col" className="px-3 py-2 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
-                     Tours Name
-                  </th>
-                  <th scope="col" className="px-3 py-2 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
-                     Description
-                  </th>
-                  <th scope="col" className="px-3 py-2 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
-                     Starting Date
-                  </th>
-                  <th scope="col" className="px-3 py-2 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
-                     Ending Date
-                  </th>
-                  <th scope="col" className="px-3 py-2 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
-                     Actions
-                  </th>
+                  <th scope="col" className="px-3 py-2 w-1/6">Tours Name</th>
+                  <th scope="col" className="px-3 py-2 w-2/6">Description</th>
+                  <th scope="col" className="px-3 py-2 w-1/6">Starting Date</th>
+                  <th scope="col" className="px-3 py-2 w-1/6">Ending Date</th>
+                  <th scope="col" className="px-3 py-2 w-1/6">Actions</th>
                </tr>
             </thead>
             <tbody>
@@ -43,22 +33,22 @@ const ToursTable = ({ data }) => {
                ) : (
                   data.tours.map((tour, index) => (
                      <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td className="px-3 py-2 flex items-center w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
+                        <td className="px-3 py-2 flex items-center w-1/6">
                            <p className="text-sm font-medium flex items-center">
                               <img className="w-8 h-8 rounded-full mr-2" style={{ width: '32px', height: '32px' }} src={`${API_PUBLIC_FOLDER}${tour.image}`} alt="tour" />
                               <span className='text-center text-gray-700 dark:text-white'>{tour.title}</span>
                            </p>
                         </td>
-                        <td className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
+                        <td className="px-6 py-2 text-sm text-gray-500 dark:text-gray-400 w-2/6">
                            {tour.description}
                         </td>
-                        <td className="px-3 py-2 text-sm font-semibold text-gray-400 dark:text-white w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
+                        <td className="px-6 py-2 text-sm font-semibold text-gray-400 dark:text-white w-1/6">
                            {tour.starting_date ? formattedDate(tour.starting_date) : '-'}
                         </td>
-                        <td className="px-3 py-2 text-sm font-semibold text-gray-400 dark:text-white w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
+                        <td className="px-6 py-2 text-sm font-semibold text-gray-400 dark:text-white w-1/6">
                            {tour.ending_date ? formattedDate(tour.ending_date) : '-'}
                         </td>
-                        <td className="px-3 py-2 flex items-center space-x-2 w-1/4 sm:w-1/5 md:w-1/6 lg:w-1/8 xl:w-1/10">
+                        <td className="px-3 py-2 flex items-center space-x-2 w-1/6">
                            <button className="text-blue-600 hover:text-blue-900 dark:hover:text-blue-500" id={tour._id}>
                               <span className="material-symbols-outlined">visibility</span>
                            </button>

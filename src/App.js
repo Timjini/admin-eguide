@@ -22,9 +22,8 @@ import ErrorPage from './pages/ErrorPage';
 
 
 function App() {
-
   const auth = useSelector(state => state.user);  
-  console.log(auth)
+
   return (
     <BrowserRouter>
       {auth && auth.user &&  <Sidebar />}

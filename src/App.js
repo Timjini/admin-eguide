@@ -26,7 +26,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {auth && auth.user &&  <Sidebar />}
+      <div className='ml-0 2xl:ml-36 xl:ml-32 lg:ml-5'>{auth && auth.user &&  <Sidebar />}</div>
       <Routes>
         {auth && auth.user ? (
           auth.user.type === 'admin' ? (

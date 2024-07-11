@@ -49,12 +49,12 @@ function Sidebar() {
   return (
     <>
       <nav className="navigation">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto pr-4 sm:pl-0 lg:ml-32 xl:ml-4 2xl:ml-0">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center ">
               <button
                 onClick={toggleSidebar}
-                className="items-center p-2 mt-2 ml-3 text-sm  rounded-lg inline-flex  md:inline-flex  lg:inline-flex  xl:hidden  focus:outline-none focus:ring-2 focus:ring-gray-200  dark:focus:ring-gray-600"
+                className="items-center p-2 mt-2 ml-3 text-sm  rounded-lg inline-flex  md:inline-flex  lg:hidden  xl:hidden  focus:outline-none focus:ring-2 focus:ring-gray-200  dark:focus:ring-gray-600"
               >
                 <span className="sr-only">
                   {isSidebarOpen ? "Close sidebar" : "Open sidebar"}

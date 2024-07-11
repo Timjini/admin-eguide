@@ -206,7 +206,7 @@ function Sidebar() {
               <div>
                 {user.user.agency.image ? (
                   <img
-                    className="rounded-full h-auto w-12"
+                    className="rounded-full h-auto w-12 lg:hidden"
                     src={`${API_ROOT_PUBLIC}uploads/${user.user.agency.image}`}
                     alt="Logo"
                   />

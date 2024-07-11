@@ -17,7 +17,7 @@ const UserMenu = ({reduxAgencyId}) => {
                 className="flex items-center p-2 rounded-lg  group"
               >
                 {item.icon}
-                <span className="ml-3 block xs:block lg:hidden xl:block ">{item.label}</span>
+                <span className="ml-3 block xs:hidden sm:hidden md:hidden lg:hidden xl:block ">{item.label}</span>
               </Link>
             </li>
           ))}

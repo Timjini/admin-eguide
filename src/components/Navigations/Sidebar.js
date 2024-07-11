@@ -231,7 +231,7 @@ function Sidebar() {
                 <span className="material-symbols-outlined">
                   space_dashboard
                 </span>
-                <span className="ml-3 block xs:block lg:hidden xl:block ">
+                <span className="ml-3 block xs:hidden sm:hidden md:hidden lg:hidden xl:block ">
                   Dashboard
                 </span>
               </Link>
@@ -249,7 +249,7 @@ function Sidebar() {
                 <span className="material-symbols-outlined">
                   manage_accounts
                 </span>
-                <span className="ml-3 block xs:block lg:hidden xl:block ">
+                <span className="ml-3 block xs:hidden sm:hidden md:hidden lg:hidden xl:block ">
                   Profile
                 </span>
               </Link>

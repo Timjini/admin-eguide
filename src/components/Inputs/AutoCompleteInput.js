@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Autocomplete from "react-google-autocomplete";
-const API_KEY = "AIzaSyAymzBudyFhnYfEKb5V0bowMcwh8xaN_6c";
+const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const AutoCompleteInput = () => {
 

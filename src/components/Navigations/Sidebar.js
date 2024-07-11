@@ -48,9 +48,88 @@ function Sidebar() {
 
   return (
     <>
+      <div className="absolute right-0 top-0 m-2 flex items-center pr-2">
+        <button
+          type="button"
+          className="relative rounded-full  p-1   focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+        >
+          <span className="absolute -inset-1.5"></span>
+          <span className="sr-only">View notifications</span>
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            strockWidth="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+            />
+          </svg>
+        </button>
+
+        <div className="relative ml-3">
+          <div>
+            <button
+              type="button"
+              className="relative flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              id="user-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              <span className="absolute -inset-1.5"></span>
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="h-10 w-10 rounded-full object-cover"
+                src={`${API_ROOT_PUBLIC}uploads/${user.user.avatar}`}
+                alt=""
+              />
+            </button>
+          </div>
+          <div
+            className="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md  py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="user-menu-button"
+            tabindex="-1"
+          >
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm "
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-item-0"
+            >
+              Your Profile
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm "
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-item-1"
+            >
+              Settings
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm "
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-item-2"
+            >
+              Sign out
+            </a>
+          </div>
+        </div>
+      </div>
       <nav className="navigation">
+
         <div className="mx-auto pr-4 sm:pl-0 lg:ml-32 xl:ml-4 2xl:ml-0">
-          <div className="relative flex h-16 items-center justify-between">
+          <div className="relative h-16">,
             <div className="absolute inset-y-0 left-0 flex items-center ">
               <button
                 onClick={toggleSidebar}
@@ -82,84 +161,6 @@ function Sidebar() {
                 {/* Add links here */}
               </div>
             </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <button
-                type="button"
-                className="relative rounded-full  p-1   focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                <span className="absolute -inset-1.5"></span>
-                <span className="sr-only">View notifications</span>
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strockWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-                  />
-                </svg>
-              </button>
-
-              <div className="relative ml-3">
-                <div>
-                  <button
-                    type="button"
-                    className="relative flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    id="user-menu-button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <span className="absolute -inset-1.5"></span>
-                    <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-10 w-10 rounded-full object-cover"
-                      src={`${API_ROOT_PUBLIC}uploads/${user.user.avatar}`}
-                      alt=""
-                    />
-                  </button>
-                </div>
-                <div
-                  className="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md  py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu-button"
-                  tabindex="-1"
-                >
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm "
-                    role="menuitem"
-                    tabindex="-1"
-                    id="user-menu-item-0"
-                  >
-                    Your Profile
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm "
-                    role="menuitem"
-                    tabindex="-1"
-                    id="user-menu-item-1"
-                  >
-                    Settings
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm "
-                    role="menuitem"
-                    tabindex="-1"
-                    id="user-menu-item-2"
-                  >
-                    Sign out
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -170,11 +171,10 @@ function Sidebar() {
 
       <aside
         id="default-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 xs:w-28 sm:w-28 md:w-28 lg:w-44 xl:w-48 h-screen transition-transform  ${
-          isSidebarOpen
-            ? "sm:translate-x-0"
-            : "-translate-x-full sm:translate-x-0 hidden lg:block sidebar-container"
-        }`}
+        className={`fixed top-0 left-0 z-40 w-64 xs:w-28 sm:w-28 md:w-28 lg:w-44 xl:w-48 h-screen transition-transform  ${isSidebarOpen
+          ? "sm:translate-x-0"
+          : "-translate-x-full sm:translate-x-0 hidden lg:block sidebar-container"
+          }`}
         aria-label="Sidebar"
         ref={sidebarRef} // Reference to the sidebar element
       >

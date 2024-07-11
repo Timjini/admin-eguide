@@ -41,7 +41,7 @@ export default function Logout() {
       <span class="material-symbols-outlined">
         logout
         </span>
-      <span className="block xs:block lg:hidden xl:block">
+      <span className="block xs:hidden sm:hidden md:hidden lg:block xl:block">
         Log Out
       </span>        
       </button>

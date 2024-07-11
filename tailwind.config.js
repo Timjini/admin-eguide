@@ -7,7 +7,10 @@ module.exports = {
     extend: {
       transitionDuration: {
         '2000': '2000ms',
-      }
+      },
+      screens: {
+        'xs': {'max': '639px'},
+      },
     },
   },
   plugins: [],

@@ -170,7 +170,7 @@ function Sidebar() {
 
       <aside
         id="default-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 md:w-24 lg:w-24 xl:w-48 h-screen transition-transform  ${
+        className={`fixed top-0 left-0 z-40 w-64 xs:w-28 sm:w-28 md:w-28 lg:w-44 xl:w-48 h-screen transition-transform  ${
           isSidebarOpen
             ? "sm:translate-x-0"
             : "-translate-x-full sm:translate-x-0 hidden lg:block sidebar-container"
@@ -179,7 +179,7 @@ function Sidebar() {
         ref={sidebarRef} // Reference to the sidebar element
       >
         <div className="h-full flex flex-col px-3 py-4 overflow-y-auto p-10">
-          <div className="p-5 hidden md:hidden lg:hidden xl:block">
+          <div className="p-5 hidden md:hidden lg:block xl:block">
             {user.user.agency !== null ? (
               <div>
                 {user.user.agency.image ? (
@@ -231,7 +231,7 @@ function Sidebar() {
                 <span className="material-symbols-outlined">
                   space_dashboard
                 </span>
-                <span className="ml-3 block xs:hidden sm:hidden md:hidden lg:hidden xl:block ">
+                <span className="ml-3 block xs:hidden sm:hidden md:hidden lg:block xl:block ">
                   Dashboard
                 </span>
               </Link>
@@ -249,7 +249,7 @@ function Sidebar() {
                 <span className="material-symbols-outlined">
                   manage_accounts
                 </span>
-                <span className="ml-3 block xs:hidden sm:hidden md:hidden lg:hidden xl:block ">
+                <span className="ml-3 block xs:hidden sm:hidden md:hidden lg:block xl:block ">
                   Profile
                 </span>
               </Link>

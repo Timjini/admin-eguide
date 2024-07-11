@@ -85,7 +85,7 @@ const AllTours = ({tours})=> {
                               id={tour._id}
                               // onClick={() => handleViewUser(member._id)}
                            >
-                              <span class="material-symbols-outlined">
+                              <span className="material-symbols-outlined">
                               visibility
                               </span>
                            </button> 
@@ -94,7 +94,7 @@ const AllTours = ({tours})=> {
                               id={tour._id}
                               // onClick={() => handleEditUser(member._id)}
                            >
-                              <span class="material-symbols-outlined">
+                              <span className="material-symbols-outlined">
                               edit
                               </span>
                            </button>

@@ -7,8 +7,6 @@ const ChannelsTable = ({channelsData}) => {
 
     const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
 
-    console.log("here is the Channels Table", channelsData.data.channels.length)
-
     const formattedDate = (dateString) => {
       const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
       const formatted = new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));

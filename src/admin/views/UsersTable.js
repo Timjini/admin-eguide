@@ -12,8 +12,6 @@ export default function UsersTable() {
 
   const [users, setUsers] = useState([]);
 
-  console.log(user.user.authToken);
-
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -27,8 +25,7 @@ export default function UsersTable() {
     fetch(`${API_ROOT}/users/users`, requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data); // Log the fetched data
-        setUsers(data); // Update the state with fetched data
+        setUsers(data);
       })
       .catch((error) => {
         console.error("Error fetching users:", error); // Log any fetch errors

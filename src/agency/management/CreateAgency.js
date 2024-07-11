@@ -15,7 +15,6 @@ const CreateAgency = () => {
   const token = localStorage.getItem('token');
   const dispatch = useDispatch();
 
-  console.log(token)
   const [agencyData, setAgencyData] = useState({
     name: '',
     description: '',
@@ -56,7 +55,6 @@ const CreateAgency = () => {
       // setTimeout(() => {
       //   window.location.reload();
       // }, 2000);
-      console.log(response.data.user)
       // dispatch(updateUserAction(response.data.user));
       // logout user
       localStorage.removeItem('token');
@@ -77,13 +75,13 @@ const CreateAgency = () => {
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 gap-5">
           <div className="w-full  rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <div class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 " role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <div className="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 " role="alert">
+            <svg className="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
-            <span class="sr-only">Info</span>
+            <span className="sr-only">Info</span>
             <div>
-              <span class="font-medium">Important!</span><br/>Please create an organization/agency profile to proceed.
+              <span className="font-medium">Important!</span><br/>Please create an organization/agency profile to proceed.
             </div>
           </div>
              <form  className='p-4 md:p-5 flex flex-col' onSubmit={handleSubmit} >
@@ -103,8 +101,8 @@ const CreateAgency = () => {
                 </div>
                 <div className='flex flex-col mt-2'>
                 
-                <div class="flex items-center justify-center w-full mb-5">
-                {/* <input class="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none " id="file_input" type="file"/> */}
+                <div className="flex items-center justify-center w-full mb-5">
+                {/* <input className="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none " id="file_input" type="file"/> */}
 
                   <input id="file_input" type="file" name="image" onChange={handleChange} accept="image/*" className='block w-full text-sm  border rounded-lg cursor-pointer  ' required />
 

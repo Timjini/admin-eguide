@@ -44,9 +44,6 @@ const CreateAgencyOwner = () => {
       formData.append('phone', memberData.phone);
       formData.append('image', memberData.image);
 
-      console.log(formData);
-
-     console.log(user.user.authToken)
      const response = await axios.post(`${API_ROOT}/admin/create_agency_owner`, formData, {
         headers: {
           'Authorization': `Bearer ${user.user.authToken}`,
@@ -55,7 +52,6 @@ const CreateAgencyOwner = () => {
       });
 
       setData(response.data);
-      console.log('Member added successfully:', response.data);
       setAlertData({ message: response.data, status: 'success' });
       setLoading(false);
       setTimeout(() => {
@@ -95,7 +91,7 @@ const CreateAgencyOwner = () => {
                     </div>
                 </div>
                 <div className='my-5'>
-                    <label class="block mb-2 text-sm font-medium " for="file_input">Upload An Image</label>    
+                    <label className="block mb-2 text-sm font-medium " htmlFor="file_input">Upload An Image</label>    
                     <input type="file" name="image" onChange={handleChange} accept="image/*" className='block w-full text-sm  border rounded-lg cursor-pointer  ' required/>
                 </div>
                 {loading && (

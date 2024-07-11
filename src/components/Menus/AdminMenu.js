@@ -11,7 +11,7 @@ const AdminMenu = () => {
         label: 'Agencies',
         link: '/admin/agencies',
         icon: (
-          <span class="material-symbols-outlined">
+          <span className="material-symbols-outlined">
           domain_add
           </span>
         ),

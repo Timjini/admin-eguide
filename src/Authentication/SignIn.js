@@ -54,11 +54,9 @@ export default function SignIn() {
           password: password
         })
         .then(res => {
-          console.log('Response from the backend:', res.data); // Log the entire response data
           if (res.data) {   
             // setUserData(res.data.user);
             dispatch(setUser(res.data.user));
-            // console.log(dispatch(setUser(res.data.user)));
             // store token in session
             localStorage.setItem('token', res.data.user.authToken);
             localStorage.setItem('user', res.data.user);
@@ -70,7 +68,6 @@ export default function SignIn() {
           }
         })
         .catch(err => {
-          console.log(err);
           setError(error);
           setAlertData({ message: "Please check your credentials", status: 'error' });
         });

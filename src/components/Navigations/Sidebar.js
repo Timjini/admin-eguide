@@ -19,7 +19,6 @@ function Sidebar() {
   } else {
     reduxAgencyId = null; // or set a default value or perform other error handling
   }
-  console.log("redux agency id", reduxAgencyId);
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
@@ -59,13 +58,13 @@ function Sidebar() {
             className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
-            strockWidth="1.5"
+            strockwidth="1.5"
             stroke="currentColor"
             aria-hidden="true"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
             />
           </svg>
@@ -94,13 +93,13 @@ function Sidebar() {
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="user-menu-button"
-            tabindex="-1"
+            tabIndex="-1"
           >
             <a
               href="#"
               className="block px-4 py-2 text-sm "
               role="menuitem"
-              tabindex="-1"
+              tabIndex="-1"
               id="user-menu-item-0"
             >
               Your Profile
@@ -109,7 +108,7 @@ function Sidebar() {
               href="#"
               className="block px-4 py-2 text-sm "
               role="menuitem"
-              tabindex="-1"
+              tabIndex="-1"
               id="user-menu-item-1"
             >
               Settings
@@ -118,7 +117,7 @@ function Sidebar() {
               href="#"
               className="block px-4 py-2 text-sm "
               role="menuitem"
-              tabindex="-1"
+              tabIndex="-1"
               id="user-menu-item-2"
             >
               Sign out
@@ -146,8 +145,8 @@ function Sidebar() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
+                    clipRule="evenodd"
+                    fillRule="evenodd"
                     d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
                   ></path>
                 </svg>

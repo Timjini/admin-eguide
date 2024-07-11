@@ -1,5 +1,4 @@
 const DashboardGuidesStats = (count) => {
-  console.log(count)
     return (
       <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-20" >
       <a
@@ -30,7 +29,7 @@ const DashboardGuidesStats = (count) => {
                {count.count.data.channels}
                </h5>
             </div>
-            <span class="material-symbols-outlined dahboard_icon">
+            <span className="material-symbols-outlined dahboard_icon">
             your_trips  
             </span>
          </div>

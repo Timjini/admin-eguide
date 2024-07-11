@@ -26,7 +26,6 @@ const useGetTours = (agencyId) => {
 
       // Ensure that toursData is an array before setting state
         setTours(toursData);
-        console.log(toursData);
     } catch (error) {
       console.error('Error getting tours:', error);
       setError(error);

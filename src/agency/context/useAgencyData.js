@@ -13,7 +13,6 @@ const useAgencyData = ({ onMembers, onTours, onChannels }) => {
         const membersResponse = await agencyApi.members();
         const membersData = membersResponse.data.members;
         onMembers && onMembers(membersData);
-        console.log(membersData);
 
         // Fetch tours
         const toursResponse = await agencyApi.tours();
@@ -22,7 +21,6 @@ const useAgencyData = ({ onMembers, onTours, onChannels }) => {
 
         // Fetch channels
         const channelsResponse = await agencyApi.channels({agencyId});
-        console.log(channelsResponse);
         const channelsData = channelsResponse.data.channels;
         onChannels && onChannels(channelsData);
       } catch (error) {

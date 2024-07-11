@@ -13,7 +13,6 @@ const AgencyAdminDashboard = ({ user }) => {
 
   const {guides ,loading:guidesLoading, error, refetch } = useGetGuides();
   const {agencyData, loading:agencyDataLoading } = useGetGuidesCount();
-  console.log("agency data", agencyData)
   // const {tours , loading: toursLoading, error: toursError, refetch: refetchTours} = useGetTours();
 
   if (guidesLoading, agencyDataLoading) {
@@ -48,7 +47,7 @@ const AgencyAdminDashboard = ({ user }) => {
 
       <div className="p-4 flex flex-row flex-wrap mx-auto ml-4 md:ml-48 gap-20" >
       <button onClick={refetch}>
-      <span class="material-symbols-outlined">
+      <span className="material-symbols-outlined">
       refresh
       </span>
       </button>

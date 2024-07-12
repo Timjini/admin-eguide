@@ -160,9 +160,21 @@ const AddTour = () => {
               name="endingDate"
               value={tourData.endingDate}
               onChange={handleChange}
-              className=' border border-gray-300  text-sm rounded-lg block w-full p-2.5 "'
+              className='border border-gray-300  text-sm rounded-lg block w-full p-2.5 "'
               required
             />
+          </div>
+          <div className="mb-5">
+              <label className="block mb-2 text-sm font-medium  " htmlFor="file_input">
+                Starting Point:
+              </label>
+              <AutoCompleteInput placeholder={"Enter starting place name"} />
+          </div>
+          <div className="mb-5">
+              <label className="block mb-2 text-sm font-medium  " htmlFor="file_input">
+                Ending Point:
+              </label>
+              <AutoCompleteInput placeholder={"Enter a destination name"} />
           </div>
           <div className="mb-5">
             <label className="block mb-2 text-sm font-medium  " htmlFor="file_input">

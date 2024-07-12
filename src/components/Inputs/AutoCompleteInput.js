@@ -4,7 +4,7 @@ import '../../styles/autocomplete.css';
 
 const LIB = ['places'];
 
-const AutoCompleteInput = () => {
+const AutoCompleteInput = ({placeholder}) => {
   const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const [searchBox, setSearchBox] = useState(null);
 
@@ -33,9 +33,9 @@ const AutoCompleteInput = () => {
       <StandaloneSearchBox onLoad={onSBLoad} onPlacesChanged={onPlacesChanged} style={{ position: 'relative', zIndex: 9999 }}>
         <input
           type="text"
-          placeholder="Business name, address, town or zip code"
+          placeholder={placeholder}
           autoComplete='on'
-          style={{ position:'absolute', width: '100%', padding: '10px', fontSize: '16px', zIndex: 999 }}
+          className='border border-gray-300  text-sm rounded-lg block w-full p-2.5'
         />
       </StandaloneSearchBox>
     </LoadScript>

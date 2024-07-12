@@ -87,10 +87,9 @@ const AddTour = () => {
         status={alertData?.status}
         onClose={() => setAlertData(null)} // Clear alertData when the alert is closed
       />
-      <form onSubmit={handleSubmit} className=" p-4 md:p-5 flex flex-col">
-        <div className="py-2 flex flex-col">
+      <form onSubmit={handleSubmit} className="p-4 md:p-5 flex flex-col">
+        <div className="py-2 flex flex-col">    
           <div className="flex flex-col mb-2">
-            <AutoCompleteInput />
             <label className="block mb-2 text-sm font-medium  "> Title:</label>
             <input
               type="text"

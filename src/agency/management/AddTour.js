@@ -83,6 +83,14 @@ const AddTour = () => {
     setStops((prevStops) => [...prevStops, ""]);
   };
 
+  const deleteStop = (index) => {
+    setStops((prevStops) => {
+      const updatedStops = [...prevStops];
+      updatedStops.splice(index, 1);
+      return updatedStops;
+    });
+  };
+
   return (
     <>
       <Alert
@@ -179,14 +187,20 @@ const AddTour = () => {
             </label>
             <AutoCompleteInput placeholder={"Enter a destination name"} loadedAlready={false} />
           </div>
-          <div className={`${stops.length > 0 ? 'bg-slate-100' : 'transparent'} p-3 rounded-lg`}
-          >
-            {stops.map((__stop, index) => (
+          <div className={`${stops.length > 0 ? "bg-slate-100" : "transparent"} p-3 rounded-lg`}>
+            {stops.map((_, index) => (
               <div className="mb-5" key={index}>
-                <label className="block mb-2 text-sm font-medium " htmlFor="stop_input">
+                <label className="block mb-2 text-sm font-medium" htmlFor={`stop_input_${index}`}>
                   Stop {index + 1}:
                 </label>
                 <AutoCompleteInput placeholder={"Enter a stop place name"} loadedAlready={true} />
+                <button
+                  type="button"
+                  className="text-sm text-red-500 mt-2"
+                  onClick={() => deleteStop(index)}
+                >
+                  Delete Stop
+                </button>
               </div>
             ))}
           </div>

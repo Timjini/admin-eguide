@@ -4,16 +4,15 @@ import agencyApi from "../../api/agency";
 import useGetGuides from "../components/getGuides";
 import Alert from "../../components/Alerts/Alert";
 import AutoCompleteInput from "../../components/Inputs/AutoCompleteInput";
-const API_KEY =  process.env.REACT_APP_GOOGLE_MAPS_API_KEY ;
 
+const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const AddTour = () => {
   const getGuides = useGetGuides();
   const [guides, setGuides] = useState([]);
   const [alertData, setAlertData] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const [showModal, setShowModal] = useState(false);
+  const [stops, setStops] = useState([]);
   const user = useSelector((state) => state.user);
 
   const [tourData, setTourData] = useState({
@@ -80,6 +79,10 @@ const AddTour = () => {
     fetchGuides();
   }, []);
 
+  const addStop = () => {
+    setStops((prevStops) => [...prevStops, ""]);
+  };
+
   return (
     <>
       <Alert
@@ -88,7 +91,7 @@ const AddTour = () => {
         onClose={() => setAlertData(null)} // Clear alertData when the alert is closed
       />
       <form onSubmit={handleSubmit} className="p-4 md:p-5 flex flex-col">
-        <div className="py-2 flex flex-col">    
+        <div className="py-2 flex flex-col">
           <div className="flex flex-col mb-2">
             <label className="block mb-2 text-sm font-medium  "> Title:</label>
             <input
@@ -165,16 +168,36 @@ const AddTour = () => {
             />
           </div>
           <div className="mb-5">
-              <label className="block mb-2 text-sm font-medium  " htmlFor="file_input">
-                Starting Point:
-              </label>
-              <AutoCompleteInput placeholder={"Enter starting place name"} />
+            <label className="block mb-2 text-sm font-medium  " htmlFor="file_input">
+              Starting Point:
+            </label>
+            <AutoCompleteInput placeholder={"Enter starting place name"} loadedAlready={false} />
           </div>
           <div className="mb-5">
-              <label className="block mb-2 text-sm font-medium  " htmlFor="file_input">
-                Ending Point:
-              </label>
-              <AutoCompleteInput placeholder={"Enter a destination name"} />
+            <label className="block mb-2 text-sm font-medium  " htmlFor="file_input">
+              Ending Point:
+            </label>
+            <AutoCompleteInput placeholder={"Enter a destination name"} loadedAlready={false} />
+          </div>
+          <div className={`${stops.length > 0 ? 'bg-slate-100' : 'transparent'} p-3 rounded-lg`}
+          >
+            {stops.map((__stop, index) => (
+              <div className="mb-5" key={index}>
+                <label className="block mb-2 text-sm font-medium " htmlFor="stop_input">
+                  Stop {index + 1}:
+                </label>
+                <AutoCompleteInput placeholder={"Enter a stop place name"} loadedAlready={true} />
+              </div>
+            ))}
+          </div>
+          <div className="mb-5">
+            <button
+              type="button"
+              className="secondaryBtn font-medium rounded-lg text-sm m-1 px-5 py-2.5 text-center me-2 mb-2"
+              onClick={addStop}
+            >
+              {stops.length > 0 ? "Add one more stop" : "Add a stop"}
+            </button>
           </div>
           <div className="mb-5">
             <label className="block mb-2 text-sm font-medium  " htmlFor="file_input">

@@ -27,7 +27,7 @@ const AddTour = () => {
       country: "",
       postal_code: "",
       coordinates: { lat: null, lng: null },
-      address_type: null,
+      address_type: 0,
     },
     endingPoint: {
       street_1: "",
@@ -36,13 +36,13 @@ const AddTour = () => {
       country: "",
       postal_code: "",
       coordinates: { lat: null, lng: null },
-      address_type: null,
+      address_type: 1,
     },
     stops: [],
   };
 
   const [tourData, setTourData] = useState(initialTourData);
-
+  console.log("TOUR DATA", tourData)
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setTourData((prevData) => ({
@@ -52,31 +52,74 @@ const AddTour = () => {
   };
 
   const handlePlaceChange = (name, place) => {
+    if (!place) return;
+  
+    const addressComponents = place.address || [];
+  
+    const getComponent = (components, type) => {
+      const component = components.find(c => c.types.includes(type));
+      return component ? component.long_name : '';
+    };
+ 
+    const street_1 = getComponent(addressComponents, "route");
+    const street_2 = getComponent(addressComponents, "administrative_area_level_4");
+    const city = getComponent(addressComponents, "administrative_area_level_2");
+    const state = getComponent(addressComponents, "administrative_area_level_1");
+    const country = getComponent(addressComponents, "country");
+    const postal_code = getComponent(addressComponents, "postal_code");
+    const coordinates = place.geometry?.location ? {
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    } : null;
+    console.log(street_1, city, state, country)
+    const address_type = name === "startingPoint" ? 0 : name === "endingPoint" ? 1 : 2;
+    
     setTourData((prevData) => ({
       ...prevData,
       [name]: {
-        street_1: place.street_1 || "",
-        city: place.city || "",
-        state: place.state || "",
-        country: place.country || "",
-        postal_code: place.postal_code || "",
-        coordinates: place.coordinates || { lat: null, lng: null },
-        address_type: place.address_type || null,
+        street_1: street_1 + ' ' + street_2,
+        city,
+        state,
+        country,
+        postal_code,
+        coordinates,
+        address_type,
       },
     }));
   };
+  
 
   const handleStopChange = (index, place) => {
+    const addressComponents = place?.address;
+    console.log("first", addressComponents)
+    const getComponent = (components, type) => {
+      const component = components?.find(c => c.types.includes(type));
+      return component ? component.long_name : '';
+    };
+  
+    const street_1 = getComponent(addressComponents, "route");
+    const street_2 = getComponent(addressComponents, "administrative_area_level_4");
+    const city = getComponent(addressComponents, "administrative_area_level_2");
+    const state = getComponent(addressComponents, "administrative_area_level_1");
+    const country = getComponent(addressComponents, "country");
+    const postal_code = getComponent(addressComponents, "postal_code");
+    const coordinates = place?.geometry?.location
+      ? {
+          lat: place?.geometry.location.lat(),
+          lng: place?.geometry.location.lng(),
+        }
+      : null;
+  
     setTourData((prevData) => {
       const updatedStops = [...prevData.stops];
       updatedStops[index] = {
-        street_1: place.street_1 || "",
-        city: place.city || "",
-        state: place.state || "",
-        country: place.country || "",
-        postal_code: place.postal_code || "",
-        coordinates: place.coordinates || { lat: null, lng: null },
-        address_type: place.address_type || null,
+        street_1: street_1 + ' ' + street_2,
+        city,
+        state,
+        country,
+        postal_code,
+        coordinates,
+        address_type: 2,
       };
       return { ...prevData, stops: updatedStops };
     });
@@ -85,6 +128,7 @@ const AddTour = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
       const formData = new FormData();
       formData.append("title", tourData.title);
@@ -127,7 +171,7 @@ const AddTour = () => {
     };
 
     fetchGuides();
-  }, []);
+  }, [getGuides]);
 
   const addStop = () => {
     setTourData((prevData) => ({
@@ -141,7 +185,7 @@ const AddTour = () => {
           country: "",
           postal_code: "",
           coordinates: { lat: null, lng: null },
-          address_type: null,
+          address_type: 2,
         },
       ],
     }));

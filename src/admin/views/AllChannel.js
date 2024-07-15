@@ -7,7 +7,6 @@ import ChannelCreate from '../../agency/management/ChannelCreate';
 
 const AllChannels = () => {
     const { channels, loading, error, refetch } = useGetChannels();
-    console.log("adminChannels channels ", channels);
     if (loading) {
         return <Loader/>;
       }
@@ -90,7 +89,7 @@ const AllChannels = () => {
                               id={channel._id}
                               // onClick={() => handleViewUser(member._id)}
                            >
-                              <span class="material-symbols-outlined">
+                              <span className="material-symbols-outlined">
                               visibility
                               </span>
                            </button> 
@@ -99,7 +98,7 @@ const AllChannels = () => {
                               id={channel._id}
                               // onClick={() => handleEditUser(member._id)}
                            >
-                              <span class="material-symbols-outlined">
+                              <span className="material-symbols-outlined">
                               edit
                               </span>
                            </button>

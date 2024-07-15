@@ -7,11 +7,9 @@ import TableHeader from '../TablesContent/TableHeader';
 
 const AgencyTour = ({data}) => {
     if (!data.tours || data.tours.length === 0) {
-        console.log('No tour data available.');
-        return null; // Return null or a message when there is no tour data
+        return null; 
       }
 
-    console.log('Tour data: ', data.tours);
       return (
         <>
             <div className='flex flex-row justify-center gap-5 flex-wrap'>

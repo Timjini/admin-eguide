@@ -28,7 +28,6 @@ const AgencyMembers = () => {
         });
 
         setMembersData(response.data);
-        console.log("memberS", response.data)
       } catch (error) {
         console.error("Error fetching agency channels:", error);
       } finally {

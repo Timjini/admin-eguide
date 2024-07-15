@@ -36,7 +36,7 @@ export default function MainDrawer({ activeDrawer, additionalComponent: Addition
          <div className='flex flex-row justify-between p-4'>
             <h3>{title}</h3>
             <button onClick={toggleDrawer(anchor, false)}>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                 close
                 </span>
             </button>

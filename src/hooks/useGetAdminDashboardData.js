@@ -20,7 +20,6 @@ const useGetAdminDashboardData = () => {
         }
       });
       setDashboardData(response);
-      console.log("fetch response",response);
     } catch (err) {
       setError(err);
     } finally {

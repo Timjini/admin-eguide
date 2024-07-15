@@ -38,10 +38,10 @@ export default function Logout() {
   return (
     <div>
       <button onClick={handleLogOut} className=' thirdBtn flex flex-row justify-center content-center px-3 py-2 mb-3 mr-3 text-sm font-medium text-center '>
-      <span class="material-symbols-outlined">
+      <span className="material-symbols-outlined">
         logout
         </span>
-      <span className="block xs:block lg:hidden xl:block">
+      <span className="block xs:hidden sm:hidden md:hidden lg:block xl:block">
         Log Out
       </span>        
       </button>

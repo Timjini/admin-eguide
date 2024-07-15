@@ -29,9 +29,6 @@ const ActivateAccount = () => {
     }
   }, [location.search]);
 
-  console.log(token)
-
-
   const user = useSelector((state)=>state.user);
   const dispatch = useDispatch({user});
 
@@ -59,14 +56,11 @@ const ActivateAccount = () => {
         token: token,
       })
       .then(res => {
-        console.log('Response from the backend:', res.data); // Log the entire response data
         if (res.data) {   
           // setUserData(res.data.user);
           // dispatch(setUser(res.data.user));
-          // console.log(dispatch(setUser(res.data.user)));
           // store token in session
           localStorage.setItem('token', res.data.authToken);
-          console.log(res.data.authToken);
           // localStorage.setItem('user', res.data.user);
           if (res.data.user.type === 'owner'){
           navigate('/activate-account/create_agency');  
@@ -84,7 +78,6 @@ const ActivateAccount = () => {
         }
       })
       .catch(err => {
-        console.log(err);
         setError(error);
         setAlertData({ message: "Please check your credentials", status: 'error' });
       });

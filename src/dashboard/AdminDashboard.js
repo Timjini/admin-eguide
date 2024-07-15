@@ -41,7 +41,7 @@ const AdminDashboard = ({user}) => {
             {dashboardData.data.tourCount}
             </h5>
             </div>
-            <span class="material-symbols-outlined dahboard_icon">
+            <span className="material-symbols-outlined dahboard_icon">
             your_trips  
             </span>
           </div>

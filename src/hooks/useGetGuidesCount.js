@@ -37,7 +37,6 @@ const useGetGuidesCount = () => {
       });
   
       setAgencyData(getAgencyData);
-    console.log("setGuides here", agencyData);
     } catch (error) {
       navigate('/error');  
       console.error('Error getting guides:', error);

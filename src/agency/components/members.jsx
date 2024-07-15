@@ -16,7 +16,6 @@ const Members = ({ data }) => {
       (member.name && member.name.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
-    console.log("filtered here", filtered);
     setFilteredData(filtered);
   } else {
     setFilteredData([]); // Ensure filteredData is an array even if there is no 'members' property in data
@@ -136,7 +135,7 @@ const Members = ({ data }) => {
                             id={member._id}
                             // onClick={() => handleViewUser(member._id)}
                           >
-                            <span class="material-symbols-outlined">
+                            <span className="material-symbols-outlined">
                             visibility
                             </span>
                           </button> 
@@ -145,7 +144,7 @@ const Members = ({ data }) => {
                             id={member._id}
                             // onClick={() => handleEditUser(member._id)}
                           >
-                            <span class="material-symbols-outlined">
+                            <span className="material-symbols-outlined">
                             edit
                             </span>
                           </button>

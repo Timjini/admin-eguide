@@ -9,8 +9,6 @@ import { useParams } from 'react-router-dom';
 export default function Dashboard(props) {
   const user = useSelector(state => state.user.user);
 
-  console.log(user.type)
-
   switch (user.type) { 
     case 'admin':
       return <UsersTable  user={user}/>;

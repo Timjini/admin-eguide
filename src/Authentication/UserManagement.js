@@ -9,7 +9,6 @@ const UserManagement = () => {
   const handleSignUpAndUpload = async (userData) => {
     try {
       const signUpResponse = await axios.post(`${API_ROOT}/api/users/sign_up`, userData);
-      console.log('Sign Up Response:', signUpResponse.data);
     } catch (error) {
       console.error('Error signing up:', error);
     }

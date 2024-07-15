@@ -17,7 +17,6 @@ export default function AdminTours(props) {
   // const { agencyId } = useParams();
   const { tours, loading, error, refetch } = useGetTours();
 
-  console.log("adminTours tours ", tours)
   if (loading) {
     return <Loader/>;
   }

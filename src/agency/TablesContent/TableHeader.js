@@ -1,8 +1,6 @@
 const TableHeader = ({ data }) => {
   const tableHeaders = Object.keys(data);
 
-  console.log('tableHeaders', data);
-
   return (
     <tr>
         <th

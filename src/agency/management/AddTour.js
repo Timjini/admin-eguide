@@ -1,73 +1,171 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import agencyApi from '../../api/agency';
-import useGetGuides from '../components/getGuides';
-import Alert from '../../components/Alerts/Alert';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import agencyApi from "../../api/agency";
+import useGetGuides from "../components/getGuides";
+import Alert from "../../components/Alerts/Alert";
+import AutoCompleteInput from "../../components/Inputs/AutoCompleteInput";
+import { Form } from "react-router-dom";
 
 const AddTour = () => {
-
-
   const getGuides = useGetGuides();
   const [guides, setGuides] = useState([]);
   const [alertData, setAlertData] = useState(null);
   const [loading, setLoading] = useState(false);
-
-
-  const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.user);
 
   const [tourData, setTourData] = useState({
-    title: '',
-    description: '',
-    guide: '',
-    agency: '',
-    startingDate: '',
-    endingDate: '',
-    image: null, // for file upload
+    title: "",
+    description: "",
+    guide: "",
+    agency: "",
+    startingDate: "",
+    endingDate: "",
+    image: null,
+    startingPoint: {
+      street_1: "",
+      city: "",
+      state: "",
+      country: "",
+      postal_code: "",
+      coordinates: { lat: null, lng: null },
+      address_type: 0,
+    },
+    endingPoint: {
+      street_1: "",
+      city: "",
+      state: "",
+      country: "",
+      postal_code: "",
+      coordinates: { lat: null, lng: null },
+      address_type: 1,
+    },
+    stops: [],
   });
-  const [data, setData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+    setTourData((prevData) => ({
+      ...prevData,
+      [name]: name === "image" ? files[0] : value,
+    }));
+  };
+
+  const handlePlaceChange = (name, place) => {
+    console.log(name, place)
+    if (!place) return;
+
+    const addressComponents = place.address || [];
+
+    const getComponent = (components, type) => {
+      const component = components.find(c => c.types.includes(type));
+      return component;
+    };
+
+    const street_1 = getComponent(addressComponents, "route");
+    const street_2 = getComponent(addressComponents, "administrative_area_level_4");
+    const city = getComponent(addressComponents, "administrative_area_level_2");
+    const state = getComponent(addressComponents, "administrative_area_level_1");
+    const country = getComponent(addressComponents, "country");
+    const postal_code = getComponent(addressComponents, "postal_code");
+    const coordinates = place ? {
+      lat: place.lat,
+      lng: place.lng,
+    } : null;
+
+    const address_type = name === "startingPoint" ? 0 : name === "endingPoint" ? 1 : 2;
 
     setTourData((prevData) => ({
       ...prevData,
-      [name]: name === 'image' ? files[0] : value,
+      [name]: {
+        street_1: street_1?.long_name || "",
+        city: city?.long_name || "",
+        state: state?.long_name || "",
+        country: country?.long_name || "",
+        postal_code: postal_code?.long_name || "",
+        coordinates,
+        address_type,
+      },
     }));
   };
 
 
+  const handleStopChange = (index, place) => {
+    console.log(index, place)
+    const addressComponents = place?.address;
+
+    const getComponent = (components, type) => {
+      const component = components?.find(c => c.types.includes(type));
+      return component;
+    };
+
+    const street_1 = getComponent(addressComponents, "route");
+    const street_2 = getComponent(addressComponents, "administrative_area_level_4");
+    const city = getComponent(addressComponents, "administrative_area_level_2");
+    const state = getComponent(addressComponents, "administrative_area_level_1");
+    const country = getComponent(addressComponents, "country");
+    const postal_code = getComponent(addressComponents, "postal_code");
+    const coordinates = place ? {
+      lat: place?.lat,
+      lng: place?.lng,
+    }
+      : null;
+
+    setTourData((prevData) => {
+      const updatedStops = [...prevData.stops];
+      updatedStops[index] = {
+        street_1: street_1.long_name || "",
+        city: city?.long_name || "",
+        state: state?.long_name || "",
+        country: country?.long_name || "",
+        postal_code: postal_code?.long_name || "",
+        coordinates,
+        address_type: 2,
+      };
+      return { ...prevData, stops: updatedStops };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log("TOUR DATA", tourData);
+  
     try {
       const formData = new FormData();
-      formData.append('title', tourData.title);
-      formData.append('description', tourData.description);
-      formData.append('guide', tourData.guide);
-      formData.append('agency', user.user.agency._id);
-      formData.append('startingDate', tourData.startingDate);
-      formData.append('endingDate', tourData.endingDate);
-      formData.append('image', tourData.image);
-
+      formData.append("title", tourData.title);
+      formData.append("description", tourData.description);
+      formData.append("guide", tourData.guide);
+      formData.append("agency", user.user.agency._id);
+      formData.append("starting_date", tourData.startingDate);
+      formData.append("ending_date", tourData.endingDate);
+      formData.append("image", tourData.image);
+      formData.append("start_point", JSON.stringify(tourData.startingPoint));
+      formData.append("end_point", JSON.stringify(tourData.endingPoint));
+      formData.append("stops", JSON.stringify(tourData.stops));
+  
       const response = await agencyApi.addTour(formData, {
         headers: {
           Authorization: `Bearer ${user.user.authToken}`,
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
-
-      setData(response.data);
-      setAlertData({ message: response.data, status: 'success' });
+      console.log("Res", response);
+      setAlertData({ message: response.data, status: "success" });
       setLoading(false);
       setTimeout(() => {
         window.location.reload();
       }, 2000);
     } catch (error) {
-      console.error('Error adding tour:', error);
-      setAlertData({ message: 'An error occurred while adding the tour', status: 'error' });
+      console.error("Error adding tour:", error);
+      setAlertData({
+        message: "An error occurred while adding the tour",
+        status: "error",
+      });
+      setLoading(false);
     }
   };
+  
+
 
   useEffect(() => {
     const fetchGuides = async () => {
@@ -78,86 +176,196 @@ const AddTour = () => {
     fetchGuides();
   }, []);
 
+  const addStop = () => {
+    setTourData((prevData) => ({
+      ...prevData,
+      stops: [
+        ...prevData.stops,
+        {
+          street_1: "",
+          city: "",
+          state: "",
+          country: "",
+          postal_code: "",
+          coordinates: { lat: null, lng: null },
+          address_type: 2,
+        },
+      ],
+    }));
+  };
+
+  const deleteStop = (index) => {
+    setTourData((prevData) => ({
+      ...prevData,
+      stops: prevData.stops.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleCancel = (e) => {
+    e.target.reset();
+  };
 
   return (
     <>
-     <Alert
+      <Alert
         message={alertData?.message}
         status={alertData?.status}
-        onClose={() => setAlertData(null)} // Clear alertData when the alert is closed
+        onClose={() => setAlertData(null)}
       />
-            <form onSubmit={handleSubmit} className=' p-4 md:p-5 flex flex-col'>
-                <div className='py-2 flex flex-col'>
-                    <div className='flex flex-col mb-2'>
-                        <label className='block mb-2 text-sm font-medium  '> Title:</label>
-                        <input type="text" name="title" value={tourData.title} onChange={handleChange} className=' border border-gray-300  text-sm rounded-lg block w-full p-2.5 "' required />
-                    </div>
-                    <div className='flex flex-col mb-2'>
-                        <label  className='block mb-2 text-sm font-medium  '>Description:</label>
-                        <textarea name="description" rows="4" className="block p-2.5 w-full text-sm   rounded-lg border border-gray-300 " value={tourData.description} onChange={handleChange} required />
-                    </div>
-                    <div className='flex flex-col mb-2'>
-                      <label
-                        className='block mb-2 text-sm font-medium  '
-                      >
-                        Guide:
-                      </label>
-                      <select
-                        name="guide"
-                        value={tourData.guide}
-                        onChange={handleChange}
-                        className=' block w-full px-4 py-2 mt-2 text-sm border border-gray-300 rounded-md '
-                        required
-                      >
-                        <option value="" className="">Select a guide</option>
-                        {/* Mapping through guidesData to create options */}
-                        {guides.map((guide) => (
-                          <option key={guide._id} value={guide._id} className="w-full p-2.5" required>
-                            {guide.user?.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className='flex flex-col mb-2'>
-                        <label className='block mb-2 text-sm font-medium  '>Starting Date:</label>
-                        <input type="date" name="startingDate" className=' border border-gray-300  text-sm rounded-lg block w-full p-2.5 "' value={tourData.startingDate} onChange={handleChange} required />
-                    </div>
-                    <div className='flex flex-col mb-2'>
-                        <label className='block mb-2 text-sm font-medium  '>Ending Date:</label>
-                        <input type="date" name="endingDate" value={tourData.endingDate} onChange={handleChange} className=' border border-gray-300  text-sm rounded-lg block w-full p-2.5 "' required />
-                    </div >
-                    <div className='mb-5'>
-                        <label class="block mb-2 text-sm font-medium  " for="file_input">Upload file</label>    
-                        <input type="file" name="image" onChange={handleChange} accept="image/*" className=' border border-gray-300  text-sm rounded-lg block w-full p-2.5 "' required/>
-                    </div>
-                    {/* add loading */}
-                    
-                </div>
-                <div className="mt-24 mt-auto">
-                      {loading && (
-                      <div className='flex flex-row justify-end'>
-                      <button disabled type="button" className="py-2.5 px-5 me-2 text-sm font-medium rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-blue-700 focus:text-blue-700 inline-flex items-center">
-                        <svg aria-hidden="true" role="status" className="inline w-4 h-4 me-3 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#1C64F2"/>
-                        </svg>
-                        Loading...
-                      </button>
-                      </div>
-                      )}
-                      {!loading && (
-                        <div className='flex flex-row justify-between'>
-                          <button type="submit" className="primaryBtn font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                            Add A Tour
-                          </button>
-                        </div>
-                      )}
-                </div>
-            </form>
-         
+      <form onSubmit={handleSubmit} className="p-4 md:p-5 flex flex-col">
+        <div className="py-2 flex flex-col">
+          <div className="flex flex-col mb-2">
+            <label className="block mb-2 text-sm font-medium">Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={tourData.title}
+              onChange={handleChange}
+              className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+              required
+            />
+          </div>
+          <div className="flex flex-col mb-2">
+            <label className="block mb-2 text-sm font-medium">Description:</label>
+            <textarea
+              name="description"
+              rows="4"
+              className="block p-2.5 w-full text-sm rounded-lg border border-gray-300"
+              value={tourData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="flex flex-col mb-2">
+            <label className="block mb-2 text-sm font-medium">Guide:</label>
+            <select
+              name="guide"
+              value={tourData.guide}
+              onChange={handleChange}
+              className="block w-full px-4 py-2 mt-2 text-sm border border-gray-300 rounded-md"
+              required
+            >
+              <option value="" className="">
+                Select a guide
+              </option>
+              {guides.map((guide) => (
+                <option key={guide._id} value={guide._id} className="w-full p-2.5" required>
+                  {guide.user?.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col mb-2">
+            <label className="block mb-2 text-sm font-medium">Starting Date:</label>
+            <input
+              type="date"
+              name="startingDate"
+              className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+              value={tourData.startingDate}
+              onChange={handleChange}
+              min={new Date()}
+              required
+            />
+          </div>
+          <div className="flex flex-col mb-2">
+            <label className="block mb-2 text-sm font-medium">Ending Date:</label>
+            <input
+              type="date"
+              name="endingDate"
+              value={tourData.endingDate}
+              onChange={handleChange}
+              className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+              required
+            />
+          </div>
+          <div className="mb-5">
+            <label className="block mb-2 text-sm font-medium">Starting Point:</label>
+            <AutoCompleteInput
+              placeholder={"Enter starting place name"}
+              loadedAlready={false}
+              onPlaceSelected={(place) => handlePlaceChange("startingPoint", place)}
+            />
+          </div>
+          <div className="mb-5">
+            <label className="block mb-2 text-sm font-medium">Ending Point:</label>
+            <AutoCompleteInput
+              placeholder={"Enter a destination name"}
+              loadedAlready={false}
+              onPlaceSelected={(place) => handlePlaceChange("endingPoint", place)}
+            />
+          </div>
+          <div className={`${tourData.stops.length > 0 ? "bg-slate-100" : "transparent"} p-3 rounded-lg`}>
+            {tourData.stops.map((stop, index) => (
+              <div className="mb-5" key={index}>
+                <label className="block mb-2 text-sm font-medium">Stop {index + 1}:</label>
+                <AutoCompleteInput
+                  placeholder={"Enter a stop place name"}
+                  loadedAlready={true}
+                  onPlaceSelected={(place) => handleStopChange(index, place)}
+                />
+                <button
+                  type="button"
+                  className="text-sm text-red-500 mt-2"
+                  onClick={() => deleteStop(index)}
+                >
+                  Delete Stop
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="mb-5">
+            <button
+              type="button"
+              className="secondaryBtn font-medium rounded-lg text-sm m-1 px-5 py-2.5 text-center me-2 mb-2"
+              onClick={addStop}
+            >
+              {tourData.stops.length > 0 ? "Add one more stop" : "Add a stop"}
+            </button>
+          </div>
+          <div className="mb-5">
+            <label className="block mb-2 text-sm font-medium">Upload Tour Image</label>
+            <input
+              type="file"
+              name="image"
+              onChange={handleChange}
+              accept="image/*"
+              className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+              required
+            />
+          </div>
+        </div>
+        <div className="mt-24 mt-auto">
+          {loading ? (
+            <div className="flex flex-row justify-end">
+              <button
+                disabled
+                type="button"
+                className="primaryBtn font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center me-2 mb-2"
+              >
+                Processing...
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-row justify-end">
+              <button
+                type="submit"
+                className="primaryBtn font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center me-2 mb-2"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                className="secondaryBtn font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center me-2 mb-2"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+        </div>
+      </form>
     </>
   );
 };
 
 export default AddTour;
-

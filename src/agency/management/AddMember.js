@@ -52,7 +52,6 @@ const AddMember = () => {
       formData.append('type', selectedUserType);
       formData.append('agencyId', user.user.agency._id);
 
-      console.log(formData);
 
 
       const response = await agencyApi.addMember(formData, {
@@ -63,7 +62,6 @@ const AddMember = () => {
       });
 
       setData(response.data);
-      console.log('Member added successfully:', response.data);
       setAlertData({ message: response.data, status: 'success' });
       // setLoading(false);
       // setTimeout(() => {
@@ -114,7 +112,7 @@ const AddMember = () => {
                 </select>
                 </div>
                 <div className='my-5'>
-                    <label class="block mb-2 text-sm font-medium " for="file_input">Upload An Image</label>    
+                    <label className="block mb-2 text-sm font-medium " htmlFor="file_input">Upload An Image</label>    
                     <input type="file" name="image" onChange={handleChange} accept="image/*" className='block w-full text-sm  border rounded-lg cursor-pointer  ' />
                 </div>
                 {loading && (

@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 
 const TableHeaderNavigation = ({title, model , data, type}) => {
-  console.log(data)
     return (
     <nav className="flex justify-between items-center py-4">
       <h1 className="text-2xl font-semibold">{title}</h1>

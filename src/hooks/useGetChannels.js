@@ -26,7 +26,6 @@ const useGetChannels = (agencyId) => {
 
       // Ensure that toursData is an array before setting state
       setChannels(channelsData);
-      console.log("SetChannels here",channelsData);
     } catch (error) {
       console.error('Error getting tours:', error);
       setError(error);

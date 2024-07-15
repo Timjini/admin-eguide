@@ -129,28 +129,27 @@ const AddTour = () => {
     e.preventDefault();
     setLoading(true);
     console.log("TOUR DATA", tourData);
-
+  
     try {
-      const data = {
-        title: tourData.title,
-        description: tourData.description,
-        guide: tourData.guide,
-        agency: user.user.agency._id,
-        starting_date: tourData.startingDate,
-        ending_date: tourData.endingDate,
-        image: tourData.image,
-        start_point: tourData.startingPoint,
-        end_point: tourData.endingPoint,
-        stops: tourData.stops,
-      };
-      console.log("DATA", data)
-      const response = await agencyApi.addTour(data, {
+      const formData = new FormData();
+      formData.append("title", tourData.title);
+      formData.append("description", tourData.description);
+      formData.append("guide", tourData.guide);
+      formData.append("agency", user.user.agency._id);
+      formData.append("starting_date", tourData.startingDate);
+      formData.append("ending_date", tourData.endingDate);
+      formData.append("image", tourData.image);
+      formData.append("start_point", JSON.stringify(tourData.startingPoint));
+      formData.append("end_point", JSON.stringify(tourData.endingPoint));
+      formData.append("stops", JSON.stringify(tourData.stops));
+  
+      const response = await agencyApi.addTour(formData, {
         headers: {
           Authorization: `Bearer ${user.user.authToken}`,
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Res", response)
+      console.log("Res", response);
       setAlertData({ message: response.data, status: "success" });
       setLoading(false);
       setTimeout(() => {
@@ -165,6 +164,7 @@ const AddTour = () => {
       setLoading(false);
     }
   };
+  
 
 
   useEffect(() => {

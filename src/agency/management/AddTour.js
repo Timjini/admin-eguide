@@ -42,7 +42,7 @@ const AddTour = () => {
   };
 
   const [tourData, setTourData] = useState(initialTourData);
-  console.log("TOUR DATA", tourData)
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setTourData((prevData) => ({
@@ -52,28 +52,29 @@ const AddTour = () => {
   };
 
   const handlePlaceChange = (name, place) => {
+    console.log(name, place)
     if (!place) return;
-  
+
     const addressComponents = place.address || [];
-  
+
     const getComponent = (components, type) => {
       const component = components.find(c => c.types.includes(type));
-      return component ? component.long_name : '';
+      return component;
     };
- 
+
     const street_1 = getComponent(addressComponents, "route");
     const street_2 = getComponent(addressComponents, "administrative_area_level_4");
     const city = getComponent(addressComponents, "administrative_area_level_2");
     const state = getComponent(addressComponents, "administrative_area_level_1");
     const country = getComponent(addressComponents, "country");
     const postal_code = getComponent(addressComponents, "postal_code");
-    const coordinates = place.geometry?.location ? {
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng(),
+    const coordinates = place ? {
+      lat: place.lat,
+      lng: place.lng,
     } : null;
-    console.log(street_1, city, state, country)
+
     const address_type = name === "startingPoint" ? 0 : name === "endingPoint" ? 1 : 2;
-    
+
     setTourData((prevData) => ({
       ...prevData,
       [name]: {
@@ -87,29 +88,29 @@ const AddTour = () => {
       },
     }));
   };
-  
+
 
   const handleStopChange = (index, place) => {
+    console.log(index, place)
     const addressComponents = place?.address;
-    console.log("first", addressComponents)
+
     const getComponent = (components, type) => {
       const component = components?.find(c => c.types.includes(type));
-      return component ? component.long_name : '';
+      return component;
     };
-  
+
     const street_1 = getComponent(addressComponents, "route");
     const street_2 = getComponent(addressComponents, "administrative_area_level_4");
     const city = getComponent(addressComponents, "administrative_area_level_2");
     const state = getComponent(addressComponents, "administrative_area_level_1");
     const country = getComponent(addressComponents, "country");
     const postal_code = getComponent(addressComponents, "postal_code");
-    const coordinates = place?.geometry?.location
-      ? {
-          lat: place?.geometry.location.lat(),
-          lng: place?.geometry.location.lng(),
-        }
+    const coordinates = place ? {
+      lat: place?.lat,
+      lng: place?.lng,
+    }
       : null;
-  
+
     setTourData((prevData) => {
       const updatedStops = [...prevData.stops];
       updatedStops[index] = {
@@ -128,24 +129,26 @@ const AddTour = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log("TOUR DATA", tourData);
 
     try {
-      const formData = new FormData();
-      formData.append("title", tourData.title);
-      formData.append("description", tourData.description);
-      formData.append("guide", tourData.guide);
-      formData.append("agency", user.user.agency._id);
-      formData.append("startingDate", tourData.startingDate);
-      formData.append("endingDate", tourData.endingDate);
-      formData.append("image", tourData.image);
-      formData.append("startingPoint", JSON.stringify(tourData.startingPoint));
-      formData.append("endingPoint", JSON.stringify(tourData.endingPoint));
-      formData.append("stops", JSON.stringify(tourData.stops));
-
-      const response = await agencyApi.addTour(formData, {
+      const data = {
+        title: tourData.title,
+        description: tourData.description,
+        guide: tourData.guide,
+        agency: user.user.agency._id,
+        starting_date: tourData.startingDate,
+        ending_date: tourData.endingDate,
+        image: tourData.image,
+        start_point: tourData.startingPoint,
+        end_point: tourData.endingPoint,
+        stops: tourData.stops,
+      };
+      console.log("DATA", data)
+      const response = await agencyApi.addTour(data, {
         headers: {
           Authorization: `Bearer ${user.user.authToken}`,
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
       });
 
@@ -163,6 +166,7 @@ const AddTour = () => {
       setLoading(false);
     }
   };
+
 
   useEffect(() => {
     const fetchGuides = async () => {

@@ -4,6 +4,7 @@ import agencyApi from "../../api/agency";
 import useGetGuides from "../components/getGuides";
 import Alert from "../../components/Alerts/Alert";
 import AutoCompleteInput from "../../components/Inputs/AutoCompleteInput";
+import { Form } from "react-router-dom";
 
 const AddTour = () => {
   const getGuides = useGetGuides();
@@ -12,7 +13,7 @@ const AddTour = () => {
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
 
-  const initialTourData = {
+  const [tourData, setTourData] = useState({
     title: "",
     description: "",
     guide: "",
@@ -39,9 +40,7 @@ const AddTour = () => {
       address_type: 1,
     },
     stops: [],
-  };
-
-  const [tourData, setTourData] = useState(initialTourData);
+  });
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -78,11 +77,11 @@ const AddTour = () => {
     setTourData((prevData) => ({
       ...prevData,
       [name]: {
-        street_1: street_1 + ' ' + street_2,
-        city,
-        state,
-        country,
-        postal_code,
+        street_1: street_1?.long_name || "",
+        city: city?.long_name || "",
+        state: state?.long_name || "",
+        country: country?.long_name || "",
+        postal_code: postal_code?.long_name || "",
         coordinates,
         address_type,
       },
@@ -114,11 +113,11 @@ const AddTour = () => {
     setTourData((prevData) => {
       const updatedStops = [...prevData.stops];
       updatedStops[index] = {
-        street_1: street_1 + ' ' + street_2,
-        city,
-        state,
-        country,
-        postal_code,
+        street_1: street_1.long_name || "",
+        city: city?.long_name || "",
+        state: state?.long_name || "",
+        country: country?.long_name || "",
+        postal_code: postal_code?.long_name || "",
         coordinates,
         address_type: 2,
       };
@@ -151,7 +150,7 @@ const AddTour = () => {
           "Content-Type": "application/json",
         },
       });
-
+      console.log("Res", response)
       setAlertData({ message: response.data, status: "success" });
       setLoading(false);
       setTimeout(() => {
@@ -175,7 +174,7 @@ const AddTour = () => {
     };
 
     fetchGuides();
-  }, [getGuides]);
+  }, []);
 
   const addStop = () => {
     setTourData((prevData) => ({
@@ -202,8 +201,8 @@ const AddTour = () => {
     }));
   };
 
-  const handleCancel = () => {
-    setTourData(initialTourData);
+  const handleCancel = (e) => {
+    e.target.reset();
   };
 
   return (
@@ -264,6 +263,7 @@ const AddTour = () => {
               className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
               value={tourData.startingDate}
               onChange={handleChange}
+              min={new Date()}
               required
             />
           </div>
@@ -323,7 +323,7 @@ const AddTour = () => {
             </button>
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium">Upload file</label>
+            <label className="block mb-2 text-sm font-medium">Upload Tour Image</label>
             <input
               type="file"
               name="image"

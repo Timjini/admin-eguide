@@ -42,6 +42,7 @@ const AddTour = () => {
     stops: [],
   });
 
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setTourData((prevData) => ({
@@ -54,23 +55,24 @@ const AddTour = () => {
     console.log(name, place)
     if (!place) return;
 
-    const addressComponents = place.address || [];
+    const addressComponents = place?.address || [];
 
     const getComponent = (components, type) => {
-      const component = components.find(c => c.types.includes(type));
+      const component = components?.find(c => c.types.includes(type));
       return component;
     };
 
     const street_1 = getComponent(addressComponents, "route");
     const street_2 = getComponent(addressComponents, "administrative_area_level_4");
-    const city = getComponent(addressComponents, "administrative_area_level_2");
-    const state = getComponent(addressComponents, "administrative_area_level_1");
+    const state = getComponent(addressComponents, "administrative_area_level_2");
+    const city = getComponent(addressComponents, "administrative_area_level_1");
     const country = getComponent(addressComponents, "country");
     const postal_code = getComponent(addressComponents, "postal_code");
     const coordinates = place ? {
       lat: place.lat,
       lng: place.lng,
     } : null;
+    console.log(postal_code)
 
     const address_type = name === "startingPoint" ? 0 : name === "endingPoint" ? 1 : 2;
 
@@ -91,7 +93,7 @@ const AddTour = () => {
 
   const handleStopChange = (index, place) => {
     console.log(index, place)
-    const addressComponents = place?.address;
+    const addressComponents = place?.address || [];
 
     const getComponent = (components, type) => {
       const component = components?.find(c => c.types.includes(type));
@@ -100,26 +102,27 @@ const AddTour = () => {
 
     const street_1 = getComponent(addressComponents, "route");
     const street_2 = getComponent(addressComponents, "administrative_area_level_4");
-    const city = getComponent(addressComponents, "administrative_area_level_2");
-    const state = getComponent(addressComponents, "administrative_area_level_1");
+    const state = getComponent(addressComponents, "administrative_area_level_2");
+    const city = getComponent(addressComponents, "administrative_area_level_1");
     const country = getComponent(addressComponents, "country");
     const postal_code = getComponent(addressComponents, "postal_code");
     const coordinates = place ? {
       lat: place?.lat,
       lng: place?.lng,
-    }
-      : null;
+    } : null;
+
+    const address_type = 2
 
     setTourData((prevData) => {
       const updatedStops = [...prevData.stops];
       updatedStops[index] = {
-        street_1: street_1.long_name || "",
+        street_1: street_1?.long_name || "",
         city: city?.long_name || "",
         state: state?.long_name || "",
         country: country?.long_name || "",
         postal_code: postal_code?.long_name || "",
         coordinates,
-        address_type: 2,
+        address_type,
       };
       return { ...prevData, stops: updatedStops };
     });

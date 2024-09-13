@@ -13,7 +13,7 @@ export default function Profile () {
     const firstName = user && user.name ? user.name.split(" ")[0] : "";
     const lastName = user && user.name ? user.name.split(" ").slice(1).join(" ") : "";
     return (
-        <div className="p-4 sm:ml-64 ">
+        <div className="content-wrapper">
              <div className="">
                     <BackButton />
             </div>

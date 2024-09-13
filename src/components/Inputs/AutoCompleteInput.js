@@ -10,7 +10,6 @@ const AutoCompleteInput = ({ placeholder, loadedAlready, onPlaceSelected }) => {
 
   const onPlacesChanged = () => {
     const places = searchBox?.getPlaces();
-    console.log("PLACES", places)
     if (places && places.length > 0) {
       const place = places[0];
       const lat = place.geometry?.location.lat();

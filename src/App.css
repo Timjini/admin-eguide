@@ -90,7 +90,7 @@ aside{background-image: var(--white-gradient); box-shadow: var(--shadow);}
 
 .navigation {grid-area: nav;}
 .sidebar-container {grid-area:side;}
-.content-wrapper {grid-area:content;background-image: var(--white-gradient);padding:1rem;background-color: #242424;min-height: 100vh;border-radius: 20px; margin-left:3rem;}
+.content-wrapper {grid-area:content;background-image: var(--white-gradient);padding:1rem;background-color: #242424;border-radius: 20px;min-width:1300px}
 
 /* HERO SECTION ============================================================  */
 

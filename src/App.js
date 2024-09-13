@@ -19,7 +19,7 @@ import ActivateAccount from './Authentication/ActivateAccount';
 import CreateAgency from './agency/management/CreateAgency';
 import AllChannels from './admin/views/AllChannel';
 import ErrorPage from './pages/ErrorPage';
-
+import AgencyPage from './agency/views/AgencyPage';
 
 function App() {
   const auth = useSelector(state => state.user);  
@@ -38,6 +38,7 @@ function App() {
               <Route path="/admin/users" element={<MembersList />} />
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
               <Route path="/admin/agencies" element={<AdminAgencies/>} />
+              <Route path="/admin/agencies/:agencyId" element={<AgencyPage/>} />
               <Route path="/admin/new" element={<NewTable />} />
             </>
           ) : (

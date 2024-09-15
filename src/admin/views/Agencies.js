@@ -1,81 +1,90 @@
+import React, { useState } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TablePagination } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
 
-import BackButton from "../../components/Buttons/BackButton";
-import AddTour from "../../agency/management/AddTour";
+const Agencies = ({ agencies }) => {
+   const navigate = useNavigate();
+  const [page, setPage] = useState(0); 
+  const [rowsPerPage, setRowsPerPage] = useState(5); //  rows per page
 
+  const formattedDate = (dateString) => {
+    const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
+    return new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
+  };
 
-const Agencies = ({agencies})=> {
-    const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
+  const handleViewAgency = (agencyId) => {
+   navigate(`/admin/agencies/${agencyId}`);
+ };
 
+  // Handle page change
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-    const formattedDate = (dateString) => {
-      const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
-      const formatted = new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
-      return formatted;
-    };
+  // Handle rows per page change
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
+  // Pagination logic - slice data according to the current page and rows per page
+  const paginatedAgencies = agencies.data.agencies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
-    const channelRows = agencies.data.agencies.length === 0 ? (
-      <tr>
-      <td colSpan={headerItems.size} className="p-4">No Agency available</td>
-    </tr>
-    ) : (
-      agencies.data.agencies.map((agency, index) => (
-         <tr key={index}>
-           {/* Render your table cells here */}
-           <td className="p-4 text-sm">{agency.name}</td>
-           <td className="p-4 text-sm">{agency.description}</td>
-           <td className="p-4 text-sm"> {agency.members.length}</td>
-           <td className="p-4 text-sm">{agency.owner}</td>
-         </tr>
-       ))
+  return (
+    <div className="p-4 flex flex-col content-wrapper">
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="agencies table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Agency Name</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>Members</TableCell>
+              <TableCell>Owner</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedAgencies.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={4} className="p-4">
+                  No agency available
+                </TableCell>
+              </TableRow>
+            ) : (
+              paginatedAgencies.map((agency, index) => (
+                <TableRow key={index}>
+                  <TableCell className="p-4">{agency.name}</TableCell>
+                  <TableCell className="p-4">{agency.description}</TableCell>
+                  <TableCell className="p-4">{agency.members.length}</TableCell>
+                  <TableCell className="p-4">{agency.owner}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleViewAgency(agency._id)} aria-label="view">
+                      <VisibilityIcon />
+                    </IconButton>
+                    <IconButton aria-label="edit">
+                      <EditIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
 
-    );
-
-
-    return (
-         <div className="p-4 flex flex-col content-wrapper">
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-               <div className="p-4 border border-gray-200 rounded-lg shadow-sm sm:p-6 ">
-                  <div className="flex flex-row justify-between">
-                  </div>
-                  <table className="mt-2 w-full text-sm text-left  ">
-                     <thead className="text-xs  uppercase shadow ">
-                        <tr>
-                           <th
-                              scope="col"
-                              className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                              >
-                              Agency Name
-                           </th>
-                           <th
-                              scope="col"
-                              className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                              >
-                              Description
-                           </th>
-                           <th
-                              scope="col"
-                              className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                              >
-                              Agency Owner
-                           </th>
-                           <th
-                              scope="col"
-                              className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                              >
-                              Related Tour
-                           </th>
-                        </tr>
-                     </thead>
-                     <tbody className="">
-                        {channelRows}
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-         </div>
-    )
-}
-
+        {/* Table Pagination Component */}
+        <TablePagination
+          component="div"
+          count={agencies.data.agencies.length} // Total number of items
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]} // Customize rows per page options
+        />
+      </TableContainer>
+    </div>
+  );
+};
 
 export default Agencies;

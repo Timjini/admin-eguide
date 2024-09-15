@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import agencyApi from "../../api/agency";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Loader from "../../components/Loaders/Loader";
 
 const TourPage = () => {
   const {tourId } = useParams();
@@ -31,6 +32,13 @@ const TourPage = () => {
         fetchAgency();
     }, [tourId, user.user.authToken]);
     
+    if (loading) {
+        return <Loader />; 
+      }
+    
+      if (error) {
+        return <p>Error: {error}</p>;
+      }
 
 return (
     <></>

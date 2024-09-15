@@ -47,7 +47,6 @@ const AllTours = ({ tours }) => {
           Authorization: `Bearer ${user.user.authToken}`,
         },
       });
-      console.log("Tour deleted:", tourToDelete);
       setTourToDelete(null); // Reset the agency to delete
     } catch (error) {
       console.error("Failed to delete tour:", error);

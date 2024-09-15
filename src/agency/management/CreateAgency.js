@@ -61,9 +61,6 @@ const CreateAgency = () => {
      
   };
 
-
-  console.log("Agency Data", agencyData);
-
   const [data, setData] = useState(null);
 
   const handleChange = (e) => {

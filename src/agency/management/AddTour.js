@@ -52,7 +52,6 @@ const AddTour = () => {
   };
 
   const handlePlaceChange = (name, place) => {
-    console.log(name, place)
     if (!place) return;
 
     const addressComponents = place?.address || [];
@@ -72,7 +71,6 @@ const AddTour = () => {
       lat: place.lat,
       lng: place.lng,
     } : null;
-    console.log(postal_code)
 
     const address_type = name === "startingPoint" ? 0 : name === "endingPoint" ? 1 : 2;
 
@@ -92,7 +90,6 @@ const AddTour = () => {
 
 
   const handleStopChange = (index, place) => {
-    console.log(index, place)
     const addressComponents = place?.address || [];
 
     const getComponent = (components, type) => {
@@ -131,7 +128,6 @@ const AddTour = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("TOUR DATA", tourData);
   
     try {
       const formData = new FormData();
@@ -152,7 +148,6 @@ const AddTour = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Res", response);
       setAlertData({ message: response.data, status: "success" });
       setLoading(false);
       setTimeout(() => {

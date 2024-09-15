@@ -11,7 +11,6 @@ const ToursTable = ({ data }) => {
       return formatted;
    };
 
-   console.log("alll data", data.tours);
    return (
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
          <table className="w-full text-sm text-left ">

@@ -48,7 +48,6 @@ const AgencyPage = () => {
         },
       });
       setIsEditing(false);
-      console.log(agency);
     } catch (error) {
       console.error("Failed to update agency:", error);
     }

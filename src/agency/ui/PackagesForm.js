@@ -15,7 +15,6 @@ const PackageForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission, e.g., sending data to a backend
-    console.log(formData);
   };
 
   return (

@@ -57,7 +57,6 @@ const Packages = ({ packages }) => {
           Authorization: `Bearer ${user.user.authToken}`,
         },
       });
-      console.log("Package deleted:", packageToDelete);
       setPackageToDelete(null);
     } catch (error) {
       console.error("Failed to delete package:", error);
@@ -86,7 +85,6 @@ const Packages = ({ packages }) => {
               <TableCell>Description</TableCell>
               <TableCell>Duration (Months)</TableCell>
               <TableCell>Price</TableCell>
-              <TableCell>Status</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -104,17 +102,6 @@ const Packages = ({ packages }) => {
                   <TableCell className="p-4">{pkg.description}</TableCell>
                   <TableCell className="p-4">{pkg.durationInMonths}</TableCell>
                   <TableCell className="p-4">{pkg.price}</TableCell>
-                  <TableCell className="p-4">
-                    <FormGroup>
-                      {pkg.status === "active" ? (
-                        <FormControlLabel
-                          control={<Switch defaultChecked color="primary" />}
-                        />
-                      ) : (
-                        <FormControlLabel control={<Switch />} />
-                      )}
-                    </FormGroup>
-                  </TableCell>
                   <TableCell className="p-4">
                     <IconButton
                       onClick={() => handleViewPackage(pkg._id)}

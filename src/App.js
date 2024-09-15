@@ -23,12 +23,20 @@ import AgencyPage from './agency/views/AgencyPage';
 import TourPage from './agency/views/TourPage';
 import UserProfile from './agency/views/UserProfile';
 import PackagesPage from './pages/PackagesPage';
+import PackagePage from './admin/views/PackagePage';
+import Subscribe from './components/OffCanvas/Subscribe';
 
 function App() {
   const auth = useSelector(state => state.user);  
-
+  let agencyInactive 
+  if(auth && auth.user && auth.user.agency){
+    agencyInactive = auth.user.agency.status === 'inactive'
+  }
   return (
     <BrowserRouter>
+      {agencyInactive && (
+        <Subscribe />
+      )}
       <div className='ml-0 2xl:ml-36 xl:ml-32 lg:ml-5'>{auth && auth.user &&  <Sidebar />}</div>
       <Routes>
         {auth && auth.user ? (
@@ -46,6 +54,7 @@ function App() {
               <Route path="admin/profile/:userId" element={<UserProfile/>} />
               <Route path="admin/packages" element={<PackagesPage/>} />
               <Route path="/tour/:tourId" element={<TourPage/>} />
+              <Route path="admin/packages/:packageId" element={<PackagePage/>} />
 
             </>
           ) : (

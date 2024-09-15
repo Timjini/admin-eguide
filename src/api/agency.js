@@ -10,6 +10,7 @@ const addChannel = payload => axios.post(`${API_ROOT}/channels/create`, payload)
 const guides = payload => axios.get(`${API_ROOT}/users/guides`, payload);
 const addMember = payload => axios.post(`${API_ROOT}/agencies/create_agent`, payload);
 const profile = payload => axios.get(`${API_ROOT}/users/profile`, payload);
+const getPackage = payload => axios.get(`${API_VERSION_2}/packages`, payload);
 const agencies = payload => axios.get(`${API_VERSION_2}/agencies`, payload);
 const agency = (agencyId, payload) => axios.get(`${API_VERSION_2}/agencies/${agencyId}`, payload);
 export const updateAgency = (agencyId, updatedData, config) => {
@@ -59,6 +60,7 @@ const agencyApi = {
     updateAgency,
     deleteAgency,
     deleteTour,
+    getPackage
   };
   
 export default agencyApi;

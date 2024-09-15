@@ -21,7 +21,6 @@ const TourPage = () => {
                 },
               });
               setTour(response.data);
-              console.log(response.data);
             } catch (error) {
               console.error(error.response?.data?.message || "An error occurred");
             } finally {

@@ -22,8 +22,6 @@ export default function Tours(props) {
   const { agencyId } = useParams();
   const { tours, loading, error, refetch } = useGetTours(agencyId);
 
-  console.log("Tours:=========>", tours.data);
-
   if (loading) {
     return <Loader/>;
   }

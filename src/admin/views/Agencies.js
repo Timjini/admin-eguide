@@ -68,7 +68,6 @@ const Agencies = ({ agencies }) => {
           Authorization: `Bearer ${user.user.authToken}`,
         },
       });
-      console.log("Agency deleted:", agencyToDelete);
       // Update the state or re-fetch the data as needed
       setAgencyToDelete(null); // Reset the agency to delete
     } catch (error) {

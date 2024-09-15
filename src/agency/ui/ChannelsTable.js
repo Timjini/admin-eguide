@@ -13,7 +13,6 @@ import {
 const ChannelsTable = ({ channelsData }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  console.log(channelsData.data.channels);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

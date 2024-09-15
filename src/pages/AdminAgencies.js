@@ -24,7 +24,6 @@ export default function AdminAgencies(props) {
   // const { agencyId } = useParams();
   const { agencies, loading, error, refetch } = useGetAgencies();
 
-  console.log(agencies);
 
   if (loading) {
     return <Loader/>;

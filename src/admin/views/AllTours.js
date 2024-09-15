@@ -2,16 +2,24 @@
 
 import TableRow from '../../agency/TablesContent/TableRow';
 import {API_USER_IMAGE} from '../../constant/index';
+import { useNavigate } from 'react-router-dom';
+
 
 const AllTours = ({tours})=> {
-   const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
+   const navigate = useNavigate();
 
+   const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
+   console.log(tours);
    
    const formattedDate = (dateString) => {
      const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
      const formatted = new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
      return formatted;
    };
+
+   const handleViewTour = (tourId) => {
+      navigate(`/admin/tour/${tourId}`);
+   }
 
    // const channelRows = tours.data.tours ? (
    //     tours.data.tours.map((tour, index) => (
@@ -83,7 +91,7 @@ const AllTours = ({tours})=> {
                               <button
                               className=""
                               id={tour._id}
-                              // onClick={() => handleViewUser(member._id)}
+                              onClick={() => handleViewTour(tour._id)}
                            >
                               <span className="material-symbols-outlined">
                               visibility

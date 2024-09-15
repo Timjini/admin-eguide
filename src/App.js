@@ -19,6 +19,8 @@ import ActivateAccount from './Authentication/ActivateAccount';
 import CreateAgency from './agency/management/CreateAgency';
 import AllChannels from './admin/views/AllChannel';
 import ErrorPage from './pages/ErrorPage';
+import AgencyPage from './agency/views/AgencyPage';
+import TourPage from './agency/views/TourPage';
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
               <Route path="/admin/users" element={<MembersList />} />
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
               <Route path="/admin/agencies" element={<AdminAgencies/>} />
+              <Route path="/admin/agencies/:agencyId" element={<AgencyPage/>} />
+              <Route path="/admin/tour/:tourId" element={<TourPage/>} />
               <Route path="/admin/new" element={<NewTable />} />
             </>
           ) : (

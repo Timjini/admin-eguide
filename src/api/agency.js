@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {API_ROOT} from '../constant'
+import {API_VERSION_2} from '../constant'
 
 // Agency Routes
 const members = payload => axios.get(`${API_ROOT}/agencies/members`, payload);
@@ -10,6 +11,8 @@ const guides = payload => axios.get(`${API_ROOT}/users/guides`, payload);
 const addMember = payload => axios.post(`${API_ROOT}/agencies/create_agent`, payload);
 const profile = payload => axios.get(`${API_ROOT}/users/profile`, payload);
 const agencies = payload => axios.get(`${API_ROOT}/agencies/all_agencies`, payload);
+const agency = (agencyId, payload) => axios.get(`${API_VERSION_2}/agencies/${agencyId}`, payload);
+const tour = (tourId, payload) => axios.get(`${API_VERSION_2}/tours/${tourId}`, payload);
 const agencyDataUrl = payload => axios.post(`${API_ROOT}/agencies/agency_data`, payload);
 const createAgency = payload => axios.post(`${API_ROOT}/agencies/create_agency`, payload);
 
@@ -45,7 +48,9 @@ const agencyApi = {
     guidesApi,
     agencies,
     agencyDataUrl,
-    createAgency
+    createAgency,
+    agency,
+    tour
   };
   
 export default agencyApi;

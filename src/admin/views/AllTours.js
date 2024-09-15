@@ -22,7 +22,7 @@ const AllTours = ({ tours }) => {
   };
 
   const handleViewTour = (tourId) => {
-    navigate(`/admin/tour/${tourId}`);
+    navigate(`/tour/${tourId}`);
   };
 
   //  page change

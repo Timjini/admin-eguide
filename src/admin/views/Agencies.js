@@ -101,8 +101,8 @@ const Agencies = ({ agencies }) => {
         <Table sx={{ minWidth: 650 }} aria-label="agencies table">
           <TableHead>
             <TableRow>
+              <TableCell></TableCell>
               <TableCell>Agency</TableCell>
-              <TableCell>Description</TableCell>
               <TableCell>Members</TableCell>
               <TableCell>Owner</TableCell>
               <TableCell>Status</TableCell>
@@ -120,8 +120,8 @@ const Agencies = ({ agencies }) => {
             ) : (
               paginatedAgencies.map((agency, index) => (
                 <TableRow key={index}>
-                  <TableCell className="p-4"><Avatar alt={agency?.name} src={`${API_ROOT_PUBLIC}uploads/${agency?.image}`} />{agency.name}</TableCell>
-                  <TableCell className="p-4">{agency.description}</TableCell>
+                  <TableCell className="p-4"><Avatar alt={agency?.name} src={`${API_ROOT_PUBLIC}uploads/${agency?.image}`} /></TableCell>
+                  <TableCell className="p-4"><span>{agency.name}</span></TableCell>
                   <TableCell className="p-4">
                     <MemberAvatars members={agency.members} />
                   </TableCell>

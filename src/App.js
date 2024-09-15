@@ -42,10 +42,11 @@ function App() {
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
               <Route path="/admin/agencies" element={<AdminAgencies/>} />
               <Route path="/admin/agencies/:agencyId" element={<AgencyPage/>} />
-              <Route path="/admin/tour/:tourId" element={<TourPage/>} />
               <Route path="/admin/new" element={<NewTable />} />
               <Route path="admin/profile/:userId" element={<UserProfile/>} />
               <Route path="admin/packages" element={<PackagesPage/>} />
+              <Route path="/tour/:tourId" element={<TourPage/>} />
+
             </>
           ) : (
             <>
@@ -57,6 +58,8 @@ function App() {
               <Route path="/members/:userId" element={<Profile/>} />
               <Route path="/agency/channel/create" element={<ChannelCreate/>} />
               <Route path="/error" element={<ErrorPage />} />
+              <Route path="/tour/:tourId" element={<TourPage/>} />
+
             </>
           )
         ) : (

@@ -1,7 +1,7 @@
 import TableHeaderNavigation from '../../components/Navigations/TableHeaderNavigation';
 import TableRow from '../TablesContent/TableRow';
 import TableHeader from '../TablesContent/TableHeader';
-import { API_PUBLIC_FOLDER } from '../../constant/index';
+import { API_PUBLIC_FOLDER, API_USER_IMAGE } from '../../constant/index';
 
 const ToursTable = ({ data }) => {
    const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
@@ -11,6 +11,7 @@ const ToursTable = ({ data }) => {
       return formatted;
    };
 
+   console.log("alll data", data.tours);
    return (
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
          <table className="w-full text-sm text-left ">
@@ -35,7 +36,7 @@ const ToursTable = ({ data }) => {
                      <tr key={index} className="bg-white border-b ">
                         <td className="px-3 py-2 flex items-center w-1/6">
                            <p className="text-sm font-medium flex items-center">
-                              <img className="w-8 h-8 rounded-full mr-2" style={{ width: '32px', height: '32px' }} src={`${API_PUBLIC_FOLDER}${tour.image}`} alt="tour" />
+                              <img className="w-8 h-8 rounded-full mr-2" style={{ width: '32px', height: '32px' }} src={`${API_USER_IMAGE}${tour.photo}`} alt="tour" />
                               <span className='text-center text-gray-700 '>{tour.title}</span>
                            </p>
                         </td>

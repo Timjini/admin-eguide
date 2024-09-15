@@ -22,6 +22,8 @@ export default function Tours(props) {
   const { agencyId } = useParams();
   const { tours, loading, error, refetch } = useGetTours(agencyId);
 
+  console.log("Tours:=========>", tours.data);
+
   if (loading) {
     return <Loader/>;
   }
@@ -36,7 +38,7 @@ export default function Tours(props) {
     <>
       <div className="p-4 flex flex-col content-wrapper">
         {user.user.type === 'admin' ? (
-          <AllTours data={data} />
+          <AllTours tours={data} />
         ) : (
           <>
           <div className='flex flex-row justify-between'>
@@ -47,7 +49,7 @@ export default function Tours(props) {
               <Loader />
             ) : (
 
-              <ToursTable data={tours.data} />
+              <AllTours tours={tours} />
             )}
           </>
         )}

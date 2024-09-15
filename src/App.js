@@ -25,6 +25,7 @@ import UserProfile from './agency/views/UserProfile';
 import PackagesPage from './pages/PackagesPage';
 import PackagePage from './admin/views/PackagePage';
 import Subscribe from './components/OffCanvas/Subscribe';
+import RequestPage from './pages/RequestPage';
 
 function App() {
   const auth = useSelector(state => state.user);  
@@ -73,6 +74,7 @@ function App() {
           )
         ) : (
           <>
+           <Route path="/request-account" element={<RequestPage />} />
             <Route path="/activate-account/create_agency" element={<CreateAgency />} />
             <Route path="/activate-account" element={<ActivateAccount />} />
             <Route path="/sign_up" element={<UserManagement />} />

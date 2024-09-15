@@ -6,11 +6,13 @@ import { API_ROOT } from '../../constant';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { updateUserAction } from '../../redux/actions/userActions';
+import AutoCompleteInput from '../../components/Inputs/AutoCompleteInput';
 
 const CreateAgency = () => {
   const navigate = useNavigate(); // Get the navigate functiont
   const [alertData, setAlertData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [place, setPlace] = useState(null);
   // get token from localstorage
   const token = localStorage.getItem('token');
   const dispatch = useDispatch();
@@ -18,8 +20,49 @@ const CreateAgency = () => {
   const [agencyData, setAgencyData] = useState({
     name: '',
     description: '',
-    image: null, // for file upload
+    image: null, 
+    address: '',
   });
+
+  const handlePlaceChange = (place) => {
+    if (!place) return;
+
+    const addressComponents = place?.address || [];
+
+    const getComponent = (components, type) => {
+      const component = components?.find(c => c.types.includes(type));
+      return component;
+    };
+
+    const street_1 = getComponent(addressComponents, "route");
+    const street_2 = getComponent(addressComponents, "administrative_area_level_4");
+    const state = getComponent(addressComponents, "administrative_area_level_2");
+    const city = getComponent(addressComponents, "administrative_area_level_1");
+    const country = getComponent(addressComponents, "country");
+    const postal_code = getComponent(addressComponents, "postal_code");
+    const coordinates = place ? {
+      lat: place.lat,
+      lng: place.lng,
+    } : null;
+
+    setAgencyData((prevData) => ({
+      ...prevData,
+      address: {
+        street_1: street_1?.long_name || "",
+        street_2: street_2?.long_name || "",
+        city: city?.long_name || "",
+        state: state?.long_name || "",
+        country: country?.long_name || "",
+        postal_code: postal_code?.long_name || "",
+        coordinates,
+        address_type: 1 
+      }
+      }));
+     
+  };
+
+
+  console.log("Agency Data", agencyData);
 
   const [data, setData] = useState(null);
 
@@ -90,6 +133,15 @@ const CreateAgency = () => {
                       <div>
                       <label className='block mb-2 text-sm font-medium '> Organizaton/Agency Name:</label>
                       <input type="name" name="name" value={agencyData.name} onChange={handleChange} className=' border border-gray-300  text-sm rounded-lg  block w-full p-2.5 ' placeholder='Organization Name' required />
+                      </div>
+                      <div>
+                      <label className='block mb-2 text-sm font-medium '>Address:</label> 
+                      <AutoCompleteInput 
+                      value={agencyData.address}
+                        placeholder={"Enter Address place name"}
+                        loadedAlready={false}
+                        onPlaceSelected={(place) => handlePlaceChange(place)}
+                      />
                       </div>
                       <div className='flex flex-col'>
                         <label  className='block mb-2 text-sm font-medium '>Description:</label>

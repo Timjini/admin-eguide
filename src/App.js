@@ -1,6 +1,6 @@
 import './App.css';
 import './styles/mobile.css';
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import SignIn from './Authentication/SignIn';
 import UserManagement from './Authentication/UserManagement';

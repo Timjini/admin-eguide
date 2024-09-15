@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const AllTours = ({ tours }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0); //
-  const [rowsPerPage, setRowsPerPage] = useState(5); // number per page here <<<=== 
+  const [rowsPerPage, setRowsPerPage] = useState(10); // number per page here <<<=== 
 
   const formattedDate = (dateString) => {
     const options = { day: 'numeric', month: 'numeric', year: '2-digit' };

@@ -1,39 +1,104 @@
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TablePagination } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import EditIcon from '@mui/icons-material/Edit';
+import React, { useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  TablePagination,
+  FormControlLabel,
+  Switch,
+  FormGroup,
+  Chip,
+  Avatar,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteAlert from "../../components/Alerts/DeleteAlert";
+import agencyApi from "../../api/agency";
+import { useSelector } from "react-redux";
+import { API_ROOT_PUBLIC } from "../../constant";
+import MemberAvatars from "../../agency/ui/MembersAvatars";
 
 const Agencies = ({ agencies }) => {
-   const navigate = useNavigate();
-  const [page, setPage] = useState(0); 
-  const [rowsPerPage, setRowsPerPage] = useState(5); //  rows per page
+  const navigate = useNavigate();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [agencyToDelete, setAgencyToDelete] = useState(null); // Store the agency ID to delete
+  const user = useSelector((state) => state.user);
+  const [invisible, setInvisible] = useState(false);
+  console.log("Agencies===========>", agencies);
 
   const formattedDate = (dateString) => {
-    const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
-    return new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
+    const options = { day: "numeric", month: "numeric", year: "2-digit" };
+    return new Intl.DateTimeFormat("en-GB", options).format(
+      new Date(dateString)
+    );
   };
 
   const handleViewAgency = (agencyId) => {
-   navigate(`/admin/agencies/${agencyId}`);
- };
+    navigate(`/admin/agencies/${agencyId}`);
+  };
 
-  // Handle page change
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  // Handle rows per page change
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  // Pagination logic - slice data according to the current page and rows per page
-  const paginatedAgencies = agencies.data.agencies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const paginatedAgencies = agencies.data.agencies.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
 
+  // Handle delete confirmation
+  const handleDeleteAgency = (agencyId) => {
+    setAgencyToDelete(agencyId);
+  };
+
+  const confirmDeleteAgency = async () => {
+    try {
+      await agencyApi.deleteAgency(agencyToDelete, {
+        headers: {
+          Authorization: `Bearer ${user.user.authToken}`,
+        },
+      });
+      console.log("Agency deleted:", agencyToDelete);
+      // Update the state or re-fetch the data as needed
+      setAgencyToDelete(null); // Reset the agency to delete
+    } catch (error) {
+      console.error("Failed to delete agency:", error);
+    }
+  };
+
+  const handleCloseAlert = () => {
+    setAgencyToDelete(null); // Reset the agency to delete
+  };
+
+  const handleUserProfileNavigation = (user) => {
+    if (user) {
+      navigate(`/users/${user._id}`);
+    }
+  };
+
+  const active = false;
   return (
     <div className="p-4 flex flex-col content-wrapper">
+      {agencyToDelete && (
+        <DeleteAlert
+          message="Are you sure you want to delete this agency?"
+          status="warning"
+          onConfirm={confirmDeleteAgency}
+          onClose={handleCloseAlert}
+        />
+      )}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="agencies table">
           <TableHead>
@@ -42,12 +107,14 @@ const Agencies = ({ agencies }) => {
               <TableCell>Description</TableCell>
               <TableCell>Members</TableCell>
               <TableCell>Owner</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {paginatedAgencies.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={4} className="p-4">
+                <TableCell colSpan={5} className="p-4">
                   No agency available
                 </TableCell>
               </TableRow>
@@ -56,14 +123,45 @@ const Agencies = ({ agencies }) => {
                 <TableRow key={index}>
                   <TableCell className="p-4">{agency.name}</TableCell>
                   <TableCell className="p-4">{agency.description}</TableCell>
-                  <TableCell className="p-4">{agency.members.length}</TableCell>
-                  <TableCell className="p-4">{agency.owner}</TableCell>
+                  <TableCell className="p-4">
+                    <MemberAvatars members={agency.members} />
+                  </TableCell>
+                  <TableCell className="p-4">
+                    <Chip
+                      onClick={handleUserProfileNavigation(agency.owner?._id)}
+                      avatar={
+                        <Avatar
+                          alt={agency.owner?.name}
+                          src={`${API_ROOT_PUBLIC}uploads/${agency.owner?.avatar}`}
+                        />
+                      }
+                      label={agency.owner?.name}
+                      variant="outlined"
+                    />
+                  </TableCell>
+                  <TableCell className="p-4">
+                    <FormGroup>
+                      {agency.status === "active" ? (
+                        <FormControlLabel
+                          control={<Switch defaultChecked color="primary" />}
+                        />
+                      ) : (
+                        <FormControlLabel control={<Switch />} />
+                      )}
+                    </FormGroup>
+                  </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => handleViewAgency(agency._id)} aria-label="view">
+                    <IconButton
+                      onClick={() => handleViewAgency(agency._id)}
+                      aria-label="view"
+                    >
                       <VisibilityIcon />
                     </IconButton>
-                    <IconButton aria-label="edit">
-                      <EditIcon />
+                    <IconButton
+                      onClick={() => handleDeleteAgency(agency._id)}
+                      aria-label="delete"
+                    >
+                      <DeleteIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>
@@ -72,15 +170,14 @@ const Agencies = ({ agencies }) => {
           </TableBody>
         </Table>
 
-        {/* Table Pagination Component */}
         <TablePagination
           component="div"
-          count={agencies.data.agencies.length} // Total number of items
+          count={agencies.data.agencies.length}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]} // Customize rows per page options
+          rowsPerPageOptions={[5, 10, 25]}
         />
       </TableContainer>
     </div>

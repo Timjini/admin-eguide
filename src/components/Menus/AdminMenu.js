@@ -38,6 +38,16 @@ const AdminMenu = () => {
             className:''
           },
           {
+            label: 'Packages',
+            link: '/admin/packages',
+            icon: (
+              <span className="material-symbols-outlined">
+              card_membership
+              </span>
+            ),
+            className:''
+          },
+          {
             label: 'All Users',
             link: '/admin/users',
             icon: (

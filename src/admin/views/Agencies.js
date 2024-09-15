@@ -28,10 +28,8 @@ const Agencies = ({ agencies }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [agencyToDelete, setAgencyToDelete] = useState(null); // Store the agency ID to delete
+  const [agencyToDelete, setAgencyToDelete] = useState(null); 
   const user = useSelector((state) => state.user);
-  const [invisible, setInvisible] = useState(false);
-  console.log("Agencies===========>", agencies);
 
   const formattedDate = (dateString) => {
     const options = { day: "numeric", month: "numeric", year: "2-digit" };
@@ -103,11 +101,12 @@ const Agencies = ({ agencies }) => {
         <Table sx={{ minWidth: 650 }} aria-label="agencies table">
           <TableHead>
             <TableRow>
-              <TableCell>Agency Name</TableCell>
+              <TableCell>Agency</TableCell>
               <TableCell>Description</TableCell>
               <TableCell>Members</TableCell>
               <TableCell>Owner</TableCell>
               <TableCell>Status</TableCell>
+              <TableCell>Subscription Expiry</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -121,14 +120,13 @@ const Agencies = ({ agencies }) => {
             ) : (
               paginatedAgencies.map((agency, index) => (
                 <TableRow key={index}>
-                  <TableCell className="p-4">{agency.name}</TableCell>
+                  <TableCell className="p-4"><Avatar alt={agency?.name} src={`${API_ROOT_PUBLIC}uploads/${agency?.image}`} />{agency.name}</TableCell>
                   <TableCell className="p-4">{agency.description}</TableCell>
                   <TableCell className="p-4">
                     <MemberAvatars members={agency.members} />
                   </TableCell>
                   <TableCell className="p-4">
                     <Chip
-                      onClick={handleUserProfileNavigation(agency.owner?._id)}
                       avatar={
                         <Avatar
                           alt={agency.owner?.name}
@@ -149,6 +147,9 @@ const Agencies = ({ agencies }) => {
                         <FormControlLabel control={<Switch />} />
                       )}
                     </FormGroup>
+                  </TableCell>
+                  <TableCell className="p-4">
+                      {formattedDate(agency?.subscriptionEnds ?? '2025-08-02')}
                   </TableCell>
                   <TableCell>
                     <IconButton

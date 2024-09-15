@@ -21,7 +21,8 @@ import AllChannels from './admin/views/AllChannel';
 import ErrorPage from './pages/ErrorPage';
 import AgencyPage from './agency/views/AgencyPage';
 import TourPage from './agency/views/TourPage';
-
+import UserProfile from './agency/views/UserProfile';
+import PackagesPage from './pages/PackagesPage';
 
 function App() {
   const auth = useSelector(state => state.user);  
@@ -43,6 +44,8 @@ function App() {
               <Route path="/admin/agencies/:agencyId" element={<AgencyPage/>} />
               <Route path="/admin/tour/:tourId" element={<TourPage/>} />
               <Route path="/admin/new" element={<NewTable />} />
+              <Route path="admin/profile/:userId" element={<UserProfile/>} />
+              <Route path="admin/packages" element={<PackagesPage/>} />
             </>
           ) : (
             <>

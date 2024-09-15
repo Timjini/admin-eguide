@@ -41,7 +41,11 @@ const TourPage = () => {
       }
 
 return (
-    <></>
+    <>
+    <div className="content-wrapper">
+      <h1> {tour.title}</h1>
+    </div>
+    </>
 
 
 )}

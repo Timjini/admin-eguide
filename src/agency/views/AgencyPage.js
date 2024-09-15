@@ -62,11 +62,12 @@ const AgencyPage = () => {
   }
 
   return (
-    <div>
+    <div className="content-wrapper">
       <h1>Agency Details</h1>
       {agency && (
-        <div>
-          <div>
+        <div className="agency-details">
+          {/* Agency Name */}
+          <div className="agency-field">
             <label>Agency Name:</label>
             {isEditing ? (
               <input
@@ -80,7 +81,8 @@ const AgencyPage = () => {
             )}
           </div>
 
-          <div>
+          {/* Agency Description */}
+          <div className="agency-field">
             <label>Description:</label>
             {isEditing ? (
               <textarea
@@ -93,20 +95,62 @@ const AgencyPage = () => {
             )}
           </div>
 
-          <div>
+          {/* Agency Owner */}
+          <div className="agency-field">
             <label>Owner:</label>
             {isEditing ? (
               <input
                 type="text"
                 name="owner"
-                value={agency.owner}
+                value={agency.owner.name}
                 onChange={handleInputChange}
               />
             ) : (
-              <p>{agency.owner}</p>
+              <p>{agency.owner.name}</p>
             )}
           </div>
 
+          {/* Agency Status */}
+          <div className="agency-field">
+            <label>Status:</label>
+            {isEditing ? (
+              <input
+                type="text"
+                name="status"
+                value={agency.status}
+                onChange={handleInputChange}
+              />
+            ) : (
+              <p>{agency.status}</p>
+            )}
+          </div>
+
+          {/* Subscription Expiry */}
+          <div className="agency-field">
+            <label>Subscription Expiry:</label>
+            {isEditing ? (
+              <input
+                type="date"
+                name="subscriptionEnds"
+                value={agency.subscriptionEnds}
+                onChange={handleInputChange}
+              />
+            ) : (
+              <p>{agency.subscriptionEnds}</p>
+            )}
+          </div>
+
+          {/* Members */}
+          <div className="agency-field">
+            <label>Members:</label>
+            <p>
+              {agency.members.map((member, index) => (
+                <span key={index}>{member.name}{index !== agency.members.length - 1 ? ', ' : ''}</span>
+              ))}
+            </p>
+          </div>
+
+          {/* Edit and Save buttons */}
           {isEditing ? (
             <button onClick={handleSaveChanges}>Save Changes</button>
           ) : (

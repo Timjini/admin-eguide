@@ -10,7 +10,7 @@ const BackButton = () => {
 
   return (
     <button onClick={handleGoBack} className=''>
-      <span className="material-symbols-outlined backBtn">undo</span>
+      <span className="material-symbols-outlined backBtn">arrow_back</span>
     </button>
   );
 };

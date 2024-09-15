@@ -1,125 +1,95 @@
-
-
-import TableRow from '../../agency/TablesContent/TableRow';
-import {API_USER_IMAGE} from '../../constant/index';
+import React, { useState } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TablePagination } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
+import { API_USER_IMAGE } from '../../constant/index';
 import { useNavigate } from 'react-router-dom';
 
+const AllTours = ({ tours }) => {
+  const navigate = useNavigate();
+  const [page, setPage] = useState(0); //
+  const [rowsPerPage, setRowsPerPage] = useState(5); // number per page here <<<=== 
 
-const AllTours = ({tours})=> {
-   const navigate = useNavigate();
+  const formattedDate = (dateString) => {
+    const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
+    return new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
+  };
 
-   const headerItems = new Set(['Channel Name', 'Starting Date & Time', 'Ending Date', 'Channel Code', 'Guide', 'Status']);
-   console.log(tours);
-   
-   const formattedDate = (dateString) => {
-     const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
-     const formatted = new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
-     return formatted;
-   };
+  const handleViewTour = (tourId) => {
+    navigate(`/admin/tour/${tourId}`);
+  };
 
-   const handleViewTour = (tourId) => {
-      navigate(`/admin/tour/${tourId}`);
-   }
+  //  page change
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-   // const channelRows = tours.data.tours ? (
-   //     tours.data.tours.map((tour, index) => (
-   //       <TableRow  data={tour} formattedDate={formattedDate}/>
-   //   ))
-   // ) : (
-   //   <tr>
-   //     <td colSpan={headerItems.size}>No tour available</td>
-   //   </tr>
-   // );
+  // handle rows per page 
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
+  // slicing data from MUI documentation
+  const paginatedTours = tours.data.tours.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
-   return (
+  return (
+    <div className="p-4 flex flex-col content-wrapper">
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="tours table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Tour Name</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>Starting Date</TableCell>
+              <TableCell>Ending Date</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedTours.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={5}>No data available</TableCell>
+              </TableRow>
+            ) : (
+              paginatedTours.map((tour, index) => (
+                <TableRow key={index}>
+                  <TableCell>
+                    <div className="flex flex-row gap-2 content-center">
+                      <img className="w-8 h-8 rounded-full" src={`${API_USER_IMAGE}/${tour.photo}`} alt={tour.title} />
+                      <span>{tour.title}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>{tour.description}</TableCell>
+                  <TableCell>{tour.starting_date ? formattedDate(tour.starting_date) : '-'}</TableCell>
+                  <TableCell>{tour.ending_date ? formattedDate(tour.ending_date) : '-'}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleViewTour(tour._id)} aria-label="view">
+                      <VisibilityIcon />
+                    </IconButton>
+                    <IconButton aria-label="edit">
+                      <EditIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
 
-   <div className="p-4 flex flex-col content-wrapper">
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <div className="p-4 border border-gray-200 rounded-lg shadow-sm sm:p-6 ">
-         <div className="flex flex-row justify-between">
-         </div>
-         <table className="mt-2 w-full text-sm text-left  ">
-            <thead className="text-xs  uppercase shadow ">
-               <tr>
-                  <th
-                     scope="col"
-                     className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                     >
-                     tour Name
-                  </th>
-                  <th
-                     scope="col"
-                     className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                     >
-                     Description
-                  </th>
-                  <th
-                     scope="col"
-                     className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                     >
-                     tour Owner
-                  </th>
-                  <th
-                     scope="col"
-                     className="p-4 text-xs font-medium tracking-wider text-left  uppercase "
-                     >
-                     Related Tour
-                  </th>
-               </tr>
-            </thead>
-            <tbody className="">
-         {tours.data.tours.length === 0 ? (
-                  <p className='p-4'>No data available</p> ) : (tours.data.tours.map((tour ,index) => (
-                  <tr key={index}>
-                     <td className="p-4 text-sm font-normal  whitespace-nowrap ">
-                        <div className='flex flex-row gap-2 content-center'>
-                           <img className="w-8 h-8 rounded-full" src={`${API_USER_IMAGE}/${tour.photo}`}  />
-                           <span>{tour.title}{" "}</span>
-                        </div>
-                     </td>
-                     <td className="p-4 text-sm font-normal  whitespace-nowrap ">
-                        {tour.description}
-                     </td>
-                     <td className="p-4 text-sm font-semibold  whitespace-nowrap ">
-                        {tour.starting_date ? formattedDate(tour.starting_date) : '-'}
-                     </td>
-                     <td className="p-4 text-sm font-normal  whitespace-nowrap ">
-                        {tour.ending_date ? formattedDate(tour.ending_date) : '-'}
-                     </td>
-                     <td className="px-6 py-4 flex gap-2">
-                              <button
-                              className=""
-                              id={tour._id}
-                              onClick={() => handleViewTour(tour._id)}
-                           >
-                              <span className="material-symbols-outlined">
-                              visibility
-                              </span>
-                           </button> 
-                              <button
-                              className=""
-                              id={tour._id}
-                              // onClick={() => handleEditUser(member._id)}
-                           >
-                              <span className="material-symbols-outlined">
-                              edit
-                              </span>
-                           </button>
-                     </td>
-                  </tr>
-                    ))
-          )}
-            </tbody>
-         </table>
-      </div>
-      </div>
-   </div>
-
-     
-
-   )
-}
-
+        {/* Table Pagination Component */}
+        <TablePagination
+          component="div"
+          count={tours.data.tours.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+      </TableContainer>
+    </div>
+  );
+};
 
 export default AllTours;

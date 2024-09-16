@@ -216,7 +216,6 @@ export default function Profile() {
                                     <div className="flex items-center space-x-4">
                                         <div className="inline-flex items-center">
                                             <Logout />
-
                                         </div>
                                     </div>
                                 </li>

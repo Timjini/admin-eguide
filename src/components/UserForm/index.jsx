@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import AutoCompleteInput from "../Inputs/AutoCompleteInput";
+import { getAddressDetails } from "../../utils/utils";
 
 const FormComponent = ({ user, firstName, lastName }) => {
     console.log("USER ====>", user.agency.name)
@@ -26,15 +28,20 @@ const FormComponent = ({ user, firstName, lastName }) => {
         e.preventDefault();
         console.log("User Form Data", formData);
         try {
-            axios.post()
+            axios.post("/new-user-profile", {
+
+            })
         } catch (error) {
 
         }
     };
-
+    const handlePlaceChange = (place) => {
+        if (!place) return;
+        const addressInfo = getAddressDetails(place);
+        console.log("Address Info", addressInfo);
+    };
     return (
         <form onSubmit={handleSubmit}>
-
             <div>
                 <div className="grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
@@ -69,14 +76,10 @@ const FormComponent = ({ user, firstName, lastName }) => {
                         <label htmlFor="address" className="block mb-2 text-sm font-medium">
                             Address
                         </label>
-                        <input
-                            type="text"
-                            name="address"
-                            id="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                            className="shadow-sm border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5"
-                            required
+                        <AutoCompleteInput
+                            placeholder={"Enter Address place name"}
+                            loadedAlready={false}
+                            onPlaceSelected={(place) => handlePlaceChange(place)}
                         />
                     </div>
                     <div className="col-span-6 sm:col-span-3">
@@ -207,6 +210,7 @@ const FormComponent = ({ user, firstName, lastName }) => {
                         </select>
                     </div>
                 </div>
+
                 <div className="col-span-6 sm:col-full">
                     <button class="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-6" type="submit">
                         Save all

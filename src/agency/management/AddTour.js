@@ -5,6 +5,7 @@ import useGetGuides from "../components/getGuides";
 import Alert from "../../components/Alerts/Alert";
 import AutoCompleteInput from "../../components/Inputs/AutoCompleteInput";
 import { Form } from "react-router-dom";
+import { getAddressDetails } from "../../utils/utils";
 
 const AddTour = () => {
   const getGuides = useGetGuides();
@@ -88,37 +89,20 @@ const AddTour = () => {
     }));
   };
 
-
   const handleStopChange = (index, place) => {
-    const addressComponents = place?.address || [];
-
-    const getComponent = (components, type) => {
-      const component = components?.find(c => c.types.includes(type));
-      return component;
-    };
-
-    const street_1 = getComponent(addressComponents, "route");
-    const street_2 = getComponent(addressComponents, "administrative_area_level_4");
-    const state = getComponent(addressComponents, "administrative_area_level_2");
-    const city = getComponent(addressComponents, "administrative_area_level_1");
-    const country = getComponent(addressComponents, "country");
-    const postal_code = getComponent(addressComponents, "postal_code");
-    const coordinates = place ? {
-      lat: place?.lat,
-      lng: place?.lng,
-    } : null;
+    const addressInfo = getAddressDetails(place);
 
     const address_type = 2
 
     setTourData((prevData) => {
       const updatedStops = [...prevData.stops];
       updatedStops[index] = {
-        street_1: street_1?.long_name || "",
-        city: city?.long_name || "",
-        state: state?.long_name || "",
-        country: country?.long_name || "",
-        postal_code: postal_code?.long_name || "",
-        coordinates,
+        street_1: addressInfo.street_1?.long_name || "",
+        city: addressInfo.city?.long_name || "",
+        state: addressInfo.state?.long_name || "",
+        country: addressInfo.country?.long_name || "",
+        postal_code: addressInfo.postal_code?.long_name || "",
+        coordinates: addressInfo.coordinates,
         address_type,
       };
       return { ...prevData, stops: updatedStops };

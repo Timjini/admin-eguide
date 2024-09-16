@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 
 const FormComponent = ({ user, firstName, lastName }) => {
@@ -24,6 +25,11 @@ const FormComponent = ({ user, firstName, lastName }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("User Form Data", formData);
+        try {
+            axios.post()
+        } catch (error) {
+
+        }
     };
 
     return (
@@ -202,7 +208,7 @@ const FormComponent = ({ user, firstName, lastName }) => {
                     </div>
                 </div>
                 <div className="col-span-6 sm:col-full">
-                    <button className="font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">
+                    <button class="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-6" type="submit">
                         Save all
                     </button>
                 </div>

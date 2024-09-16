@@ -56,7 +56,7 @@ export default function Profile() {
                                     </button>
                                     <button
                                         type="button"
-                                        className="py-2 px-3 text-sm font-medium  focus:outline-none rounded-lg border focus:z-10 focus:ring-4"
+                                        class="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold px-3 border border-gray-400 rounded shadow"
                                     >
                                         Delete
                                     </button>

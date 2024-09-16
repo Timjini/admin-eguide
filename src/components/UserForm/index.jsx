@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const FormComponent = ({ user, firstName, lastName }) => {
+    console.log("USER ====>", user.agency.name)
     const [formData, setFormData] = useState({
         language: "English (US)",
         timezone: "GMT+0 Greenwich Mean Time (GMT)",
@@ -10,7 +11,7 @@ const FormComponent = ({ user, firstName, lastName }) => {
         email: user.email || "",
         phoneNumber: user.phone || "",
         birthday: "",
-        organization: user.agency || "",
+        organization: user.agency.name || "",
         role: user.isAgencyOwner ? "Admin" : user.type || "",
         department: "Development",
     });

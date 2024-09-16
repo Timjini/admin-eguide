@@ -7,8 +7,10 @@ import UserForm from '../components/UserForm';
 
 export default function Profile() {
     const user = useSelector(state => state.user.user);
+
     const firstName = user && user.name ? user.name.split(" ")[0] : "";
     const lastName = user && user.name ? user.name.split(" ").slice(1).join(" ") : "";
+
     return (
         <div className="content-wrapper">
             <div className="">
@@ -62,10 +64,6 @@ export default function Profile() {
                             </div>
                         </div>
                     </div>
-
-
-
-
                 </div>
                 <div className="col-span-2">
                     <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2  sm:p-6 ">
@@ -229,5 +227,4 @@ export default function Profile() {
             </div>
         </div>
     );
-
 }

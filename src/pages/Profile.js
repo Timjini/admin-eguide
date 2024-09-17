@@ -56,7 +56,7 @@ export default function Profile() {
                                     </button>
                                     <button
                                         type="button"
-                                        class="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold px-3 border border-gray-400 rounded shadow"
+                                        className="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold px-3 border border-gray-400 rounded shadow"
                                     >
                                         Delete
                                     </button>
@@ -199,7 +199,7 @@ export default function Profile() {
                                 </div>
                                 <div className="col-span-6 sm:col-full">
                                     <button
-                                        class="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                                        className="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
                                         type="submit"
                                     >
                                         Save all

@@ -2,15 +2,16 @@ import axios from "axios";
 import { useState } from "react";
 import AutoCompleteInput from "../Inputs/AutoCompleteInput";
 import { getAddressDetails } from "../../utils/utils";
+import { API_VERSION_2 } from "../../constant";
 
 const FormComponent = ({ user, firstName, lastName }) => {
-    console.log("USER ====>", user.agency.name)
+    console.log("Token ===>", user.authToken)
     const [formData, setFormData] = useState({
         language: "English (US)",
         timezone: "GMT+0 Greenwich Mean Time (GMT)",
         firstName: firstName || "",
         lastName: lastName || "",
-        address: "",
+        address: {},
         email: user.email || "",
         phoneNumber: user.phone || "",
         birthday: "",
@@ -23,23 +24,21 @@ const FormComponent = ({ user, firstName, lastName }) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("User Form Data", formData);
-        try {
-            axios.post("/new-user-profile", {
-
-            })
-        } catch (error) {
-
-        }
+    console.log(`${API_VERSION_2}/new-user-profile`)
+    const handleSubmit = async () => {
+        await axios.post(`${API_VERSION_2}/user-profile/create`, { ...formData }, {
+            headers: {
+                'Authorization': `Bearer ${user.authToken}`
+            },
+        }).then(res => console.log("RESPONSE", res)).catch(err => console.log("Err", err))
     };
+
     const handlePlaceChange = (place) => {
         if (!place) return;
         const addressInfo = getAddressDetails(place);
-        console.log("Address Info", addressInfo);
+        setFormData({ ...formData, address: { ...addressInfo } })
     };
+
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -212,7 +211,7 @@ const FormComponent = ({ user, firstName, lastName }) => {
                 </div>
 
                 <div className="col-span-6 sm:col-full">
-                    <button class="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-6" type="submit">
+                    <button className="bg-white hover:bg-gray-600 text-gray-800 hover:text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-6" type="submit">
                         Save all
                     </button>
                 </div>

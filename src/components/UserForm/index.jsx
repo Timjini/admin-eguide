@@ -5,7 +5,6 @@ import { getAddressDetails } from "../../utils/utils";
 import { API_VERSION_2 } from "../../constant";
 
 const FormComponent = ({ user, firstName, lastName }) => {
-    console.log("Token ===>", user.authToken)
     const [formData, setFormData] = useState({
         language: "English (US)",
         timezone: "GMT+0 Greenwich Mean Time (GMT)",
@@ -24,7 +23,7 @@ const FormComponent = ({ user, firstName, lastName }) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    console.log(`${API_VERSION_2}/new-user-profile`)
+    
     const handleSubmit = async () => {
         await axios.post(`${API_VERSION_2}/user-profile/create`, { ...formData }, {
             headers: {

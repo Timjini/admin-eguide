@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Loaders/Loader";
 import MemberAvatars from "../ui/MembersAvatars";
+import SubscriptionCard from "../ui/SubscriptionCard";
 
 const AgencyPage = () => {
   const { agencyId } = useParams();
@@ -65,7 +66,8 @@ const AgencyPage = () => {
   }
 
   return (
-  <div className="content-wrapper">
+    <>
+    <div className="content-wrapper">
     <h1>Agency Details</h1>
     {agency && (
       <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2  sm:p-6 ">
@@ -147,7 +149,14 @@ const AgencyPage = () => {
         )}
       </div>
     )}
-  </div>
+
+    {agency && agency?.subscription &&
+    (<SubscriptionCard subscription={agency.subscription} />)
+    }
+    </div>
+
+    </>
+  
 
   );
 };

@@ -26,9 +26,12 @@ import PackagesPage from './pages/PackagesPage';
 import PackagePage from './admin/views/PackagePage';
 import Subscribe from './components/OffCanvas/Subscribe';
 import RequestPage from './pages/RequestPage';
+import SubscriptionsPage from './admin/views/SubscriptionsPage';
+import PaymentsPage from './admin/views/PaymentsPage';
 
 function App() {
   const auth = useSelector(state => state.user);  
+
   let agencyInactive 
   if(auth && auth.user && auth.user.agency){
     agencyInactive = auth.user.agency.status === 'inactive'
@@ -56,6 +59,8 @@ function App() {
               <Route path="admin/packages" element={<PackagesPage/>} />
               <Route path="/tour/:tourId" element={<TourPage/>} />
               <Route path="admin/packages/:packageId" element={<PackagePage/>} />
+              <Route path="admin/subscriptions" element={<SubscriptionsPage/>} />
+              <Route path="admin/payments" element={<PaymentsPage/>} />
 
             </>
           ) : (

@@ -30,7 +30,7 @@ const FormComponent = ({ user, firstName, lastName }) => {
             ...formData, 
             dob: formattedDate(formData.dob)
         };
-
+        console.log("formattedData", formattedFormData)
         await axios.post(`${API_VERSION_2}/user-profile/create`, formattedFormData, {
             headers: {
                 'Authorization': `Bearer ${user.authToken}`

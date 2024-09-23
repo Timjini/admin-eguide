@@ -1,35 +1,43 @@
 import axios from "axios";
 import { useState } from "react";
 import AutoCompleteInput from "../Inputs/AutoCompleteInput";
-import { getAddressDetails } from "../../utils/utils";
+import { formattedDate, getAddressDetails } from "../../utils/utils";
 import { API_VERSION_2 } from "../../constant";
 
 const FormComponent = ({ user, firstName, lastName }) => {
     const [formData, setFormData] = useState({
-        language: "English (US)",
-        timezone: "GMT+0 Greenwich Mean Time (GMT)",
+        language: "",
+        timezone: "",
         firstName: firstName || "",
         lastName: lastName || "",
         address: {},
         email: user.email || "",
         phoneNumber: user.phone || "",
-        birthday: "",
-        organization: user.agency.name || "",
+        dob: "",
+        organization: user?.agency?.name || "",
         role: user.isAgencyOwner ? "Admin" : user.type || "",
         department: "Development",
     });
-
+    console.log("Form Data", formData)
     const handleChange = (e) => {
         const { name, value } = e.target;
+        if (name === "dob") { console.log(formattedDate(value))};
         setFormData({ ...formData, [name]: value });
     };
     
     const handleSubmit = async () => {
-        await axios.post(`${API_VERSION_2}/user-profile/create`, { ...formData }, {
+        const formattedFormData = { 
+            ...formData, 
+            dob: formattedDate(formData.dob)
+        };
+
+        await axios.post(`${API_VERSION_2}/user-profile/create`, formattedFormData, {
             headers: {
                 'Authorization': `Bearer ${user.authToken}`
             },
-        }).then(res => console.log("RESPONSE", res)).catch(err => console.log("Err", err))
+        })
+        .then(res => console.log("RESPONSE", res))
+        .catch(err => console.log("Err", err));
     };
 
     const handlePlaceChange = (place) => {
@@ -109,14 +117,15 @@ const FormComponent = ({ user, firstName, lastName }) => {
                         />
                     </div>
                     <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="birthday" className="block mb-2 text-sm font-medium">
+                        <label htmlFor="dob" className="block mb-2 text-sm font-medium">
                             Birthday
                         </label>
                         <input
-                            type="text"
-                            name="birthday"
-                            id="birthday"
-                            value={formData.birthday}
+                            type="date"
+                            name="dob"
+                            id="dob"
+                            value={formData?.dob ?? "2000-01-01"}
+                            min="2000-01-01"
                             onChange={handleChange}
                             className="shadow-sm border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5"
                             required

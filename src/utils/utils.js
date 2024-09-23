@@ -16,3 +16,9 @@ export const getAddressDetails = (place) => {
         coordinates: place ? { lat: place.lat, lng: place.lng } : null,
     };
 };
+
+export const formattedDate = (dateString) => {
+    const options = { day: 'numeric', month: 'numeric', year: '2-digit' };
+    const formatted = new Intl.DateTimeFormat('en-GB', options).format(new Date(dateString));
+    return formatted;
+};

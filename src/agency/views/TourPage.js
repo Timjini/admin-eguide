@@ -3,6 +3,8 @@ import agencyApi from "../../api/agency";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Loaders/Loader";
+import TourMap from "../../components/Map/TourMap";
+import BackButton from "../../components/Buttons/BackButton";
 
 const TourPage = () => {
   const {tourId } = useParams();
@@ -39,10 +41,40 @@ const TourPage = () => {
         return <p>Error: {error}</p>;
       }
 
+      console.log(tour);
+
 return (
     <>
     <div className="content-wrapper">
-      <h1> {tour.title}</h1>
+      <BackButton />
+      <h1 className="text-2xl text-center mb-4"> {tour.title}</h1>
+      {tour && tour.start_point && tour.end_point ? (
+        <TourMap tour={tour} stops={tour.stops} />
+      ) : (
+        <p>Tour coordinates missing</p>
+      )}
+      <div className="flex flex-col mx-auto">
+        <div className="flex flex-col">
+          <div className="mb-2">
+          <span><strong>Start Point</strong></span>
+          </div>
+          <div>
+            <p>{tour?.start_point.street1} {tour?.start_point.state} {tour?.start_point.city} {tour?.start_point.country} {tour?.start_point.postal_code} </p>
+          </div>
+          <div className="mb-2">
+            <span><strong>End Point</strong></span>
+          </div>
+          <div>
+            <p>{tour?.end_point.street1} {tour?.end_point.state} {tour?.end_point.city} {tour?.end_point.country} {tour?.end_point.postal_code} </p>
+          </div>
+          <div className="mt-4 mb-1">
+          <span><strong>Info</strong></span>
+          </div>
+          <div>
+            <p>{tour?.description} </p>
+          </div>
+        </div>
+      </div>
     </div>
     </>
 

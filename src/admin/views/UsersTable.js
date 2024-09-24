@@ -1,24 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import Container from "@mui/material/Container";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  TablePagination,
+} from "@mui/material";
 import { useSelector } from "react-redux";
 import { API_ROOT } from "../../constant";
 import MainDrawer from "../../components/OffCanvas/MainDrawer";
 import CreateAgencyOwner from "../postRequests/createAgencyOwner";
 import BackButton from "../../components/Buttons/BackButton";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteAlert from "../../components/Alerts/DeleteAlert";
 
 export default function UsersTable() {
   const user = useSelector((state) => state.user);
-
   const [users, setUsers] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   useEffect(() => {
     const requestOptions = {
       method: "GET",
       headers: {
-        "Content-Type": "application/json", // Adjust the content type as needed
-        Authorization: `Bearer ${user.user.authToken}`, // Replace with your actual authorization token
-        // Add any other headers you need
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.user.authToken}`,
       },
     };
 
@@ -28,28 +41,45 @@ export default function UsersTable() {
         setUsers(data);
       })
       .catch((error) => {
-        console.error("Error fetching users:", error); // Log any fetch errors
+        console.error("Error fetching users:", error);
       });
   }, []);
 
-  const rows = users.map((user) => ({
-    id: user.id,
-    name: user.username,
-    email: user.email,
-    phone: user.phone,
-    type: user.type,
-  }));
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
-  const columns = [
-    { field: "id", headerName: "id", width: 200 },
-    { field: "name", headerName: "Name", width: 200 },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "phone", headerName: "Phone", width: 200 },
-    { field: "type", headerName: "Type", width: 200 },
-  ];
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleDeleteUser = (userId) => {
+    setUserToDelete(userId);
+  };
+
+  const confirmDeleteUser = async () => {
+    // Handle user deletion logic here
+    // For example, make an API call to delete the user
+    setUserToDelete(null); // Reset the user to delete
+  };
+
+  const handleCloseAlert = () => {
+    setUserToDelete(null); // Reset the user to delete
+  };
+
+  const paginatedUsers = users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <div className="p-4 flex flex-col content-wrapper">
+      {userToDelete && (
+        <DeleteAlert
+          message="Are you sure you want to delete this user?"
+          status="warning"
+          onConfirm={confirmDeleteUser}
+          onClose={handleCloseAlert}
+        />
+      )}
       <div className="flex justify-between">
         <BackButton />
         <MainDrawer
@@ -58,22 +88,57 @@ export default function UsersTable() {
           additionalComponent={CreateAgencyOwner}
         />
       </div>
-      <Container sx={{ marginTop: 10 }} className="">
-        <div>
-          <h2 className="mb-4 text-xl">Users List</h2>
-        </div>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          }}
-          pageSizeOptions={[10, 20]}
-          checkboxSelection
+      <TableContainer component={Paper} sx={{ marginTop: 2 }}>
+        <Table sx={{ minWidth: 650 }} aria-label="users table">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedUsers.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={6} className="p-4">
+                  No users available
+                </TableCell>
+              </TableRow>
+            ) : (
+              paginatedUsers.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>{user.id}</TableCell>
+                  <TableCell>{user.username}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.phone}</TableCell>
+                  <TableCell>{user.type}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => handleDeleteUser(user.id)} aria-label="delete">
+                      <DeleteIcon />
+                    </IconButton>
+                    <IconButton onClick={() => { /* Add view user logic here */ }} aria-label="view">
+                      <VisibilityIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+
+        <TablePagination
+          component="div"
+          count={users.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]}
         />
-      </Container>
+      </TableContainer>
     </div>
   );
 }

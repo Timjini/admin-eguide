@@ -1,3 +1,5 @@
+import Logout from "../../Authentication/Logout";
+
 const Subscribe = () => {
     return (
               <><div
@@ -27,6 +29,7 @@ const Subscribe = () => {
             }}
         >
                 <p>Please check your subscription. Your agency is currently inactive.</p>
+                <Logout />
             </div></>
           );
         }

@@ -14,6 +14,7 @@ const getPackage = payload => axios.get(`${API_VERSION_2}/packages`, payload);
 const agencies = payload => axios.get(`${API_VERSION_2}/agencies`, payload);
 const agency = (agencyId, payload) => axios.get(`${API_VERSION_2}/agencies/${agencyId}`, payload);
 export const updateAgency = (agencyId, updatedData, config) => {
+  console.log("update data ", updatedData);
   return axios.put(`${API_VERSION_2}/agencies/${agencyId}`, updatedData, config);
 };
 const deleteAgency = (agencyId, payload) => axios.delete(`${API_VERSION_2}/agencies/${agencyId}`, payload);

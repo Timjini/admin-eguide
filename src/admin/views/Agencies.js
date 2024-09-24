@@ -61,6 +61,19 @@ const Agencies = ({ agencies }) => {
     setAgencyToDelete(agencyId);
   };
 
+  // update agency
+  const handleToggleChanges = async (agencyId, newStatus) => {
+    try {
+      await agencyApi.updateAgency(agencyId, { status: newStatus }, {
+        headers: {
+          Authorization: `Bearer ${user.user.authToken}`,
+        },
+      });
+    } catch (error) {
+      console.error("Failed to update agency:", error);
+    }
+  };
+
   const confirmDeleteAgency = async () => {
     try {
       await agencyApi.deleteAgency(agencyToDelete, {
@@ -140,10 +153,13 @@ const Agencies = ({ agencies }) => {
                     <FormGroup>
                       {agency.status === "active" ? (
                         <FormControlLabel
-                          control={<Switch defaultChecked color="primary" />}
+                          control={<Switch defaultChecked 
+                                color="primary"
+                                    onChange={() => handleToggleChanges(agency._id, "inactive")}
+                                    />}
                         />
                       ) : (
-                        <FormControlLabel control={<Switch />} />
+                        <FormControlLabel control={<Switch onChange={() => handleToggleChanges(agency._id, "active")} />} />
                       )}
                     </FormGroup>
                   </TableCell>

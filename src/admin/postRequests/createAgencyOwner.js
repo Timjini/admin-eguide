@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import adminApi from '../../api/admin';
+// import adminApi from '../../api/admin';
 import axios from 'axios';
 import {API_ROOT} from '../../constant'
 import Alert from '../../components/Alerts/Alert';

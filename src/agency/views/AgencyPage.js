@@ -3,6 +3,8 @@ import agencyApi from "../../api/agency";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Loaders/Loader";
+import MemberAvatars from "../ui/MembersAvatars";
+import SubscriptionCard from "../ui/SubscriptionCard";
 
 const AgencyPage = () => {
   const { agencyId } = useParams();
@@ -11,6 +13,8 @@ const AgencyPage = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false); // Tracks whether the user is editing
   const user = useSelector((state) => state.user);
+
+  console.log("agency", agency)
 
   // Fetch agency details
   useEffect(() => {
@@ -21,7 +25,7 @@ const AgencyPage = () => {
             Authorization: `Bearer ${user.user.authToken}`,
           },
         });
-        setAgency(response.data);
+        setAgency(response.data.agency);
       } catch (error) {
         setError(error.response?.data?.message || "An error occurred");
       } finally {
@@ -62,103 +66,98 @@ const AgencyPage = () => {
   }
 
   return (
+    <>
     <div className="content-wrapper">
-      <h1>Agency Details</h1>
-      {agency && (
-        <div className="agency-details">
-          {/* Agency Name */}
+    <h1>Agency Details</h1>
+    {agency && (
+      <div className="p-4 mb-4  border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2  sm:p-6 ">
+        {/* Agency Name */}
+        <div className="flex flex-row flex-wrap gap-20">
           <div className="agency-field">
-            <label>Agency Name:</label>
+            <label className="block mb-2 text-sm font-medium ">Agency Name:</label>
             {isEditing ? (
               <input
+              className="block mb-2 text-sm font-medium "
                 type="text"
                 name="name"
                 value={agency.name}
                 onChange={handleInputChange}
               />
             ) : (
-              <p>{agency.name}</p>
+              <>
+              <input
+              className="block mb-2 text-sm font-medium "
+                type="text"
+                name="name"
+                value={agency.name}
+              />
+              </>
+             
             )}
           </div>
 
           {/* Agency Description */}
           <div className="agency-field">
-            <label>Description:</label>
+            <label className="block mb-2 text-sm font-medium">Description:</label>
             {isEditing ? (
               <textarea
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                 name="description"
                 value={agency.description}
                 onChange={handleInputChange}
+                style={{height:'180px'}}
               />
             ) : (
-              <p>{agency.description}</p>
-            )}
-          </div>
+              <textarea
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                name="description"
+                value={agency.description}
+                style={{height:'180px'}}
 
-          {/* Agency Owner */}
-          <div className="agency-field">
-            <label>Owner:</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="owner"
-                value={agency.owner.name}
-                onChange={handleInputChange}
               />
-            ) : (
-              <p>{agency.owner.name}</p>
             )}
           </div>
+        </div>
 
-          {/* Agency Status */}
-          <div className="agency-field">
-            <label>Status:</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="status"
-                value={agency.status}
-                onChange={handleInputChange}
-              />
-            ) : (
-              <p>{agency.status}</p>
-            )}
-          </div>
-
-          {/* Subscription Expiry */}
-          <div className="agency-field">
-            <label>Subscription Expiry:</label>
-            {isEditing ? (
-              <input
-                type="date"
-                name="subscriptionEnds"
-                value={agency.subscriptionEnds}
-                onChange={handleInputChange}
-              />
-            ) : (
-              <p>{agency.subscriptionEnds}</p>
-            )}
-          </div>
-
-          {/* Members */}
-          <div className="agency-field">
-            <label>Members:</label>
-            <p>
-              {agency.members.map((member, index) => (
-                <span key={index}>{member.name}{index !== agency.members.length - 1 ? ', ' : ''}</span>
-              ))}
-            </p>
-          </div>
-
-          {/* Edit and Save buttons */}
+        {/* Agency Status */}
+        <div className="agency-field">
+        <label className="block mb-2 text-sm font-medium ">Status:</label>
           {isEditing ? (
-            <button onClick={handleSaveChanges}>Save Changes</button>
+            <select name="status" value={agency.status} onChange={handleInputChange}>
+              <option value="inactive">Inactive</option>
+              <option value="active">Active</option>
+              <option value="archived">Archived</option>
+            </select>
           ) : (
-            <button onClick={() => setIsEditing(true)}>Edit</button>
+            <p>{agency.status}</p>
           )}
         </div>
-      )}
+
+        {/* Members */}
+        <div className="agency-field">
+          <label>Members:</label>
+          <p>
+            <MemberAvatars members={agency.members} />
+          </p>
+        </div>
+
+        {/* Edit and Save buttons */}
+        {isEditing ? (
+          <button onClick={handleSaveChanges}>Save Changes</button>
+        ) : (
+          <button onClick={() => setIsEditing(true)}>Edit</button>
+        )}
+      </div>
+    )}
+
+    {agency && agency?.subscription &&
+    (<SubscriptionCard subscription={agency.subscription} />)
+    }
     </div>
+
+    </>
+  
+
   );
 };
 

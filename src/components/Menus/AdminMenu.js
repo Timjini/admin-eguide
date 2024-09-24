@@ -48,6 +48,26 @@ const AdminMenu = () => {
             className:''
           },
           {
+            label: 'Payments',
+            link: '/admin/payments',
+            icon: (
+              <span className="material-symbols-outlined">
+              paid
+              </span>
+            ),
+            className:''
+          },
+          {
+            label: 'Subscriptions',
+            link: '/admin/subscriptions',
+            icon: (
+              <span className="material-symbols-outlined">
+              loyalty
+              </span>
+            ),
+            className:''
+          },
+          {
             label: 'All Users',
             link: '/admin/users',
             icon: (

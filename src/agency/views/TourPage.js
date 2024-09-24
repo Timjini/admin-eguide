@@ -59,13 +59,13 @@ return (
           <span><strong>Start Point</strong></span>
           </div>
           <div>
-            <p>{tour?.start_point.street1} {tour?.start_point.state} {tour?.start_point.city} {tour?.start_point.country} {tour?.start_point.postal_code} </p>
+            <p>{tour?.start_point?.street1} {tour?.start_point?.state} {tour?.start_point?.city} {tour?.start_point?.country} {tour?.start_point?.postal_code} </p>
           </div>
           <div className="mb-2">
             <span><strong>End Point</strong></span>
           </div>
           <div>
-            <p>{tour?.end_point.street1} {tour?.end_point.state} {tour?.end_point.city} {tour?.end_point.country} {tour?.end_point.postal_code} </p>
+            <p>{tour?.end_point?.street1} {tour?.end_point?.state} {tour?.end_point?.city} {tour?.end_point?.country} {tour?.end_point?.postal_code} </p>
           </div>
           <div className="mt-4 mb-1">
           <span><strong>Info</strong></span>

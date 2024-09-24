@@ -92,7 +92,7 @@ const AllTours = ({ tours }) => {
                 <TableRow key={index}>
                   <TableCell>
                     <div className="flex flex-row gap-2 content-center">
-                      <img className="w-8 h-8 rounded-full" src={`${API_PUBLIC_FOLDER_NO_SLASH}/${tour.image}`} alt={tour.title} />
+                      <img className="w-8 h-8 rounded-full" src={`${API_PUBLIC_FOLDER_NO_SLASH}/${tour.image ?? tour.photo}`} alt={tour.title} />
                       <span>{tour.title}</span>
                     </div>
                   </TableCell>

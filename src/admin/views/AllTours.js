@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TablePagination } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { API_USER_IMAGE } from '../../constant/index';
+import { API_PUBLIC_FOLDER_NO_SLASH } from '../../constant/index';
 import { useNavigate } from 'react-router-dom';
 import agencyApi from '../../api/agency';
 import DeleteAlert from '../../components/Alerts/DeleteAlert';
@@ -60,6 +60,7 @@ const AllTours = ({ tours }) => {
   // slicing data from MUI documentation
   const paginatedTours = tours.data.tours.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
+
   return (
     <div className="p-4 flex flex-col content-wrapper">
        {tourToDelete && (
@@ -91,7 +92,7 @@ const AllTours = ({ tours }) => {
                 <TableRow key={index}>
                   <TableCell>
                     <div className="flex flex-row gap-2 content-center">
-                      <img className="w-8 h-8 rounded-full" src={`${API_USER_IMAGE}/${tour.photo}`} alt={tour.title} />
+                      <img className="w-8 h-8 rounded-full" src={`${API_PUBLIC_FOLDER_NO_SLASH}/${tour.image}`} alt={tour.title} />
                       <span>{tour.title}</span>
                     </div>
                   </TableCell>

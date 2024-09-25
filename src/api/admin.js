@@ -9,6 +9,22 @@ const getAdminGuidesData = payload => axios.get(`${API_ROOT}/admin/guides`, payl
 const createAgencyOwner = payload => axios.post(`${API_ROOT}/admin/create_agency_owner`, payload);
 const getPayments = payload => axios.get(`${API_VERSION_2}/payments`, payload);
 const getSubscriptions = payload => axios.get(`${API_VERSION_2}/subscriptions`, payload);
+const updateSubscriptions = (id, payload) => {
+  return axios.put(`${API_VERSION_2}/subscriptions/${id}`, payload, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
+const updatePayment = (id, payload) => {
+  return axios.put(`${API_VERSION_2}/payments/${id}`, payload, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
+const getPackages = payload => axios.get(`${API_VERSION_2}/packages`, payload);
+const deletePackage = payload => axios.delete(`${API_VERSION_2}/packages/${payload}`, payload);
 
 
 
@@ -19,7 +35,11 @@ const adminApi = {
     getAdminGuidesData,
     createAgencyOwner,
     getPayments,
-    getSubscriptions
+    getSubscriptions,
+    getPackages,
+    deletePackage,
+    updateSubscriptions,
+    updatePayment
   };
   
 export default adminApi;

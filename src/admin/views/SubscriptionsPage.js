@@ -1,15 +1,54 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, TextField, Select, MenuItem, Button } from '@mui/material';
 import useGetAdminSubscriptions from '../../hooks/useGetAdminSubscriptions';
 import Loader from '../../components/Loaders/Loader';
 import BackButton from '../../components/Buttons/BackButton';
 import MainDrawer from '../../components/OffCanvas/MainDrawer';
 import CreateSubscription from '../postRequests/createSubscription';
+import adminApi from '../../api/admin';
+import { useSelector } from 'react-redux';
 
 const SubscriptionsPage = () => {
-  const { subscriptions, loading, error } = useGetAdminSubscriptions();
+  const { subscriptions, loading, error, refetch } = useGetAdminSubscriptions();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const user = useSelector((state) => state.user);
+
+  // State to keep track of editing rows
+  const [editingRow, setEditingRow] = useState(null);
+  const [editedData, setEditedData] = useState({});
+
+  const handleEditClick = (subscription) => {
+    setEditingRow(subscription._id);
+    setEditedData(subscription);  // Populate editedData with current subscription data
+  };
+
+  const handleCancelClick = () => {
+    setEditingRow(null);  // Cancel editing
+    setEditedData({});     // Clear the edit state
+  };
+
+  const handleSaveClick = async (subscriptionId) => {
+    try {
+      console.log('Saving data:', editedData);
+      
+      const response = await adminApi.updateSubscriptions(subscriptionId, editedData); // Pass id and data separately
+  
+      console.log('Subscription updated successfully:', response.data);
+  
+      setEditingRow(null);  
+      setEditedData({});
+      refetch();
+    } catch (error) {
+      console.error('Failed to update subscription:', error);
+    }
+  };
+  
+  
+
+  const handleInputChange = (field, value) => {
+    setEditedData({ ...editedData, [field]: value });
+  };
 
   if (loading) {
     return <Loader />;
@@ -37,21 +76,20 @@ const SubscriptionsPage = () => {
     setPage(0);
   };
 
-
   const paginatedSubscriptions = subscriptions.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <div className="p-4 flex flex-col content-wrapper">
-      <div className='flex flex-row justify-between'>
+      <div className="flex flex-row justify-between">
         <BackButton />
         <MainDrawer
-            activeDrawer="right"
-            title="Create A Subscription"
-            additionalComponent={CreateSubscription}
-          />
+          activeDrawer="right"
+          title="Create A Subscription"
+          additionalComponent={CreateSubscription}
+        />
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="channels table">
+        <Table sx={{ minWidth: 650 }} aria-label="editable subscriptions table">
           <TableHead>
             <TableRow>
               <TableCell>Subscription Status</TableCell>
@@ -68,18 +106,66 @@ const SubscriptionsPage = () => {
                 </TableCell>
               </TableRow>
             ) : (
-                paginatedSubscriptions.map((subscription, index) => (
-                <TableRow key={index}>
-                  <TableCell>{subscription.status}</TableCell>
-                  <TableCell>{subscription.startDate ? formattedDate(subscription.startDate) : '-'}</TableCell>
-                  <TableCell>{subscription.endDate ? formattedDate(subscription.endDate) : '-'}</TableCell>
-                  <TableCell className="px-6 py-4 flex gap-2">
-                    <button id={subscription._id}>
-                      <span className="material-symbols-outlined">visibility</span>
-                    </button>
-                    <button id={subscription._id}>
-                      <span className="material-symbols-outlined">edit</span>
-                    </button>
+              paginatedSubscriptions.map((subscription) => (
+                <TableRow key={subscription._id}>
+                  {/* Subscription Status */}
+                  <TableCell>
+                    {editingRow === subscription._id ? (
+                      <Select
+                        value={editedData.status || ''}
+                        onChange={(e) => handleInputChange('status', e.target.value)}
+                      >
+                        <MenuItem value="active">Active</MenuItem>
+                        <MenuItem value="expired">Expired</MenuItem>
+                        <MenuItem value="pending">Pending</MenuItem>
+                      </Select>
+                    ) : (
+                      subscription.status
+                    )}
+                  </TableCell>
+
+                  {/* Start Date */}
+                  <TableCell>
+                    {editingRow === subscription._id ? (
+                      <TextField
+                        type="date"
+                        value={editedData.startDate ? new Date(editedData.startDate).toISOString().substr(0, 10) : ''}
+                        onChange={(e) => handleInputChange('startDate', e.target.value)}
+                      />
+                    ) : (
+                      subscription.startDate ? formattedDate(subscription.startDate) : '-'
+                    )}
+                  </TableCell>
+
+                  {/* End Paid */}
+                  <TableCell>
+                    {editingRow === subscription._id ? (
+                      <TextField
+                        type="date"
+                        value={editedData.endDate ? new Date(editedData.endDate).toISOString().substr(0, 10) : ''}
+                        onChange={(e) => handleInputChange('endDate', e.target.value)}
+                      />
+                    ) : (
+                      subscription.endDate ? formattedDate(subscription.endDate) : '-'
+                    )}
+                  </TableCell>
+
+                  {/* Actions: Edit / Save / Cancel */}
+                  <TableCell>
+                    {editingRow === subscription._id ? (
+                      <>
+                       <Button onClick={() => handleSaveClick(subscription._id)} variant="contained" color="primary">
+                          Save
+                        </Button>
+                        <Button onClick={handleCancelClick} variant="outlined" color="secondary">
+                          Cancel
+                        </Button>
+                      </>
+                    ) : (
+                      <Button onClick={() => handleEditClick(subscription)} variant="contained" color="primary">
+                        Edit
+                      </Button>
+                    )}
                   </TableCell>
                 </TableRow>
               ))

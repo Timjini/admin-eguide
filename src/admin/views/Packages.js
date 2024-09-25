@@ -20,6 +20,9 @@ import DeleteAlert from "../../components/Alerts/DeleteAlert";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import packageApi from "../../api/agency";
+import BackButton from "../../components/Buttons/BackButton";
+import MainDrawer from "../../components/OffCanvas/MainDrawer";
+import CreatePackage from "../postRequests/createPackage";
 
 const Packages = ({ packages }) => {
   const navigate = useNavigate();
@@ -69,6 +72,14 @@ const Packages = ({ packages }) => {
 
   return (
     <div className="p-4 flex flex-col content-wrapper">
+       <div className='flex flex-row justify-between'>
+        <BackButton/>
+          <MainDrawer
+            activeDrawer="right"
+            title="Create A Package"
+            additionalComponent={CreatePackage}
+          />
+        </div>
       {packageToDelete && (
         <DeleteAlert
           message="Are you sure you want to delete this package?"

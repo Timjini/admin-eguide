@@ -3,6 +3,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import useGetAdminPayments from '../../hooks/useGetAdminPayments';
 import Loader from '../../components/Loaders/Loader';
 import BackButton from '../../components/Buttons/BackButton';
+import MainDrawer from '../../components/OffCanvas/MainDrawer';
+import CreatePayment from '../postRequests/createPayment';
 
 const PaymentsPage = () => {
   const { payments, loading, error } = useGetAdminPayments();
@@ -42,6 +44,11 @@ const PaymentsPage = () => {
     <div className="p-4 flex flex-col content-wrapper">
       <div className='flex flex-row justify-between'>
         <BackButton />
+        <MainDrawer
+          activeDrawer="right"
+          title="Create A Payment"
+          additionalComponent={CreatePayment}
+        />
       </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="channels table">

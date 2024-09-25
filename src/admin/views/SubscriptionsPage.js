@@ -3,6 +3,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import useGetAdminSubscriptions from '../../hooks/useGetAdminSubscriptions';
 import Loader from '../../components/Loaders/Loader';
 import BackButton from '../../components/Buttons/BackButton';
+import MainDrawer from '../../components/OffCanvas/MainDrawer';
+import CreateSubscription from '../postRequests/createSubscription';
 
 const SubscriptionsPage = () => {
   const { subscriptions, loading, error } = useGetAdminSubscriptions();
@@ -42,6 +44,11 @@ const SubscriptionsPage = () => {
     <div className="p-4 flex flex-col content-wrapper">
       <div className='flex flex-row justify-between'>
         <BackButton />
+        <MainDrawer
+            activeDrawer="right"
+            title="Create A Subscription"
+            additionalComponent={CreateSubscription}
+          />
       </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="channels table">

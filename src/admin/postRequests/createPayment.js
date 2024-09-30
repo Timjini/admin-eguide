@@ -22,27 +22,32 @@ const CreatePayment = () => {
   const agencyList = agencies?.data?.agencies || [];
   const packageList = packages?.data || [];
 
-  const [memberData, setMemberData] = useState({
+  console.log(agencyList);
+
+  const [paymentData, setPaymentData] = useState({
     agencyId: selectedAgency, // Include agencyId here
     packageId: selectedPackage, // Include packageId here
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
 
-    setMemberData((prevData) => ({
+    setPaymentData((prevData) => ({
       ...prevData,
-      [name]: name === 'image' ? files[0] : value,
+      [name]: value,
     }));
   };
+
+  console.log(paymentData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append('agencyId', selectedAgency); 
-      formData.append('packageId', selectedPackage);
+    formData.append('agencyId', paymentData.agencyId);
+    formData.append('packageId', paymentData.packageId);
+    formData.append('amount', paymentData.amount);
 
       const response = await axios.post(`${API_VERSION_2}/payments`, formData, {
         headers: {
@@ -76,7 +81,7 @@ const CreatePayment = () => {
           placeholder="Search Agency..."
           onChange={(agencyId) => {
             setSelectedAgency(agencyId);
-            setMemberData((prevData) => ({ ...prevData, agencyId })); // Update memberData with agencyId
+            setPaymentData((prevData) => ({ ...prevData, agencyId })); // Update memberData with agencyId
           }}
         />
         <SearchInputComponent
@@ -84,14 +89,15 @@ const CreatePayment = () => {
           placeholder="Search Package..."
           onChange={(packageId) => {
             setSelectedPackage(packageId);
-            setMemberData((prevData) => ({ ...prevData, packageId })); // Update memberData with packageId
+            setPaymentData((prevData) => ({ ...prevData, packageId })); // Update memberData with packageId
           }}
         />
+        <input type="number" name="amount" placeholder="Amount" className='shadow-sm border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5' onChange={handleChange} />
         {/* Other input fields here */}
         {loading ? (
           <button disabled type="button" className="loading-button">Loading...</button>
         ) : (
-          <button type="submit" className="primaryBtn">Add A Payment</button>
+          <button type="submit" className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none flex items-center gap-3 mb-2 primaryBtn">Add A Payment</button>
         )}
       </form>
     </>

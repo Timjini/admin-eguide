@@ -8,7 +8,6 @@ const useGetPackages = () => {
   const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
-  console.log('User:here', user);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [packages, setPackages] = useState([]);

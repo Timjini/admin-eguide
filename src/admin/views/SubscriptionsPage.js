@@ -13,6 +13,8 @@ const SubscriptionsPage = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const user = useSelector((state) => state.user);
+  console.log("user", user);
+  console.log("subscriptions", subscriptions);
 
   // State to keep track of editing rows
   const [editingRow, setEditingRow] = useState(null);
@@ -24,8 +26,8 @@ const SubscriptionsPage = () => {
   };
 
   const handleCancelClick = () => {
-    setEditingRow(null);  // Cancel editing
-    setEditedData({});     // Clear the edit state
+    setEditingRow(null); 
+    setEditedData({});     
   };
 
   const handleSaveClick = async (subscriptionId) => {
@@ -92,6 +94,7 @@ const SubscriptionsPage = () => {
         <Table sx={{ minWidth: 650 }} aria-label="editable subscriptions table">
           <TableHead>
             <TableRow>
+              <TableCell>Agency Name</TableCell>
               <TableCell>Subscription Status</TableCell>
               <TableCell>Start Date</TableCell>
               <TableCell>End Paid</TableCell>
@@ -108,22 +111,10 @@ const SubscriptionsPage = () => {
             ) : (
               paginatedSubscriptions.map((subscription) => (
                 <TableRow key={subscription._id}>
-                  {/* Subscription Status */}
+                  {/* Agency Name */}
                   <TableCell>
-                    {editingRow === subscription._id ? (
-                      <Select
-                        value={editedData.status || ''}
-                        onChange={(e) => handleInputChange('status', e.target.value)}
-                      >
-                        <MenuItem value="active">Active</MenuItem>
-                        <MenuItem value="expired">Expired</MenuItem>
-                        <MenuItem value="pending">Pending</MenuItem>
-                      </Select>
-                    ) : (
-                      subscription.status
-                    )}
+                  {subscription.agency?.name || "No Agency"} {/* Display agency name */}
                   </TableCell>
-
                   {/* Start Date */}
                   <TableCell>
                     {editingRow === subscription._id ? (
@@ -147,6 +138,20 @@ const SubscriptionsPage = () => {
                       />
                     ) : (
                       subscription.endDate ? formattedDate(subscription.endDate) : '-'
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {editingRow === subscription._id ? (
+                      <Select
+                        value={editedData.status || ''}
+                        onChange={(e) => handleInputChange('status', e.target.value)}
+                      >
+                        <MenuItem value="active">Active</MenuItem>
+                        <MenuItem value="expired">Expired</MenuItem>
+                        <MenuItem value="pending">Pending</MenuItem>
+                      </Select>
+                    ) : (
+                      subscription.status
                     )}
                   </TableCell>
 

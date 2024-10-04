@@ -48,6 +48,7 @@ const CreatePayment = () => {
     formData.append('agencyId', paymentData.agencyId);
     formData.append('packageId', paymentData.packageId);
     formData.append('amount', paymentData.amount);
+    
 
       const response = await axios.post(`${API_VERSION_2}/payments`, formData, {
         headers: {

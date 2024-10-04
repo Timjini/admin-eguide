@@ -92,7 +92,6 @@ export default function UsersTable() {
         <Table sx={{ minWidth: 650 }} aria-label="users table">
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Phone</TableCell>
@@ -110,8 +109,7 @@ export default function UsersTable() {
             ) : (
               paginatedUsers.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell>{user.id}</TableCell>
-                  <TableCell>{user.username}</TableCell>
+                  <TableCell>{user?.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.phone}</TableCell>
                   <TableCell>{user.type}</TableCell>
